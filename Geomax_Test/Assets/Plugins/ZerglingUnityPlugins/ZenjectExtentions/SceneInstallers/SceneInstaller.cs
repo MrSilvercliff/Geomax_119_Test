@@ -7,7 +7,7 @@ using ZerglingUnityPlugins.ZenjectExtentions.ContextProvider;
 
 namespace ZerglingUnityPlugins.ZenjectExtentions.SceneInstallers
 {
-    public abstract class SceneInstallerBasic : MonoInstaller
+    public abstract class SceneInstaller : MonoInstaller
     {
         [SerializeField] private SceneContext _sceneContext;
 
