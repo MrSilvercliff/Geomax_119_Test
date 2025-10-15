@@ -5,26 +5,38 @@ using _Project.Scripts.Project.Services.Balance.Models;
 using _Project.Scripts.Project.Services.Balance.Storages;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
+using ZerglingUnityPlugins.Tools.Scripts.Interfaces.ProjectService.AsyncSync;
 using ZerglingUnityPlugins.Tools.Scripts.Log;
 
 namespace _Project.Scripts.GameScene.Services.Abilities
 {
-    public interface IAbilitiesProvider
+    public interface IAbilitiesProvider : IProjectService
     {
         IAbility GetAbility(string id);
     }
 
     public class AbilitiesProvider : IAbilitiesProvider
     {
-        [Inject] private IProjectBalanceService _projectBalanceStorage;
+        [Inject] private IAbilitiesCreator _abilitiesCreator;
 
         private Dictionary<string, IAbility> _abilitiesById;
 
         public AbilitiesProvider()
         {
             _abilitiesById = new();
+        }
+
+        public Task<bool> Init()
+        {
+            return Task.FromResult(true);
+        }
+
+        public bool Flush()
+        {
+            return true;
         }
 
         public IAbility GetAbility(string id)
@@ -34,34 +46,9 @@ namespace _Project.Scripts.GameScene.Services.Abilities
             if (tryGetResult)
                 return existAbility;
 
-            var abilitiesBalanceStorage = _projectBalanceStorage.Abilities;
-            tryGetResult = abilitiesBalanceStorage.TryGetById(id, out var balanceModel);
-
-            if (!tryGetResult)
-            {
-                LogUtils.Error(this, $"Ability balance model with id [{id}] does not exist!");
-                return null;
-            }
-
-            var newAbility = CreateAbility(balanceModel);
+            var newAbility = _abilitiesCreator.CreateAbility(id);
             _abilitiesById[id] = newAbility;
             return newAbility;
-        }
-
-        private IAbility CreateAbility(IAbilityBalanceModel balanceModel)
-        {
-            var abilityType = balanceModel.AbilityType;
-
-            IAbility result = null;
-
-            switch (abilityType)
-            {
-                default:
-                    LogUtils.Error(this, $"Ability factory for ability type [{abilityType}] does not implemented!");
-                    break;
-            }
-
-            return result;
         }
     }
 }
