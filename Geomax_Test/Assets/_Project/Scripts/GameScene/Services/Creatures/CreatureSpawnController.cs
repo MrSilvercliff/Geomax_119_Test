@@ -7,14 +7,16 @@ using _Project.Scripts.Project.Services.Balance.Models;
 using _Project.Scripts.Project.Services.StateMachines;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using Zenject;
+using ZerglingUnityPlugins.Tools.Scripts.Interfaces.ProjectService.AsyncSync;
 using ZerglingUnityPlugins.Tools.Scripts.Log;
 
 namespace _Project.Scripts.GameScene.Services.Creatures
 {
-    public interface ICreatureSpawnController
+    public interface ICreatureSpawnController : IProjectService
     {
         void Spawn(string creatureId, bool enterOnSpawnState);
     }
@@ -29,6 +31,16 @@ namespace _Project.Scripts.GameScene.Services.Creatures
         [Inject] private ICreaturePrefabPool _prefabPool;
 
         [Inject] private PlayerControllerPool _playerControllerPool;
+
+        public Task<bool> Init()
+        {
+            return Task.FromResult(true);
+        }
+
+        public bool Flush()
+        {
+            return true;
+        }
 
         public void Spawn(string creatureId, bool enterOnSpawnState)
         {

@@ -77,6 +77,7 @@ namespace _Project.Scripts.GameScene.Scene
 
             Container.Bind<ICreatureControllerRepository>().To<CreatureControllerRepository>().AsSingle();
             Container.Bind<ICreatureControllerUpdater>().To<CreatureControllerUpdater>().AsSingle();
+            Container.Bind<ICreatureService>().To<CreatureService>().AsSingle();
         }
 
         private void BindCreatureStateFactories()

@@ -27,7 +27,7 @@ namespace _Project.Scripts.GameScene.Scene
         #region Second
 
         // creatures
-        [Inject] private ICreatureControllerRepository _creatureControllerRepository;
+        [Inject] private ICreatureService _creatureService;
 
         #endregion Second
 
@@ -67,7 +67,7 @@ namespace _Project.Scripts.GameScene.Scene
 
         private async Task<bool> InitSecond()
         {
-            AddService(_creatureControllerRepository);
+            AddService(_creatureService);
 
             var result = await InitServices();
             return result;

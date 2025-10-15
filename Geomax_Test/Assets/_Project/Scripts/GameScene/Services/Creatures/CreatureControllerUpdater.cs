@@ -4,17 +4,28 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using ZerglingUnityPlugins.Tools.Scripts.Interfaces.Async;
+using ZerglingUnityPlugins.Tools.Scripts.Interfaces.ProjectService.AsyncSync;
 using ZerglingUnityPlugins.Tools.Scripts.Mono;
 
 namespace _Project.Scripts.GameScene.Services.Creatures
 {
-    public interface ICreatureControllerUpdater : ILateStartable, IMonoUpdatable, IMonoFixedUpdatable, IMonoLateUpdatable
+    public interface ICreatureControllerUpdater : IProjectService, ILateStartable, IMonoUpdatable, IMonoFixedUpdatable, IMonoLateUpdatable
     {
     }
 
     public class CreatureControllerUpdater : ICreatureControllerUpdater
     {
         [Inject] private ICreatureControllerRepository _repository;
+
+        public Task<bool> Init()
+        {
+            return Task.FromResult(true);
+        }
+
+        public bool Flush()
+        {
+            return true;
+        }
 
         public async Task<bool> OnLateStart()
         {

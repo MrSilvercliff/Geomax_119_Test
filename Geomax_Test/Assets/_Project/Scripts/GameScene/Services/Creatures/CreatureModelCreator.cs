@@ -6,13 +6,15 @@ using _Project.Scripts.Project.Services.Balance;
 using _Project.Scripts.Project.Services.Balance.Models;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
+using ZerglingUnityPlugins.Tools.Scripts.Interfaces.ProjectService.AsyncSync;
 using ZerglingUnityPlugins.Tools.Scripts.Log;
 
 namespace _Project.Scripts.GameScene.Services.Creatures
 {
-    public interface ICreatureModelCreator
+    public interface ICreatureModelCreator : IProjectService
     {
         ICreatureModel GetCreatureModel(string creatureId);
     }
@@ -22,6 +24,16 @@ namespace _Project.Scripts.GameScene.Services.Creatures
         [Inject] private IProjectBalanceService _projectBalanceStorage;
         [Inject] private CreatureModel.Factory _creatureModelFactory;
         [Inject] private IAbilitiesProvider _abilitiesProvider;
+
+        public Task<bool> Init()
+        {
+            return Task.FromResult(true);
+        }
+
+        public bool Flush()
+        {
+            return true;
+        }
 
         public ICreatureModel GetCreatureModel(string creatureId)
         {
