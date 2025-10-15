@@ -13,6 +13,11 @@ namespace _Project.Scripts.Project.Extensions
             transform.localPosition = localPosition;
         }
 
+        public static void ResetLocal(this Transform transform)
+        { 
+            transform.localPosition = Vector3.zero;
+        }
+
         public static void ResetLocalPosition(this Transform transform)
         {
             transform.localPosition = Vector3.zero;

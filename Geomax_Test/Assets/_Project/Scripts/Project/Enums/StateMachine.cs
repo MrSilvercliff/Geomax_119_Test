@@ -19,10 +19,5 @@ namespace _Project.Scripts.Project.Enums
         NONE = 0,
         
         CreatureState_Idle = 1,
-        CreatureState_Move = 2,
-        CreatureState_FreeLook = 3,
-        CreatureState_RotateLook = 4,
-        CreatureState_FreeFall = 5,
-        CreatureState_Jump = 6,
     }
 }
