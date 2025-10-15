@@ -14,9 +14,7 @@ namespace _Project.Scripts.Project.Enums
     { 
         None = 0,
         Move = 1,
-        CameraLook = 2,
-        CharacterController = 3,
-        StateMachineDebug = 4,
-        AnimatorController = 5,
+        StateMachineDebug = 2,
+        AnimatorController = 3,
     }
 }
