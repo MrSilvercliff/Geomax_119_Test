@@ -56,9 +56,6 @@ namespace _Project.Scripts.GameScene.Services.Abilities
 
             switch (abilityType)
             {
-                case AbilityType.BASIC_MOVE:
-                    break;
-
                 default:
                     LogUtils.Error(this, $"Ability factory for ability type [{abilityType}] does not implemented!");
                     break;
