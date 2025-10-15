@@ -131,4 +131,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: _Project.Scripts.GameScene::_Project.Scripts.GameScene.Scene.GameSceneInstaller
   _sceneContext: {fileID: 3795792049919745459}
   _objectPoolContainers: {fileID: 2178705512804592916}
-  _creaturePrefabConfig: {fileID: 0}
+  _creaturePrefabConfig: {fileID: 11400000, guid: 7a0aff8d9a357fc438415a86e871672d, type: 2}
