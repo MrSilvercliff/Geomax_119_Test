@@ -12,7 +12,7 @@ namespace _Project.Scripts.GameScene.Configs
         CreaturePrefab Get(string id);
     }
 
-    [CreateAssetMenu(fileName = "{CreaturePrefabConfig}", menuName = "Project/Configs/Game Scene/Creature Prefab Config")]
+    [CreateAssetMenu(fileName = "CreaturePrefabConfig", menuName = "Project/Configs/Game Scene/Creature Prefab Config")]
     public class CreaturePrefabConfig : ProjectConfig, ICreaturePrefabConfig
     {
         [SerializeField] private CreaturePrefab[] _prefabsList;
