@@ -69,7 +69,7 @@ namespace _Project.Scripts.GameScene.Scene
 
             Container.Bind<ICreatureModelCreator>().To<CreatureModelCreator>().AsSingle();
 
-            Container.Bind<ICreatureSpawnController>().To<CreatureSpawnController>().AsSingle();
+            Container.Bind<ICreatureSpawnService>().To<CreatureSpawnService>().AsSingle();
 
             Container.Bind<ICreatureControllerRepository>().To<CreatureControllerRepository>().AsSingle();
             Container.Bind<ICreatureControllerUpdater>().To<CreatureControllerUpdater>().AsSingle();

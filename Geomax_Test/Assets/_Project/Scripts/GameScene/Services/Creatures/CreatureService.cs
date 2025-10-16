@@ -14,7 +14,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
         [Inject] private ICreatureControllerRepository _creatureControllerRepository;
         [Inject] private ICreatureControllerUpdater _creatureControllerUpdater;
         [Inject] private ICreatureModelCreator _creatureModelCreator;
-        [Inject] private ICreatureSpawnController _creatureSpawnController;
+        [Inject] private ICreatureSpawnService _creatureSpawnController;
 
         public async Task<bool> Init()
         {

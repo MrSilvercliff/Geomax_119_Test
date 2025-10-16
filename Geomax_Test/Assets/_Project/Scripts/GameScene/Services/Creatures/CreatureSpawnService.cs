@@ -17,12 +17,12 @@ using ZerglingUnityPlugins.Tools.Scripts.Log;
 
 namespace _Project.Scripts.GameScene.Services.Creatures
 {
-    public interface ICreatureSpawnController : IProjectService
+    public interface ICreatureSpawnService : IProjectService
     {
         void Spawn(string creatureId, bool enterOnSpawnState);
     }
 
-    public class CreatureSpawnController : ICreatureSpawnController
+    public class CreatureSpawnService : ICreatureSpawnService
     {
         [Inject] private IProjectBalanceService _balanceStorage;
         [Inject] private IStateMachineCreator _stateMachineCreator;
