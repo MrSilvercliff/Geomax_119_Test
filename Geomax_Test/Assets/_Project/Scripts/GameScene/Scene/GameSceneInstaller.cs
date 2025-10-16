@@ -3,6 +3,8 @@ using _Project.Scripts.GameScene.Creatures;
 using _Project.Scripts.GameScene.Creatures.Basis;
 using _Project.Scripts.GameScene.Creatures.Basis.Prefab;
 using _Project.Scripts.GameScene.Creatures.Player;
+using _Project.Scripts.GameScene.Creatures.Player.States;
+using _Project.Scripts.GameScene.GameLevel;
 using _Project.Scripts.GameScene.ObjectPools;
 using _Project.Scripts.GameScene.Services.Abilities;
 using _Project.Scripts.GameScene.Services.Creatures;
@@ -17,8 +19,9 @@ namespace _Project.Scripts.GameScene.Scene
     public class GameSceneInstaller : SceneInstaller
     {
         [SerializeField] private GameSceneObjectPoolContainers _objectPoolContainers;
+        [SerializeField] private GameLevelController _levelController;
 
-        [Header("CONFIGS")] 
+        [Header("CONFIGS")]
         [SerializeField] private CreaturePrefabConfig _creaturePrefabConfig;
 
         protected override void OnInstallBindings()
@@ -28,8 +31,6 @@ namespace _Project.Scripts.GameScene.Scene
             BindAbilityServices();
 
             BindCreatureServices();
-
-            BindSpawnPointsServices();
 
             BindObjectPools();
 
@@ -46,6 +47,11 @@ namespace _Project.Scripts.GameScene.Scene
         private void BindConfigs()
         {
             Container.Bind<ICreaturePrefabConfig>().FromInstance(_creaturePrefabConfig).AsSingle();
+        }
+
+        private void BindGameLevelController()
+        { 
+            Container.Bind<IGameLevelController>().FromInstance(_levelController).AsSingle();
         }
 
         private void BindAbilityServices()
@@ -83,11 +89,12 @@ namespace _Project.Scripts.GameScene.Scene
 
         private void BindPlayerStateFactories()
         {
-            Container.Bind<IPlayerStateCreator>().To<PlayerStateCreator>().AsSingle();
-        }
+            Container.BindFactory<IPlayerController, PlayerStateStart, PlayerStateStart.Factory>();
+            Container.BindFactory<IPlayerController, PlayerStateIdle, PlayerStateIdle.Factory>();
+            Container.BindFactory<IPlayerController, PlayerStateAttack, PlayerStateAttack.Factory>();
+            Container.BindFactory<IPlayerController, PlayerStateDeath, PlayerStateDeath.Factory>();
 
-        private void BindSpawnPointsServices()
-        {
+            Container.Bind<IPlayerStateCreator>().To<PlayerStateCreator>().AsSingle();
         }
 
         private void BindObjectPools()
