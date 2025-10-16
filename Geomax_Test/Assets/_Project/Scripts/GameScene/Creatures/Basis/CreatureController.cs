@@ -75,11 +75,12 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
             _creatureStateMachine.Init();
         }
 
-        public void SetupPrefab(ICreaturePrefab view)
+        public void SetupPrefab(ICreaturePrefab prefab)
         {
-            _creaturePrefab = view;
+            _creaturePrefab = prefab;
             _creaturePrefab.Transform.SetParent(_prefabContainer);
-            _creaturePrefab.Transform.ResetLocal();
+            _creaturePrefab.Transform.ResetLocalPosition();
+            _creaturePrefab.Transform.ResetLocalRotation();
             _componentContainer.InitComponents(this, _creaturePrefab.Components);
         }
 
