@@ -23,7 +23,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
     {
         [Inject] private IProjectBalanceService _projectBalanceStorage;
         [Inject] private CreatureModel.Factory _creatureModelFactory;
-        [Inject] private IAbilitiesProvider _abilitiesProvider;
+        [Inject] private IAbilityService _abilityService;
 
         public Task<bool> Init()
         {
@@ -61,7 +61,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
             foreach (var abilityId in abilityIds)
             {
-                var ability = _abilitiesProvider.GetAbility(abilityId);
+                var ability = _abilityService.GetAbility(abilityId);
                 result[ability.AbilityType] = ability;
             }
 
