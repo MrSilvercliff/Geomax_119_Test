@@ -12,7 +12,7 @@ namespace _Project.Scripts.GameScene.Creatures.Player
     { 
     }
 
-    public class PlayerController : CreatureController, IPlayerController
+    public class PlayerController : CreatureController<PlayerController>, IPlayerController
     {
         public override CreatureType CreatureType => CreatureType.PLAYER;
 
