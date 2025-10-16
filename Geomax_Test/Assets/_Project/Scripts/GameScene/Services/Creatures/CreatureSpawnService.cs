@@ -2,6 +2,7 @@ using _Project.Scripts.GameScene.Creatures.Basis;
 using _Project.Scripts.GameScene.Creatures.Basis.Prefab;
 using _Project.Scripts.GameScene.Creatures.Player;
 using _Project.Scripts.GameScene.ObjectPools;
+using _Project.Scripts.GameScene.Services.CreatureSlots;
 using _Project.Scripts.Project.Enums;
 using _Project.Scripts.Project.Services.Balance;
 using _Project.Scripts.Project.Services.Balance.Models;
@@ -25,11 +26,10 @@ namespace _Project.Scripts.GameScene.Services.Creatures
     public class CreatureSpawnService : ICreatureSpawnService
     {
         [Inject] private IProjectBalanceService _balanceStorage;
-        [Inject] private IStateMachineCreator _stateMachineCreator;
-
-        //[Inject] private ICreatureSpawnPointRepository _spawnPointRepository;
-        [Inject] private ICreatureModelCreator _modelCreator;
         [Inject] private IGameSceneObjectPoolService _gameSceneObjectPoolService;
+        [Inject] private IStateMachineCreator _stateMachineCreator;
+        [Inject] private ICreatureModelCreator _modelCreator;
+        [Inject] private ICreatureSlotService _creatureSlotService;
 
         public Task<bool> Init()
         {
@@ -58,6 +58,10 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             {
                 case CreatureType.PLAYER:
                     SpawnPlayer(creatureBalanceModel, enterOnSpawnState);
+                    break;
+
+                case CreatureType.ENEMY:
+                    SpawnEnemy(creatureBalanceModel, enterOnSpawnState);
                     break;
 
                 default:
@@ -94,6 +98,10 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             InitStateMachineStateControllers(controller);
             TryEnterOnSpawnState(enterOnSpawnState, controller);
             */
+        }
+
+        private void SpawnEnemy(ICreatureBalanceModel balanceModel, bool enterOnSpawnState)
+        { 
         }
 
         /*
