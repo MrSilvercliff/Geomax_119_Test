@@ -1,3 +1,4 @@
+using _Project.Scripts.GameScene.Abilities;
 using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -6,7 +7,8 @@ using ZerglingUnityPlugins.Tools.Scripts.Interfaces.ProjectService.AsyncSync;
 namespace _Project.Scripts.GameScene.Services.Abilities
 {
     public interface IAbilityService : IProjectService
-    { 
+    {
+        IAbility GetAbility(string id);
     }
 
     public class AbilityService : IAbilityService
@@ -26,6 +28,12 @@ namespace _Project.Scripts.GameScene.Services.Abilities
             _abilitiesCreator.Flush();
             _abilitiesProvider.Flush();
             return true;
+        }
+
+        public IAbility GetAbility(string id)
+        {
+            var result = _abilitiesProvider.GetAbility(id);
+            return result;
         }
     }
 }
