@@ -49,9 +49,14 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         protected ICreatureModel _creatureModel;
         protected ICreaturePrefab _creaturePrefab;
         protected ICreatureStateMachine _creatureStateMachine;
-        protected ICreatureComponentContainer _componentContainer = new CreatureComponentContainer();
+        protected ICreatureComponentContainer _componentContainer;
 
         #region BASIS
+
+        protected override void OnAwake()
+        {
+            _componentContainer = new CreatureComponentContainer();
+        }
 
         public void InitComponents()
         {
