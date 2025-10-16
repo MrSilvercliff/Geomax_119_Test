@@ -198,6 +198,72 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &135753461
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1615839544}
+    m_Modifications:
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591650826937006380, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_Name
+      value: '[Prefab] CreatureSlotController (2)'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970435568267433154, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+--- !u!4 &135753462 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+  m_PrefabInstance: {fileID: 135753461}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &170417197
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +361,152 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &551333491
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1615839544}
+    m_Modifications:
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591650826937006380, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_Name
+      value: '[Prefab] CreatureSlotController (1)'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970435568267433154, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+--- !u!4 &551333492 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+  m_PrefabInstance: {fileID: 551333491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &559193754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 559193756}
+  - component: {fileID: 559193755}
+  m_Layer: 0
+  m_Name: '[Controller] GameLevel'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &559193755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559193754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8da8f4399ef2faa4e9550316f4dd682d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: _Project.Scripts.GameScene::_Project.Scripts.GameScene.GameLevel.GameLevelController
+  _playerCreatureSlots: []
+  _enemyCreatureSlots: []
+--- !u!4 &559193756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559193754}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1394371342}
+  - {fileID: 1615839544}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1394371341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1394371342}
+  m_Layer: 0
+  m_Name: '[Contaier] PlayerCreatureSlots'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1394371342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394371341}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5336339173048349187}
+  m_Father: {fileID: 559193756}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1419002376
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,8 +567,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -387,6 +599,106 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1615839543
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1615839544}
+  m_Layer: 0
+  m_Name: '[Contaier] PlayerCreatureSlots (1)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1615839544
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615839543}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 551333492}
+  - {fileID: 135753462}
+  - {fileID: 1893085575}
+  m_Father: {fileID: 559193756}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1893085574
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1615839544}
+    m_Modifications:
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591650826937006380, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_Name
+      value: '[Prefab] CreatureSlotController (3)'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970435568267433154, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+--- !u!4 &1893085575 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+  m_PrefabInstance: {fileID: 1893085574}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1558335426674089736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -456,6 +768,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Canvas] Scene'
       objectReference: {fileID: 0}
+    - target: {fileID: 2842372875409782822, guid: 8c432e9736278b94da0dd51f1a33566d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ff4263a8caa30cd4a87c07b36393e380, type: 3}
     - target: {fileID: 2907810587096157487, guid: 8c432e9736278b94da0dd51f1a33566d, type: 3}
       propertyPath: m_Camera
       value: 
@@ -545,6 +861,68 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c432e9736278b94da0dd51f1a33566d, type: 3}
+--- !u!1001 &5336339173048349186
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1394371342}
+    m_Modifications:
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591650826937006380, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+      propertyPath: m_Name
+      value: '[Prefab] CreatureSlotController'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+--- !u!4 &5336339173048349187 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2760505597967872926, guid: eb521bb19bf4f14449c310d6ca47d741, type: 3}
+  m_PrefabInstance: {fileID: 5336339173048349186}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7497636396358878503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -612,3 +990,4 @@ SceneRoots:
   - {fileID: 3472668122994912438}
   - {fileID: 7497636396358878503}
   - {fileID: 1558335426674089736}
+  - {fileID: 559193756}
