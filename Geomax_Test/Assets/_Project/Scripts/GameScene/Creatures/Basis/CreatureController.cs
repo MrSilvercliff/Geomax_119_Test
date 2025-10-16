@@ -1,14 +1,9 @@
 using _Project.Scripts.GameScene.Creatures.Basis.Components;
-using _Project.Scripts.GameScene.Creatures.Basis.States;
 using _Project.Scripts.GameScene.Services.Creatures;
 using _Project.Scripts.Project.Enums;
 using _Project.Scripts.Project.Extensions;
 using _Project.Scripts.Project.Monobeh;
 using _Project.Scripts.Project.ObjectPools;
-using _Project.Scripts.Project.StateMachine;
-using _Project.Scripts.Project.Zenject;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using ZerglingUnityPlugins.Tools.Scripts.Log;
@@ -137,5 +132,11 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
 
         #region GAMEPLAY
         #endregion GAMEPLAY
+    }
+
+    public abstract class CreatureController<TObjectPoolType> : CreatureController
+        where TObjectPoolType : CreatureController
+    { 
+        public class Pool : ProjectMonoMemoryPool<TObjectPoolType> { }
     }
 }
