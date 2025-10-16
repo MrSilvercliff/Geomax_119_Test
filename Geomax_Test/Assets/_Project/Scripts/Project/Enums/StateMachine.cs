@@ -12,12 +12,17 @@ namespace _Project.Scripts.Project.Enums
 
         GAME_SCENE_NULL = 2000,
         CREATURE_PLAYER = 2001,
+        CREATURE_ENEMY = 2002,
     }
 
     public enum StateMachineStateType
     {
         NONE = 0,
         
-        CreatureState_Idle = 1,
+        CreatureState_Start = 1,
+        CreatureState_Idle = 2,
+        CreatureState_Attack = 3,
+        CreatureState_Hit = 4,
+        CreatureState_Death = 5,
     }
 }

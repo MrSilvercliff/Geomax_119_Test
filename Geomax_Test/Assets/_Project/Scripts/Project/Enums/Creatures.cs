@@ -8,6 +8,7 @@ namespace _Project.Scripts.Project.Enums
     { 
         NONE = 0,
         PLAYER = 1,
+        ENEMY = 2,
     }
 
     public enum CreatureComponentType
