@@ -1,18 +1,14 @@
-using _Project.Scripts.GameScene.Abilities;
 using _Project.Scripts.GameScene.Configs;
 using _Project.Scripts.GameScene.Creatures;
 using _Project.Scripts.GameScene.Creatures.Basis;
 using _Project.Scripts.GameScene.Creatures.Basis.Prefab;
 using _Project.Scripts.GameScene.Creatures.Player;
-using _Project.Scripts.GameScene.Creatures.Player.States;
+using _Project.Scripts.GameScene.ObjectPools;
 using _Project.Scripts.GameScene.Services.Abilities;
 using _Project.Scripts.GameScene.Services.Creatures;
 using _Project.Scripts.GameScene.Services.StateMachines;
 using _Project.Scripts.Project.Services.Balance.Models;
 using _Project.Scripts.Project.Services.StateMachines;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using ZerglingUnityPlugins.ZenjectExtentions.SceneInstallers;
 
@@ -99,6 +95,8 @@ namespace _Project.Scripts.GameScene.Scene
             Container.Bind<IGameSceneObjectPoolContainers>().FromInstance(_objectPoolContainers).AsSingle();
             
             BindCreatureObjectPools();
+
+            Container.Bind<IGameSceneObjectPoolService>().To<GameSceneObjectPoolService>().AsSingle();
         }
 
         private void BindCreatureObjectPools()
@@ -113,9 +111,10 @@ namespace _Project.Scripts.GameScene.Scene
 
             var prefab = poolItem.Prefab;
             var container = poolItem.Container;
+            var poolInitSize = poolItem.PoolInitialSize;
 
-            Container.BindMemoryPool<PlayerController, PlayerControllerPool>()
-                .WithInitialSize(1)
+            Container.BindMemoryPool<PlayerController, PlayerController.Pool>()
+                .WithInitialSize(poolInitSize)
                 .FromComponentInNewPrefab(prefab)
                 .UnderTransform(container);
         }
