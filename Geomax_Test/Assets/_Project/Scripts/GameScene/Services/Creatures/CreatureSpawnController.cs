@@ -1,6 +1,7 @@
 using _Project.Scripts.GameScene.Creatures.Basis;
 using _Project.Scripts.GameScene.Creatures.Basis.Prefab;
 using _Project.Scripts.GameScene.Creatures.Player;
+using _Project.Scripts.GameScene.ObjectPools;
 using _Project.Scripts.Project.Enums;
 using _Project.Scripts.Project.Services.Balance;
 using _Project.Scripts.Project.Services.Balance.Models;
@@ -28,9 +29,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
         //[Inject] private ICreatureSpawnPointRepository _spawnPointRepository;
         [Inject] private ICreatureModelCreator _modelCreator;
-        [Inject] private ICreaturePrefabPool _prefabPool;
-
-        [Inject] private PlayerControllerPool _playerControllerPool;
+        [Inject] private IGameSceneObjectPoolService _gameSceneObjectPoolService;
 
         public Task<bool> Init()
         {
@@ -83,8 +82,9 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
             var prefabId = balanceModel.PrefabId;
 
+            /*
             var controller = _playerControllerPool.Spawn();
-            //controller.Transform.position = spawnPoint.Transform.position;
+            controller.Transform.position = spawnPoint.Transform.position;
             controller.Transform.position = Vector3.zero;
 
             SetupCreatureModel(creatureId, controller);
@@ -93,6 +93,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             SetupCreaturePrefab(prefabId, controller);
             InitStateMachineStateControllers(controller);
             TryEnterOnSpawnState(enterOnSpawnState, controller);
+            */
         }
 
         /*
@@ -118,7 +119,8 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
         void SetupCreaturePrefab(string prefabId, ICreatureController creatureController)
         {
-            var creaturePrefab = _prefabPool.Spawn(prefabId);
+            var prefabPool = _gameSceneObjectPoolService.CreaturePrefabPool;
+            var creaturePrefab = prefabPool.Spawn(prefabId);
             creatureController.SetupPrefab(creaturePrefab);
         }
 
