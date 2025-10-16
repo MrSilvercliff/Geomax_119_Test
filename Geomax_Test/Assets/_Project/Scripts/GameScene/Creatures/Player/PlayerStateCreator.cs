@@ -16,13 +16,31 @@ namespace _Project.Scripts.GameScene.Creatures.Player
 
     public class PlayerStateCreator : IPlayerStateCreator
     {
+        [Inject] private PlayerStateStart.Factory _startFactory;
+        [Inject] private PlayerStateIdle.Factory _idleFactory;
+        [Inject] private PlayerStateAttack.Factory _attackFactory;
+        [Inject] private PlayerStateDeath.Factory _deathFactory;
+
         public IPlayerStateControllerBase Create(StateMachineStateType state, IPlayerController creatureController)
         {
             IPlayerStateControllerBase result = null;
 
             switch (state)
             {
+                case StateMachineStateType.CreatureState_Start:
+                    result= _startFactory.Create(creatureController);
+                    break;
+
                 case StateMachineStateType.CreatureState_Idle:
+                    result = _idleFactory.Create(creatureController);
+                    break;
+
+                case StateMachineStateType.CreatureState_Attack:
+                    result = _attackFactory.Create(creatureController);
+                    break;
+
+                case StateMachineStateType.CreatureState_Death:
+                    result = _deathFactory.Create(creatureController);
                     break;
 
                 default:
