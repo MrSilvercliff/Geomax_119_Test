@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8817920346823767616
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3962520077457275437, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+      propertyPath: m_Name
+      value: '[CreatureController] Player'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079821263820630563, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079821263820630563, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079821263820630563, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079821263820630563, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079821263820630563, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079821263820630563, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079821263820630563, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079821263820630563, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079821263820630563, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079821263820630563, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3962520077457275437, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3837394828201291735}
+  m_SourcePrefab: {fileID: 100100000, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+--- !u!4 &174763830811801490 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8661382031122432466, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+  m_PrefabInstance: {fileID: 8817920346823767616}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1203073078800331597 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7704998436300653837, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+  m_PrefabInstance: {fileID: 8817920346823767616}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df13ad30c846c994d80bfd111346ca1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: _Project.Scripts.GameScene::_Project.Scripts.GameScene.Creatures.Basis.Components.CreatureComponentStateMachineDebug
+--- !u!4 &1738134626181291107 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7079821263820630563, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+  m_PrefabInstance: {fileID: 8817920346823767616}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5522038568411663469 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3962520077457275437, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+  m_PrefabInstance: {fileID: 8817920346823767616}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3837394828201291735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5522038568411663469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e1714f668de93c4c98aa0cd73363e1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: _Project.Scripts.GameScene::_Project.Scripts.GameScene.Creatures.Player.PlayerController
+  _transform: {fileID: 1738134626181291107}
+  _prefabContainer: {fileID: 174763830811801490}
+  _onSpawnState: 1
+  _componentsList:
+  - {fileID: 1203073078800331597}
