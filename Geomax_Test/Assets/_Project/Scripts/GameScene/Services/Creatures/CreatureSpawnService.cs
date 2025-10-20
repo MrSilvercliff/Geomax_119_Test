@@ -1,16 +1,12 @@
 using _Project.Scripts.GameScene.Creatures.Basis;
-using _Project.Scripts.GameScene.Creatures.Basis.Prefab;
-using _Project.Scripts.GameScene.Creatures.Player;
+using _Project.Scripts.GameScene.CreatureSlot;
 using _Project.Scripts.GameScene.ObjectPools;
 using _Project.Scripts.GameScene.Services.CreatureSlots;
 using _Project.Scripts.Project.Enums;
 using _Project.Scripts.Project.Services.Balance;
 using _Project.Scripts.Project.Services.Balance.Models;
 using _Project.Scripts.Project.Services.StateMachines;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnityEditor;
 using UnityEngine;
 using Zenject;
 using ZerglingUnityPlugins.Tools.Scripts.Interfaces.ProjectService.AsyncSync;
@@ -29,6 +25,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
         [Inject] private IGameSceneObjectPoolService _gameSceneObjectPoolService;
         [Inject] private IStateMachineCreator _stateMachineCreator;
         [Inject] private ICreatureModelCreator _modelCreator;
+        [Inject] private ICreatureControllerRepository _controllerRepository;
         [Inject] private ICreatureSlotService _creatureSlotService;
 
         public Task<bool> Init()
@@ -74,43 +71,46 @@ namespace _Project.Scripts.GameScene.Services.Creatures
         {
             var creatureId = balanceModel.Id;
 
-            /*
-            var tryGetResult = TryGetFirstSpawnPoint(creatureId, out var spawnPoint);
+            var tryGetResult = TryGetFreeCreatureSlotController(true, out var creatureSlotController);
 
             if (!tryGetResult)
             {
                 LogUtils.Error(this, $"Cant spawn creature, spawn point doesnt exist!");
                 return;
             }
-            */
 
             var prefabId = balanceModel.PrefabId;
 
-            /*
-            var controller = _playerControllerPool.Spawn();
-            controller.Transform.position = spawnPoint.Transform.position;
-            controller.Transform.position = Vector3.zero;
+            var playerControllerPool = _gameSceneObjectPoolService.PlayerControllerPool;
+            var playerController = playerControllerPool.Spawn();
+            creatureSlotController.SetCreatureController(playerController);
+            _controllerRepository.Add(playerController);
 
-            SetupCreatureModel(creatureId, controller);
-            SetupStateMachine(controller);
-            InitComponents(controller);
-            SetupCreaturePrefab(prefabId, controller);
-            InitStateMachineStateControllers(controller);
-            TryEnterOnSpawnState(enterOnSpawnState, controller);
-            */
+            SetupCreatureModel(creatureId, playerController);
+            SetupStateMachine(playerController);
+            InitComponents(playerController);
+            SetupCreaturePrefab(prefabId, playerController);
+            InitStateMachineStateControllers(playerController);
+            TryEnterOnSpawnState(enterOnSpawnState, playerController);
+            
         }
 
         private void SpawnEnemy(ICreatureBalanceModel balanceModel, bool enterOnSpawnState)
         { 
         }
 
-        /*
-        bool TryGetFirstSpawnPoint(string creatureId, out ICreatureSpawnPointController creatureSpawnPoint)
+        bool TryGetFreeCreatureSlotController(bool playerSlot, out ICreatureSlotController creatureSlotController)
         {
-            var tryGetResult = _spawnPointRepository.TryGetFirstByCreatureId(creatureId, out creatureSpawnPoint);
-            return tryGetResult;
+            var result = false;
+            creatureSlotController = null;
+
+            if (playerSlot)
+                result = _creatureSlotService.TryGetFreePlayerCreatureSlot(out creatureSlotController);
+            else
+                result = _creatureSlotService.TryGetFreeEnemyCreatureSlot(out creatureSlotController);
+
+            return result;
         }
-        */
 
         void SetupCreatureModel(string creatureId, ICreatureController creatureController)
         {
