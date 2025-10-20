@@ -31,20 +31,26 @@ namespace ZerglingUnityPlugins.Tools.Scripts.Mono
 
         private void Update()
         {
+            var deltaTime = Time.deltaTime;
+
             foreach (var updatable in _monoUpdatableObjects)
-                updatable.OnUpdate();
+                updatable.OnUpdate(deltaTime);
         }
 
         private void FixedUpdate()
         {
+            var deltaTime = Time.fixedDeltaTime;
+
             foreach (var updatable in _monoFixedUpdatableObjects)
-                updatable.OnFixedUpdate();
+                updatable.OnFixedUpdate(deltaTime);
         }
 
         private void LateUpdate()
         {
+            var deltaTime = Time.deltaTime;
+
             foreach (var updatable in _monoLateUpdatableObjects)
-                updatable.OnLateUpdate();
+                updatable.OnLateUpdate(deltaTime);
         }
 
         public void Subscribe(IMonoUpdatable updatable)

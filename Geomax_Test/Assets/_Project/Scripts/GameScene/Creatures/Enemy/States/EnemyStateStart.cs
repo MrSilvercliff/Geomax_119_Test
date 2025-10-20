@@ -25,15 +25,15 @@ namespace _Project.Scripts.GameScene.Creatures.Enemy.States
             _creatureStateMachine.EnterState(StateMachineStateType.CreatureState_Idle);
         }
 
-        public override void OnFixedUpdate()
+        public override void OnFixedUpdate(float deltaTime)
         {
         }
 
-        public override void OnUpdate()
+        public override void OnUpdate(float deltaTime)
         {
         }
 
-        public override void OnLateUpdate()
+        public override void OnLateUpdate(float deltaTime)
         {
         }
 

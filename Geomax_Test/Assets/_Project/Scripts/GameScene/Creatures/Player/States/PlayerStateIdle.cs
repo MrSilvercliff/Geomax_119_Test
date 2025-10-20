@@ -29,15 +29,15 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
             _componentAnimator.AnimatorController.Play(AnimatorStateHash.Idle);
         }
 
-        public override void OnFixedUpdate()
+        public override void OnFixedUpdate(float deltaTime)
         {
         }
 
-        public override void OnUpdate()
+        public override void OnUpdate(float deltaTime)
         {
         }
 
-        public override void OnLateUpdate()
+        public override void OnLateUpdate(float deltaTime)
         {
         }
 

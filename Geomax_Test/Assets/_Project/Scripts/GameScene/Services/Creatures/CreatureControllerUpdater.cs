@@ -37,28 +37,28 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             return true;
         }
 
-        public void OnFixedUpdate()
+        public void OnFixedUpdate(float deltaTime)
         {
             var controllers = _repository.GetAll();
 
             foreach (var controller in controllers)
-                controller.OnFixedUpdate();
+                controller.OnFixedUpdate(deltaTime);
         }
 
-        public void OnUpdate()
+        public void OnUpdate(float deltaTime)
         {
             var controllers = _repository.GetAll();
 
             foreach (var controller in controllers)
-                controller.OnUpdate();
+                controller.OnUpdate(deltaTime);
         }
 
-        public void OnLateUpdate()
+        public void OnLateUpdate(float deltaTime)
         {
             var controllers = _repository.GetAll();
 
             foreach (var controller in controllers)
-                controller.OnLateUpdate();
+                controller.OnLateUpdate(deltaTime);
         }
     }
 }

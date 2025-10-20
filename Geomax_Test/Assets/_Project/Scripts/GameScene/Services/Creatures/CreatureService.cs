@@ -41,20 +41,20 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             return true;
         }
 
-        public void OnFixedUpdate()
+        public void OnFixedUpdate(float deltaTime)
         {
-            _creatureControllerUpdater.OnFixedUpdate();
+            _creatureControllerUpdater.OnFixedUpdate(deltaTime);
         }
 
-        public void OnUpdate()
+        public void OnUpdate(float deltaTime)
         {
-            _creatureControllerUpdater.OnUpdate();
+            _creatureControllerUpdater.OnUpdate(deltaTime);
         }
 
-        public void OnLateUpdate()
+        public void OnLateUpdate(float deltaTime)
         {
-            _creatureControllerUpdater.OnLateUpdate();
-            _creatureControllerRepository.OnLateUpdate();
+            _creatureControllerUpdater.OnLateUpdate(deltaTime);
+            _creatureControllerRepository.OnLateUpdate(deltaTime);
         }
 
         public void SpawnCreature(string creatureId, bool enterOnSpawnState)

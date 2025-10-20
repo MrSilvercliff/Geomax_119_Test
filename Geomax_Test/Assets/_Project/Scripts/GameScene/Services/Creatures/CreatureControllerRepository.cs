@@ -102,7 +102,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             return _activeCreatureControllersHashSet;
         }
 
-        public void OnLateUpdate()
+        public void OnLateUpdate(float deltaTime)
         {
             CheckToRemoveCreatureControllers();
             CheckToAddCreatureControllers();

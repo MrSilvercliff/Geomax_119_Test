@@ -47,19 +47,19 @@ namespace _Project.Scripts.Project.StateMachine
             return _activeStateController.StateType == state;
         }
 
-        public override void OnFixedUpdate()
+        public override void OnFixedUpdate(float deltaTime)
         {
-            _activeStateController?.OnFixedUpdate();
+            _activeStateController?.OnFixedUpdate(deltaTime);
         }
 
-        public override void OnUpdate()
+        public override void OnUpdate(float deltaTime)
         {
-            _activeStateController?.OnUpdate();
+            _activeStateController?.OnUpdate(deltaTime);
         }
 
-        public override void OnLateUpdate()
+        public override void OnLateUpdate(float deltaTime)
         {
-            _activeStateController?.OnLateUpdate();
+            _activeStateController?.OnLateUpdate(deltaTime);
         }
     }
 }

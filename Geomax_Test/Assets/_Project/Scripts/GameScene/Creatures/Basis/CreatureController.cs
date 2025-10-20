@@ -84,19 +84,19 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
             _componentContainer.InitComponents(this, _creaturePrefab.Components);
         }
 
-        public void OnFixedUpdate()
+        public void OnFixedUpdate(float deltaTime)
         {
-            _creatureStateMachine.OnFixedUpdate();
+            _creatureStateMachine.OnFixedUpdate(deltaTime);
         }
 
-        public void OnUpdate()
+        public void OnUpdate(float deltaTime)
         {
-            _creatureStateMachine.OnUpdate();
+            _creatureStateMachine.OnUpdate(deltaTime);
         }
 
-        public void OnLateUpdate()
+        public void OnLateUpdate(float deltaTime)
         {
-            _creatureStateMachine.OnLateUpdate();
+            _creatureStateMachine.OnLateUpdate(deltaTime);
         }
 
         public void OnCreated()

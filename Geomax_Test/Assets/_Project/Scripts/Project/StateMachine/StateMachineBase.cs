@@ -59,11 +59,11 @@ namespace _Project.Scripts.Project.StateMachine
 
         public abstract bool IsStateActive(StateMachineStateType state);
 
-        public abstract void OnFixedUpdate();
+        public abstract void OnFixedUpdate(float deltaTime);
 
-        public abstract void OnUpdate();
+        public abstract void OnUpdate(float deltaTime);
 
-        public abstract void OnLateUpdate();
+        public abstract void OnLateUpdate(float deltaTime);
 
         public class Factory : PlaceholderFactory<TFactoryType> { }
     }

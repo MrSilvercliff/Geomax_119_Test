@@ -6,6 +6,6 @@ namespace ZerglingUnityPlugins.Tools.Scripts.Mono
 {
     public interface IMonoUpdatable
     {
-        void OnUpdate();
+        void OnUpdate(float deltaTime);
     }
 }

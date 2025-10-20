@@ -10,6 +10,7 @@ using _Project.Scripts.GameScene.Services.Creatures;
 using System.Threading.Tasks;
 using Zenject;
 using _Project.Scripts.GameScene.Services.CreatureSlots;
+using _Project.Scripts.Project.Services.Timers;
 
 namespace _Project.Scripts.GameScene.GameLevel
 {
@@ -23,6 +24,7 @@ namespace _Project.Scripts.GameScene.GameLevel
         [SerializeField] private CreatureSlotController[] _enemyCreatureSlots;
 
         [Inject] private IMonoUpdater _monoUpdater;
+        [Inject] private ITimerService _timerService;
 
         [Inject] private IGameStartConfig _gameStartConfig;
         [Inject] private ICreatureSlotService _creatureSlotService;
@@ -58,28 +60,29 @@ namespace _Project.Scripts.GameScene.GameLevel
             return true;
         }
 
-        public void OnFixedUpdate()
+        public void OnFixedUpdate(float deltaTime)
         {
             if (!_updateEnabled)
                 return;
 
-            _creatureService.OnFixedUpdate();
+            _creatureService.OnFixedUpdate(deltaTime);
         }
 
-        public void OnUpdate()
+        public void OnUpdate(float deltaTime)
         {
             if (!_updateEnabled)
                 return;
 
-            _creatureService.OnUpdate();
+            _creatureService.OnUpdate(deltaTime);
         }
 
-        public void OnLateUpdate()
+        public void OnLateUpdate(float deltaTime)
         {
             if (!_updateEnabled)
                 return;
 
-            _creatureService.OnLateUpdate();
+            _creatureService.OnLateUpdate(deltaTime);
+            _timerService.OnLateUpdate(deltaTime);
         }
 
         private void OnStartSpawnCreatures()

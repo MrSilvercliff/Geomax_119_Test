@@ -8,6 +8,8 @@ using _Project.Scripts.Project.Handlers.UI.Views;
 using _Project.Scripts.Project.Services.Balance;
 using _Project.Scripts.Project.Services.SceneLoading;
 using _Project.Scripts.Project.Services.ServiceInit;
+using _Project.Scripts.Project.Services.Time;
+using _Project.Scripts.Project.Services.Timers;
 using _Project.Scripts.Project.Services.UI.Panels;
 using _Project.Scripts.Project.Services.UI.Popups;
 using _Project.Scripts.Project.Services.UI.Views;
@@ -71,6 +73,10 @@ namespace _Project.Scripts.Project.Zenject
 
             BindBalanceServices();
 
+            BindTimeServices();
+
+            BindTimerServices();
+
             BindProjectServiceIniter();
         }
 
@@ -122,6 +128,20 @@ namespace _Project.Scripts.Project.Zenject
             Container.Bind<IJSONParseHelper>().To<JsonParseHelper>().AsSingle();
             Container.Bind<IBalanceJSONParser>().To<BalanceJSONParser>().AsSingle();
             Container.Bind<IProjectBalanceService>().To<ProjectBalanceService>().AsSingle();
+        }
+
+        private void BindTimeServices()
+        { 
+            Container.Bind<ITimeService>().To<TimeService>().AsSingle();
+        }
+
+        private void BindTimerServices()
+        { 
+            Container.Bind<ITimerIdProvider>().To<TimerIdProvider>().AsSingle();
+            Container.Bind<ITimerCreator>().To<TimerCreator>().AsSingle();
+            Container.Bind<ITimerRepository>().To<TimerRepository>().AsSingle();
+            Container.Bind<ITimerStartService>().To<TimerStartService>().AsSingle();
+            Container.Bind<ITimerService>().To<TimerService>().AsSingle();
         }
 
         private void BindProjectServiceIniter()
