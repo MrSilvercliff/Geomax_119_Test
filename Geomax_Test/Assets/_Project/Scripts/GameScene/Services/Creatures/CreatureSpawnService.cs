@@ -1,4 +1,5 @@
 using _Project.Scripts.GameScene.Creatures.Basis;
+using _Project.Scripts.GameScene.Creatures.Player;
 using _Project.Scripts.GameScene.CreatureSlot;
 using _Project.Scripts.GameScene.ObjectPools;
 using _Project.Scripts.GameScene.Services.CreatureSlots;
@@ -84,7 +85,6 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             var playerControllerPool = _gameSceneObjectPoolService.PlayerControllerPool;
             var playerController = playerControllerPool.Spawn();
             creatureSlotController.SetCreatureController(playerController);
-            _controllerRepository.Add(playerController);
 
             SetupCreatureModel(creatureId, playerController);
             SetupStateMachine(playerController);
@@ -92,11 +92,37 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             SetupCreaturePrefab(prefabId, playerController);
             InitStateMachineStateControllers(playerController);
             TryEnterOnSpawnState(enterOnSpawnState, playerController);
-            
+
+            _controllerRepository.Add(playerController);
         }
 
         private void SpawnEnemy(ICreatureBalanceModel balanceModel, bool enterOnSpawnState)
         { 
+            var creatureId = balanceModel.Id;
+
+            var tryGetResult = TryGetFreeCreatureSlotController(false, out var creatureSlotController);
+
+            if (!tryGetResult)
+            {
+                LogUtils.Error(this, $"Cant spawn creature, spawn point doesnt exist!");
+                return;
+            }
+
+            var prefabId = balanceModel.PrefabId;
+
+            var enemyCreatureControllerPool = _gameSceneObjectPoolService.EnemyControllerPool;
+            var enemyCreatureController = enemyCreatureControllerPool.Spawn();
+            creatureSlotController.SetCreatureController(enemyCreatureController);
+            _controllerRepository.Add(enemyCreatureController);
+
+            SetupCreatureModel(creatureId, enemyCreatureController);
+            SetupStateMachine(enemyCreatureController);
+            InitComponents(enemyCreatureController);
+            SetupCreaturePrefab(prefabId, enemyCreatureController);
+            InitStateMachineStateControllers(enemyCreatureController);
+            TryEnterOnSpawnState(enterOnSpawnState, enemyCreatureController);
+
+            _controllerRepository.Add(enemyCreatureController);
         }
 
         bool TryGetFreeCreatureSlotController(bool playerSlot, out ICreatureSlotController creatureSlotController)
