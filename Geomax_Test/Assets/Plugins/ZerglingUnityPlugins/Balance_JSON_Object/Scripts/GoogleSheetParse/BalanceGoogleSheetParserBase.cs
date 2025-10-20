@@ -372,8 +372,13 @@ namespace Plugins.ZerglingUnityPlugins.Balance_Total_JSON.Scripts.GoogleSheetPar
 
         private JSONObject ParseVector2(string s)
         {
+            var result = JSONObject.Create(JSONObject.Type.Object);
+
+            if (string.IsNullOrEmpty(s))
+                return result;
+
             var split = s.Split(';');
-            var result = new JSONObject();
+            
             result["x"] = JSONObject.Create(ParseFloat(split[0]));
             result["y"] = JSONObject.Create(ParseFloat(split[1]));
             return result;
@@ -381,8 +386,13 @@ namespace Plugins.ZerglingUnityPlugins.Balance_Total_JSON.Scripts.GoogleSheetPar
 
         private JSONObject ParseVector2Int(string s)
         {
+            var result = JSONObject.Create(JSONObject.Type.Object);
+
+            if (string.IsNullOrEmpty(s))
+                return result;
+
             var split = s.Split(';');
-            var result = new JSONObject();
+
             result["x"] = JSONObject.Create(ParseInt(split[0]));
             result["y"] = JSONObject.Create(ParseInt(split[1]));
             return result;
@@ -400,8 +410,13 @@ namespace Plugins.ZerglingUnityPlugins.Balance_Total_JSON.Scripts.GoogleSheetPar
 
         private JSONObject ParseVector3Int(string s)
         {
+            var result = JSONObject.Create(JSONObject.Type.Object);
+
+            if (string.IsNullOrEmpty(s))
+                return result;
+
             var split = s.Split(';');
-            var result = new JSONObject();
+            
             result["x"] = JSONObject.Create(ParseInt(split[0]));
             result["y"] = JSONObject.Create(ParseInt(split[1]));
             result["z"] = JSONObject.Create(ParseInt(split[2]));
@@ -410,10 +425,13 @@ namespace Plugins.ZerglingUnityPlugins.Balance_Total_JSON.Scripts.GoogleSheetPar
 
         private JSONObject ParseArray(string s, string dataType)
         {
+            var result = JSONObject.Create(JSONObject.Type.Array);
+
+            if (string.IsNullOrEmpty(s))
+                return result;
+
             dataType = dataType.Substring(0, dataType.Length - 2);
             var split = s.Split(',');
-
-            var result = new JSONObject();
 
             for (int i = 0; i < split.Length; i++)
             {
