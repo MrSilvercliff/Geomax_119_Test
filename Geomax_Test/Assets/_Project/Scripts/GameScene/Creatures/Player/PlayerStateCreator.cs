@@ -28,7 +28,7 @@ namespace _Project.Scripts.GameScene.Creatures.Player
             switch (state)
             {
                 case StateMachineStateType.CreatureState_Start:
-                    result= _startFactory.Create(creatureController);
+                    result = _startFactory.Create(creatureController);
                     break;
 
                 case StateMachineStateType.CreatureState_Idle:

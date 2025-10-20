@@ -18,6 +18,17 @@ namespace _Project.Scripts.GameScene.Creatures.Player
 
         protected override void CreateStateControllers()
         {
+            var startState = StateMachineStateType.CreatureState_Start;
+            _allStates[startState] = _stateCreator.Create(startState, _creatureController);
+
+            var idleState = StateMachineStateType.CreatureState_Idle;
+            _allStates[idleState] = _stateCreator.Create(idleState, _creatureController);
+
+            var attackState = StateMachineStateType.CreatureState_Attack;
+            _allStates[attackState] = _stateCreator.Create(attackState, _creatureController);
+
+            var deathState = StateMachineStateType.CreatureState_Death;
+            _allStates[deathState] = _stateCreator.Create(deathState, _creatureController);
         }
     }
 }
