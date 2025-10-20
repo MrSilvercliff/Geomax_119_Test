@@ -44,8 +44,10 @@ namespace _Project.Scripts.GameScene.CreatureSlot
             if (_creatureContainer == null)
                 return;
 
+            _creatureController.Transform.SetParent(_creatureContainer);
             _creatureController.Transform.ResetLocalPosition();
             _creatureController.Transform.ResetLocalRotation();
+            _creatureController.Transform.ResetLocalScale();
         }
     }
 }
