@@ -2,6 +2,8 @@ using _Project.Scripts.GameScene.Configs;
 using _Project.Scripts.GameScene.Creatures;
 using _Project.Scripts.GameScene.Creatures.Basis;
 using _Project.Scripts.GameScene.Creatures.Basis.Prefab;
+using _Project.Scripts.GameScene.Creatures.Enemy;
+using _Project.Scripts.GameScene.Creatures.Enemy.States;
 using _Project.Scripts.GameScene.Creatures.Player;
 using _Project.Scripts.GameScene.Creatures.Player.States;
 using _Project.Scripts.GameScene.GameLevel;
@@ -98,6 +100,7 @@ namespace _Project.Scripts.GameScene.Scene
         private void BindCreatureStateFactories()
         {
             BindPlayerStateFactories();
+            BindEnemyCreatureStateFactories();
         }
 
         private void BindPlayerStateFactories()
@@ -108,6 +111,18 @@ namespace _Project.Scripts.GameScene.Scene
             Container.BindFactory<IPlayerController, PlayerStateDeath, PlayerStateDeath.Factory>();
 
             Container.Bind<IPlayerStateCreator>().To<PlayerStateCreator>().AsSingle();
+        }
+
+        private void BindEnemyCreatureStateFactories()
+        { 
+            Container.BindFactory<IEnemyCreatureController, EnemyStateStart, EnemyStateStart.Factory>();
+            Container.BindFactory<IEnemyCreatureController, EnemyStateIdle, EnemyStateIdle.Factory>();
+            Container.BindFactory<IEnemyCreatureController, EnemyStateAttack, EnemyStateAttack.Factory>();
+            Container.BindFactory<IEnemyCreatureController, EnemyStateHit, EnemyStateHit.Factory>();
+            Container.BindFactory<IEnemyCreatureController, EnemyStateDeath, EnemyStateDeath.Factory>();
+            Container.BindFactory<IEnemyCreatureController, EnemyStateDespawn, EnemyStateDespawn.Factory>();
+
+            Container.Bind<IEnemyCreatureStateCreator>().To<EnemyCreatureStateCreator>().AsSingle();
         }
 
         private void BindObjectPools()
@@ -121,8 +136,16 @@ namespace _Project.Scripts.GameScene.Scene
 
         private void BindCreatureObjectPools()
         {
-            BindPlayerControllerPool();
             BindCreaturePrefabPool();
+            BindPlayerControllerPool();
+            BindEnemyCreatureControllerPool();
+        }
+
+        private void BindCreaturePrefabPool()
+        {
+            Container.BindFactory<CreaturePrefab, CreaturePrefab, CreaturePrefab.Factory>().FromFactory<CreaturePrefabFactory>();
+
+            Container.Bind<ICreaturePrefabPool>().To<CreaturePrefabPool>().AsSingle();
         }
 
         private void BindPlayerControllerPool()
@@ -139,11 +162,18 @@ namespace _Project.Scripts.GameScene.Scene
                 .UnderTransform(container);
         }
 
-        private void BindCreaturePrefabPool()
+        private void BindEnemyCreatureControllerPool()
         {
-            Container.BindFactory<CreaturePrefab, CreaturePrefab, CreaturePrefab.Factory>().FromFactory<CreaturePrefabFactory>();
+            var poolItem = _objectPoolContainers.EnemyCreatureController;
 
-            Container.Bind<ICreaturePrefabPool>().To<CreaturePrefabPool>().AsSingle();
+            var prefab = poolItem.Prefab;
+            var container = poolItem.Container;
+            var poolInitSize = poolItem.PoolInitialSize;
+
+            Container.BindMemoryPool<EnemyCreatureController, EnemyCreatureController.Pool>()
+                .WithInitialSize(poolInitSize)
+                .FromComponentInNewPrefab(prefab)
+                .UnderTransform(container);
         }
 
         private void BindStateMachineServices()
