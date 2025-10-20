@@ -11,7 +11,7 @@
 		"CREATURE_HERO_1":{
 			"id":"CREATURE_HERO_1",
 			"type":"ENEMY",
-			"prefab_id":"CREATURE_HERO_1_PLAYER",
+			"prefab_id":"CREATURE_HERO_1_ENEMY",
 			"state_machine_type":"CREATURE_ENEMY",
 			"name":"ENEMY_1",
 			"abilities":[]
