@@ -5,6 +5,7 @@ using ZerglingUnityPlugins.WindowsManagerAsync.Scripts.Services.Panels;
 using ZerglingUnityPlugins.WindowsManagerAsync.Scripts.Services.Popups;
 using ZerglingUnityPlugins.WindowsManagerAsync.Scripts.Services.Views;
 using _Project.Scripts.Project.Services.ServiceInit;
+using _Project.Scripts.GameScene.Services.CreatureSlots;
 
 namespace _Project.Scripts.GameScene.Scene
 {
@@ -28,6 +29,9 @@ namespace _Project.Scripts.GameScene.Scene
 
         // creatures
         [Inject] private ICreatureService _creatureService;
+
+        // creature slots
+        [Inject] private ICreatureSlotService _creatureSlotService;
 
         #endregion Second
 
@@ -67,6 +71,7 @@ namespace _Project.Scripts.GameScene.Scene
 
         private async Task<bool> InitSecond()
         {
+            AddService(_creatureService);
             AddService(_creatureService);
 
             var result = await InitServices();
