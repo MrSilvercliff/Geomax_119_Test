@@ -10,9 +10,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
     public interface IAbilityBalanceModel : IBalanceModelWithIdBase
     {
         AbilityType AbilityType { get; }
-        int RequiredLevel { get; }
-        string NameKey { get; }
-        string DescriptionKey { get; }
+        string Name { get; }
 
         int IntValue1 { get; }
         int IntValue2 { get; }
@@ -34,9 +32,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
     public class AbilityBalanceModel : BalanceModelWithIdBase, IAbilityBalanceModel
     {
         public AbilityType AbilityType => _abilityType;
-        public int RequiredLevel => _requiredLevel;
-        public string NameKey => _nameKey;
-        public string DescriptionKey => _descriptionKey;
+        public string Name => _name;
 
         public int IntValue1 => _intValue1;
         public int IntValue2 => _intValue2;
@@ -55,9 +51,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
         public string StringValue2 => _stringValue2;
 
         private AbilityType _abilityType;
-        private int _requiredLevel;
-        private string _nameKey;
-        private string _descriptionKey;
+        private string _name;
 
         private int _intValue1;
         private int _intValue2;
@@ -79,9 +73,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
         {
             _id = json["id"].stringValue;
             _abilityType = parseHelper.ParseEnum(json, "type", AbilityType.NONE);
-            _requiredLevel = json["required_level"].intValue;
-            _nameKey = json["name_key"].stringValue;
-            _descriptionKey = json["description_key"].stringValue;
+            _name = json["name"].stringValue;
             
             _intValue1 = json["int_value_1"].intValue;
             _intValue2 = json["int_value_2"].intValue;
@@ -105,9 +97,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
             var builder = new StringBuilder();
             
             builder.AppendLine($"_abilityType = {_abilityType}");
-            builder.AppendLine($"_requiredLevel = {_requiredLevel}");
-            builder.AppendLine($"_nameKey = {_nameKey}");
-            builder.AppendLine($"_descriptionKey = {_descriptionKey}");
+            builder.AppendLine($"_name = {_name}");
 
             builder.AppendLine($"_intValue1 = {_intValue1}");
             builder.AppendLine($"_intValue2 = {_intValue2}");

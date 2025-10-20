@@ -11,8 +11,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
     public interface ICreatureBalanceModel : IBalanceModelWithIdBase
     { 
         CreatureType CreatureType { get; }
-        string NameKey { get; }
-        string DescriptionKey { get; }
+        string Name { get; }
         string PrefabId { get; }
         StateMachineType StateMachineType { get; }
         IReadOnlyList<string> Abilities { get; }
@@ -21,15 +20,13 @@ namespace _Project.Scripts.Project.Services.Balance.Models
     public class CreatureBalanceModel : BalanceModelWithIdBase, ICreatureBalanceModel
     {
         public CreatureType CreatureType => _creatureType;
-        public string NameKey => _nameKey;
-        public string DescriptionKey => _descriptionKey;
+        public string Name => _name;
         public string PrefabId => _prefabId;
         public StateMachineType StateMachineType => _stateMachineType;
         public IReadOnlyList<string> Abilities => _abilities;
 
         private CreatureType _creatureType;
-        private string _nameKey;
-        private string _descriptionKey;
+        private string _name;
         private string _prefabId;
         private StateMachineType _stateMachineType;
         private List<string> _abilities;
@@ -38,8 +35,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
         {
             _id = json["id"].stringValue;
             _creatureType = parseHelper.ParseEnum(json, "type", CreatureType.NONE);
-            _nameKey = json["name_key"].stringValue;
-            _descriptionKey = json["description_key"].stringValue;
+            _name = json["name"].stringValue;
             _prefabId = json["prefab_id"].stringValue;
             _stateMachineType = parseHelper.ParseEnum(json, "state_machine_type", StateMachineType.NONE);
             _abilities = parseHelper.ParseList<string>(json, "abilities");
@@ -51,8 +47,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
             
             builder.AppendLine($"Id = {Id}");
             builder.AppendLine($"_creatureType = {_creatureType}");
-            builder.AppendLine($"_nameKey = {_nameKey}");
-            builder.AppendLine($"_descriptionKey = {_descriptionKey}");
+            builder.AppendLine($"_name = {_name}");
             builder.AppendLine($"_prefabId = {_prefabId}");
             builder.AppendLine($"_stateMachineType = {_stateMachineType}");
 
