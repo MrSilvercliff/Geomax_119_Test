@@ -21,6 +21,7 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
 
         protected override void OnEnter()
         {
+            _creatureStateMachine.EnterState(StateMachineStateType.CreatureState_Idle);
         }
 
         public override void OnFixedUpdate()

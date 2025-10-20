@@ -13,7 +13,7 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
     {
         public override StateMachineStateType StateType => StateMachineStateType.CreatureState_Idle;
 
-        private IMonoBehaviourAnimatorController _animatorController;
+        private ICreatureComponentAnimator _componentAnimator;
 
         public PlayerStateIdle(IPlayerController creatureController) : base(creatureController)
         {
@@ -21,13 +21,12 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
 
         protected override void OnInit()
         {
-            var animatorComponent = _creatureComponentContainer.GetComponent<CreatureComponentAnimator>(CreatureComponentType.AnimatorController);
-            _animatorController = animatorComponent.AnimatorController;
+            _componentAnimator = _creatureComponentContainer.GetComponent<CreatureComponentAnimator>(CreatureComponentType.AnimatorController);
         }
 
         protected override void OnEnter()
         {
-            _animatorController.Play(AnimatorStateHash.Idle);
+            _componentAnimator.AnimatorController.Play(AnimatorStateHash.Idle);
         }
 
         public override void OnFixedUpdate()
