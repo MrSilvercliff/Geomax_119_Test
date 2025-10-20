@@ -1,14 +1,12 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
-using ZerglingUnityPlugins.Tools.Scripts.Interfaces.Async;
-using ZerglingUnityPlugins.Tools.Scripts.Interfaces.ProjectService.AsyncSync;
-using ZerglingUnityPlugins.Tools.Scripts.Interfaces.Sync;
 using ZerglingUnityPlugins.Tools.Scripts.Mono;
 using IAwakable = ZerglingUnityPlugins.Tools.Scripts.Interfaces.Async.IAwakable;
 using IStartable = ZerglingUnityPlugins.Tools.Scripts.Interfaces.Async.IStartable;
 using IFlushable = ZerglingUnityPlugins.Tools.Scripts.Interfaces.Sync.IFlushable;
 using _Project.Scripts.GameScene.Services.Creatures;
+using _Project.Scripts.GameScene.Configs;
 
 namespace _Project.Scripts.GameScene.GameLoop
 {
@@ -20,6 +18,7 @@ namespace _Project.Scripts.GameScene.GameLoop
     {
         [Inject] private IMonoUpdater _monoUpdater;
 
+        [Inject] private IGameStartConfig _gameStartConfig;
         [Inject] private ICreatureService _creatureService;
 
         private bool _updateEnabled;
@@ -32,10 +31,12 @@ namespace _Project.Scripts.GameScene.GameLoop
 
         public Task<bool> OnStart()
         {
-            _updateEnabled = true;
+            OnStartSpawnCreatures();
+
             _monoUpdater.Subscribe((IMonoFixedUpdatable)this);
             _monoUpdater.Subscribe((IMonoUpdatable)this);
             _monoUpdater.Subscribe((IMonoLateUpdatable)this);
+            _updateEnabled = true;
             return Task.FromResult(true);
         }
 
@@ -70,6 +71,17 @@ namespace _Project.Scripts.GameScene.GameLoop
                 return;
 
             _creatureService.OnLateUpdate();
+        }
+
+        private void OnStartSpawnCreatures()
+        {
+            var playerCreatureId = _gameStartConfig.PlayerCreatureId;
+            _creatureService.SpawnCreature(playerCreatureId, true);
+
+            var enemyCreatureIds = _gameStartConfig.EnemyCreatureIds;
+
+            foreach (var creatureId in enemyCreatureIds)
+                _creatureService.SpawnCreature(creatureId, true);
         }
     }
 }
