@@ -7,5 +7,6 @@ namespace _Project.Scripts.Project.Enums
     public enum AbilityType
     { 
         NONE = 0,
+        BASIC_ATTACK = 1,
     }
 }
