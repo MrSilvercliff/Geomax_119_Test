@@ -119,8 +119,8 @@ namespace _Project.Scripts.Project.Zenject
         private void BindBalanceServices()
         { 
             Container.Bind<IBalanceConfig>().FromInstance(_projectBalanceConfig).AsSingle();
-            Container.Bind<IBalanceJSONParser>().To<BalanceJSONParser>().AsSingle();
             Container.Bind<IJSONParseHelper>().To<JsonParseHelper>().AsSingle();
+            Container.Bind<IBalanceJSONParser>().To<BalanceJSONParser>().AsSingle();
             Container.Bind<IProjectBalanceService>().To<ProjectBalanceService>().AsSingle();
         }
 
