@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8320693301434260809}
   m_Layer: 0
-  m_Name: '[Contaier] PlayerCreatureSlots (1)'
+  m_Name: '[Contaier] EnemyCreatureSlots'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
