@@ -7,7 +7,7 @@ using ZerglingUnityPlugins.WindowsManagerAsync.Scripts.Panels;
 
 namespace _Project.Scripts.Project.Configs.Windows
 {
-    [CreateAssetMenu(fileName = "PanelConfig", menuName = "Project/Configs/Project/PanelConfig")]
+    [CreateAssetMenu(fileName = "PanelConfig", menuName = "Project/Configs/Project/Panel Config")]
     public class PanelConfig : ScriptableObject, IPanelsConfig
     {
         [SerializeField] private PanelWindow[] _projectPanels;

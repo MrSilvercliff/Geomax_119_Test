@@ -8,7 +8,7 @@ using ZerglingUnityPlugins.WindowsManagerAsync.Scripts.Views;
 
 namespace _Project.Scripts.Project.Configs.Windows
 {
-    [CreateAssetMenu(fileName = "ViewConfig", menuName = "Project/Configs/Project/ViewConfig")]
+    [CreateAssetMenu(fileName = "ViewConfig", menuName = "Project/Configs/Project/View Config")]
     public class ViewConfig : ScriptableObject, IViewsConfig
     {
         [SerializeField] private ViewWindow[] _projectViews;

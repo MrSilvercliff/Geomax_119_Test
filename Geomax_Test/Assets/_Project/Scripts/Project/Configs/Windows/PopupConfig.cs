@@ -8,7 +8,7 @@ using ZerglingUnityPlugins.WindowsManagerAsync.Scripts.Popups;
 
 namespace _Project.Scripts.Project.Configs.Windows
 {
-    [CreateAssetMenu(fileName = "PopupConfig", menuName = "Project/Configs/Project/PopupConfig")]
+    [CreateAssetMenu(fileName = "PopupConfig", menuName = "Project/Configs/Project/Popup Config")]
     public class PopupConfig : ScriptableObject, IPopupsConfig
     {
         [SerializeField] private PopupWindow[] _projectPopups;
