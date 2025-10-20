@@ -7,7 +7,8 @@ using ZerglingUnityPlugins.Tools.Scripts.Mono;
 namespace _Project.Scripts.GameScene.Services.Creatures
 {
     public interface ICreatureService : IProjectService, IMonoFixedUpdatable, IMonoUpdatable, IMonoLateUpdatable
-    { 
+    {
+        void SpawnCreature(string creatureId, bool enterOnSpawnState);
     }
 
     public class CreatureService : ICreatureService
@@ -49,6 +50,11 @@ namespace _Project.Scripts.GameScene.Services.Creatures
         {
             _creatureControllerUpdater.OnLateUpdate();
             _creatureControllerRepository.OnLateUpdate();
+        }
+
+        public void SpawnCreature(string creatureId, bool enterOnSpawnState)
+        {
+            _creatureSpawnController.Spawn(creatureId, enterOnSpawnState);
         }
     }
 }
