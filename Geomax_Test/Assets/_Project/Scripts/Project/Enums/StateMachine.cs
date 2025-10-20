@@ -24,5 +24,6 @@ namespace _Project.Scripts.Project.Enums
         CreatureState_Attack = 3,
         CreatureState_Hit = 4,
         CreatureState_Death = 5,
+        CreatureState_Despawn = 6,
     }
 }
