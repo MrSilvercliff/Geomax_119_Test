@@ -29,7 +29,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7065657272230876101}
+  - {fileID: 2372675575683626046}
   m_Father: {fileID: 7418651574109598468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2178705512804592916
@@ -45,13 +47,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: _Project.Scripts.GameScene::_Project.Scripts.GameScene.Scene.GameSceneObjectPoolContainers
   _playerController:
-    _prefab: {fileID: 0}
-    _container: {fileID: 0}
+    _prefab: {fileID: 5522038568411663469, guid: 21bf5c3778a1ea84dba5cceaf12fe2d2, type: 3}
+    _container: {fileID: 7065657272230876101}
     _poolInitialSize: 0
   _creaturePrefab:
     _prefab: {fileID: 0}
-    _container: {fileID: 0}
+    _container: {fileID: 2372675575683626046}
     _poolInitialSize: 0
+--- !u!1 &3467116909617342617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2372675575683626046}
+  m_Layer: 0
+  m_Name: '[Container] CreaturePrefabs'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2372675575683626046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3467116909617342617}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5421163441703813516}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5516458389180098917
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,4 +164,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: _Project.Scripts.GameScene::_Project.Scripts.GameScene.Scene.GameSceneInstaller
   _sceneContext: {fileID: 3795792049919745459}
   _objectPoolContainers: {fileID: 2178705512804592916}
+  _levelController: {fileID: 0}
   _creaturePrefabConfig: {fileID: 11400000, guid: 7a0aff8d9a357fc438415a86e871672d, type: 2}
+--- !u!1 &6678134216732101197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7065657272230876101}
+  m_Layer: 0
+  m_Name: '[Container] PlayerController'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7065657272230876101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678134216732101197}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5421163441703813516}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
