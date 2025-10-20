@@ -166,6 +166,7 @@ MonoBehaviour:
   _objectPoolContainers: {fileID: 2178705512804592916}
   _levelController: {fileID: 0}
   _creaturePrefabConfig: {fileID: 11400000, guid: 7a0aff8d9a357fc438415a86e871672d, type: 2}
+  _gameStartConfig: {fileID: 11400000, guid: b5604ba15420cab4eb059814d0a8e143, type: 2}
 --- !u!1 &6678134216732101197
 GameObject:
   m_ObjectHideFlags: 0
