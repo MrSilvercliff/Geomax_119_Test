@@ -21,6 +21,7 @@
 		"PLAYER_AUTO_ATTACK":{
 			"id":"PLAYER_AUTO_ATTACK",
 			"type":"BASIC_ATTACK",
+			"name":"PLAYER AUTO ATTACK",
 			"int_value_1":0,
 			"int_value_2":0,
 			"int_value_3":0,
