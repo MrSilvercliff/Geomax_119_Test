@@ -60,10 +60,10 @@ namespace _Project.Scripts.GameScene.Scene
 
         private async Task<bool> InitFirst()
         {
-            AddService(_viewController);
-            AddService(_popupController);
             AddService(_panelSettingsRepository);
             AddService(_panelController);
+            AddService(_viewController);
+            AddService(_popupController);
 
             var result = await InitServices();
             return result;
@@ -71,7 +71,7 @@ namespace _Project.Scripts.GameScene.Scene
 
         private async Task<bool> InitSecond()
         {
-            AddService(_creatureService);
+            AddService(_creatureSlotService);
             AddService(_creatureService);
 
             var result = await InitServices();
