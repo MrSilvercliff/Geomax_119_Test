@@ -84,7 +84,6 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
             var playerControllerPool = _gameSceneObjectPoolService.PlayerControllerPool;
             var playerController = playerControllerPool.Spawn();
-            creatureSlotController.SetCreatureController(playerController);
 
             SetupCreatureModel(creatureId, playerController);
             SetupStateMachine(playerController);
@@ -93,6 +92,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             InitStateMachineStateControllers(playerController);
             TryEnterOnSpawnState(enterOnSpawnState, playerController);
 
+            creatureSlotController.SetCreatureController(playerController);
             _controllerRepository.Add(playerController);
         }
 
@@ -112,8 +112,6 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
             var enemyCreatureControllerPool = _gameSceneObjectPoolService.EnemyControllerPool;
             var enemyCreatureController = enemyCreatureControllerPool.Spawn();
-            creatureSlotController.SetCreatureController(enemyCreatureController);
-            _controllerRepository.Add(enemyCreatureController);
 
             SetupCreatureModel(creatureId, enemyCreatureController);
             SetupStateMachine(enemyCreatureController);
@@ -122,6 +120,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             InitStateMachineStateControllers(enemyCreatureController);
             TryEnterOnSpawnState(enterOnSpawnState, enemyCreatureController);
 
+            creatureSlotController.SetCreatureController(enemyCreatureController);
             _controllerRepository.Add(enemyCreatureController);
         }
 
