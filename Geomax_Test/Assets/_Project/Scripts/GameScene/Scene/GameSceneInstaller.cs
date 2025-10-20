@@ -5,7 +5,6 @@ using _Project.Scripts.GameScene.Creatures.Basis.Prefab;
 using _Project.Scripts.GameScene.Creatures.Player;
 using _Project.Scripts.GameScene.Creatures.Player.States;
 using _Project.Scripts.GameScene.GameLevel;
-using _Project.Scripts.GameScene.GameLoop;
 using _Project.Scripts.GameScene.ObjectPools;
 using _Project.Scripts.GameScene.Services.Abilities;
 using _Project.Scripts.GameScene.Services.Creatures;
@@ -43,8 +42,6 @@ namespace _Project.Scripts.GameScene.Scene
 
             BindGameLevelController();
 
-            BindGameLoopController();
-
             BindSceneServiceIniter();
         }
 
@@ -62,11 +59,6 @@ namespace _Project.Scripts.GameScene.Scene
         private void BindGameLevelController()
         { 
             Container.Bind<IGameLevelController>().FromInstance(_levelController).AsSingle();
-        }
-
-        private void BindGameLoopController()
-        { 
-            Container.Bind<IGameLoopController>().To<GameLoopController>().AsSingle();
         }
 
         private void BindAbilityServices()
