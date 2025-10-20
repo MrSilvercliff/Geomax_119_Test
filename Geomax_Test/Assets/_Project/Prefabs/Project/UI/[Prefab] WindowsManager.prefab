@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5043303967268011535, guid: b779b1612bdcd2d40adc6092dff55371, type: 3}
+      propertyPath: orthographic size
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6820671618566450859, guid: b779b1612bdcd2d40adc6092dff55371, type: 3}
       propertyPath: m_ReferenceResolution.x
       value: 1920
