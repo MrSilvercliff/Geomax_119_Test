@@ -179,6 +179,7 @@ namespace _Project.Scripts.GameScene.Scene
         private void BindStateMachineServices()
         {
             Container.BindFactory<PlayerStateMachine, PlayerStateMachine.Factory>();
+            Container.BindFactory<EnemyCreatureStateMachine, EnemyCreatureStateMachine.Factory>();
             Container.Bind<IStateMachineCreator>().To<GameSceneStateMachineCreator>().AsSingle();
         }
     }
