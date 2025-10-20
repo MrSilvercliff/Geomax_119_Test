@@ -2,10 +2,11 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using ZerglingUnityPlugins.Tools.Scripts.Interfaces.ProjectService.AsyncSync;
+using ZerglingUnityPlugins.Tools.Scripts.Mono;
 
 namespace _Project.Scripts.GameScene.Services.Creatures
 {
-    public interface ICreatureService : IProjectService
+    public interface ICreatureService : IProjectService, IMonoFixedUpdatable, IMonoUpdatable, IMonoLateUpdatable
     { 
     }
 
@@ -32,6 +33,22 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             _creatureModelCreator.Flush();
             _creatureSpawnController.Flush();
             return true;
+        }
+
+        public void OnFixedUpdate()
+        {
+            _creatureControllerUpdater.OnFixedUpdate();
+        }
+
+        public void OnUpdate()
+        {
+            _creatureControllerUpdater.OnUpdate();
+        }
+
+        public void OnLateUpdate()
+        {
+            _creatureControllerUpdater.OnLateUpdate();
+            _creatureControllerRepository.OnLateUpdate();
         }
     }
 }
