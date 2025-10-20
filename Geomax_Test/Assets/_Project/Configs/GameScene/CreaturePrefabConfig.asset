@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: CreaturePrefabConfig
   m_EditorClassIdentifier: _Project.Scripts.GameScene::_Project.Scripts.GameScene.Configs.CreaturePrefabConfig
   _prefabsList:
-  - {fileID: 996630775597487104, guid: cac4c80634a699449b7d4afbdc039fb2, type: 3}
+  - {fileID: 1628558874005860272, guid: fa4e9bf272905c04f9116574f3c4a3ac, type: 3}
+  - {fileID: 1485374975681349465, guid: 3f2ee5888199a904aa85d9b9b62ef7a7, type: 3}
