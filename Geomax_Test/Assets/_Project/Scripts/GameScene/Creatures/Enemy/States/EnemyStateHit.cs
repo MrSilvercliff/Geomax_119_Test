@@ -12,7 +12,7 @@ namespace _Project.Scripts.GameScene.Creatures.Enemy.States
     {
         public override StateMachineStateType StateType => StateMachineStateType.CreatureState_Hit;
 
-        public EnemyStateHit(IPlayerController creatureController) : base(creatureController)
+        public EnemyStateHit(IEnemyCreatureController creatureController) : base(creatureController)
         {
         }
 

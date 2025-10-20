@@ -12,7 +12,7 @@ namespace _Project.Scripts.GameScene.Creatures.Enemy.States
     {
         public override StateMachineStateType StateType => StateMachineStateType.CreatureState_Despawn;
 
-        public EnemyStateDespawn(IPlayerController creatureController) : base(creatureController)
+        public EnemyStateDespawn(IEnemyCreatureController creatureController) : base(creatureController)
         {
         }
 

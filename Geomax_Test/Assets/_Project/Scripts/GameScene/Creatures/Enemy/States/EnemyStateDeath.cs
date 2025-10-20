@@ -12,7 +12,7 @@ namespace _Project.Scripts.GameScene.Creatures.Enemy.States
     {
         public override StateMachineStateType StateType => StateMachineStateType.CreatureState_Death;
 
-        public EnemyStateDeath(IPlayerController creatureController) : base(creatureController)
+        public EnemyStateDeath(IEnemyCreatureController creatureController) : base(creatureController)
         {
         }
 

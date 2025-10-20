@@ -10,10 +10,10 @@ namespace _Project.Scripts.GameScene.Creatures.Enemy.States
     { 
     }
 
-    public abstract class EnemyStateControllerBase<TFactoryType> : CreatureStateControllerBase<IPlayerController>, IEnemyStateControllerBase
+    public abstract class EnemyStateControllerBase<TFactoryType> : CreatureStateControllerBase<IEnemyCreatureController>, IEnemyStateControllerBase
         where TFactoryType : IEnemyStateControllerBase
     {
-        protected EnemyStateControllerBase(IPlayerController creatureController) : base(creatureController)
+        protected EnemyStateControllerBase(IEnemyCreatureController creatureController) : base(creatureController)
         {
         }
 

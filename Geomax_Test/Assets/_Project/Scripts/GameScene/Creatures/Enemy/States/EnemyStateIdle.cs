@@ -16,18 +16,18 @@ namespace _Project.Scripts.GameScene.Creatures.Enemy.States
 
         private ICreatureComponentAnimator _componentAnimator;
 
-        public EnemyStateIdle(IPlayerController creatureController) : base(creatureController)
+        public EnemyStateIdle(IEnemyCreatureController creatureController) : base(creatureController)
         {
-            _componentAnimator = _creatureComponentContainer.GetComponent<CreatureComponentAnimator>(CreatureComponentType.AnimatorController);
         }
 
         protected override void OnInit()
         {
-            _componentAnimator.AnimatorController.Play(AnimatorStateHash.Idle);
+            _componentAnimator = _creatureComponentContainer.GetComponent<CreatureComponentAnimator>(CreatureComponentType.AnimatorController);
         }
 
         protected override void OnEnter()
         {
+            _componentAnimator.AnimatorController.Play(AnimatorStateHash.Idle);
         }
 
         public override void OnFixedUpdate()
