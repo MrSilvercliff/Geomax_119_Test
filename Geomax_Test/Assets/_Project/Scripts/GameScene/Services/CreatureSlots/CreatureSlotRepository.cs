@@ -11,16 +11,16 @@ namespace _Project.Scripts.GameScene.Services.CreatureSlots
 {
     public interface ICreatureSlotRepository : IProjectService
     {
+        void AddPlayerCreatureSlots(IReadOnlyCollection<ICreatureSlotController> creatureSlots);
+        void AddEnemyCreatureSlots(IReadOnlyCollection<ICreatureSlotController> creatureSlots);
         bool TryGetFreePlayerCreatureSlot(out ICreatureSlotController slotController);
         bool TryGetFreeEnemyCreatureSlot(out ICreatureSlotController slotController);
     }
 
     public class CreatureSlotRepository : ICreatureSlotRepository
     {
-        private Dictionary<int, ICreatureSlotController> _playerCreatureSlots;
-        private Dictionary<int, ICreatureSlotController> _enemyCreatureSlots;
-
-        [Inject] IGameLevelController _gameLevelController;
+        private HashSet<ICreatureSlotController> _playerCreatureSlots;
+        private HashSet<ICreatureSlotController> _enemyCreatureSlots;
 
         public CreatureSlotRepository()
         {
@@ -30,52 +30,43 @@ namespace _Project.Scripts.GameScene.Services.CreatureSlots
 
         public Task<bool> Init()
         {
-            InitSlotDictionary(_playerCreatureSlots, _gameLevelController.PlayerCreatureSlots);
-            InitSlotDictionary(_enemyCreatureSlots, _gameLevelController.EnemyCreatureSlots);
             return Task.FromResult(true);
         }
 
         public bool Flush()
         {
+            _playerCreatureSlots.Clear();
+            _enemyCreatureSlots.Clear();
             return true;
         }
 
-        private void InitSlotDictionary(Dictionary<int, ICreatureSlotController> dictionary, IReadOnlyCollection<ICreatureSlotController> creatureSlotControllers)
+        public void AddPlayerCreatureSlots(IReadOnlyCollection<ICreatureSlotController> creatureSlots)
         {
-            foreach (var creatureSlotController in creatureSlotControllers)
-            {
-                var slotIndex = creatureSlotController.SlotIndex;
+            foreach (var creatureSlot in creatureSlots) 
+                _playerCreatureSlots.Add(creatureSlot);
+        }
 
-                if (dictionary.ContainsKey(slotIndex))
-                {
-                    LogUtils.Error(this, $"Creature slot controller with index [{slotIndex}] ALREADY EXIST!");
-                    continue;
-                }
-
-                dictionary[slotIndex] = creatureSlotController;
-            }
+        public void AddEnemyCreatureSlots(IReadOnlyCollection<ICreatureSlotController> creatureSlots)
+        {
+            foreach (var creatureSlot in creatureSlots)
+                _enemyCreatureSlots.Add(creatureSlot);
         }
 
         public bool TryGetFreePlayerCreatureSlot(out ICreatureSlotController slotController)
         {
-            foreach (var creatureSlotController in _playerCreatureSlots.Values)
-            {
-                var slotIsEmpty = creatureSlotController.IsEmpty();
-
-                if (slotIsEmpty)
-                {
-                    slotController = creatureSlotController;
-                    return true;
-                }
-            }
-
-            slotController = null;
-            return false;
+            var result = TryGetFreeCreatureSlot(_playerCreatureSlots, out slotController);
+            return result;
         }
 
         public bool TryGetFreeEnemyCreatureSlot(out ICreatureSlotController slotController)
         {
-            foreach (var creatureSlotController in _enemyCreatureSlots.Values)
+            var result = TryGetFreeCreatureSlot(_enemyCreatureSlots, out slotController);
+            return result;
+        }
+
+        private bool TryGetFreeCreatureSlot(HashSet<ICreatureSlotController> creatureSlotSet, out ICreatureSlotController slotController)
+        {
+            foreach (var creatureSlotController in creatureSlotSet)
             {
                 var slotIsEmpty = creatureSlotController.IsEmpty();
 
@@ -90,4 +81,5 @@ namespace _Project.Scripts.GameScene.Services.CreatureSlots
             return false;
         }
     }
+
 }

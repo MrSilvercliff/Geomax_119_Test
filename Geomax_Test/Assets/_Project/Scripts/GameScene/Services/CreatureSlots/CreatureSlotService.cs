@@ -1,4 +1,5 @@
 using _Project.Scripts.GameScene.CreatureSlot;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -8,6 +9,7 @@ namespace _Project.Scripts.GameScene.Services.CreatureSlots
 {
     public interface ICreatureSlotService : IProjectService
     {
+        void AddCreatureSlots(IReadOnlyCollection<ICreatureSlotController> playerCreatureSlots, IReadOnlyCollection<ICreatureSlotController> enemyCreatureSlots);
         bool TryGetFreePlayerCreatureSlot(out ICreatureSlotController slotController);
         bool TryGetFreeEnemyCreatureSlot(out ICreatureSlotController slotController);
     }
@@ -26,6 +28,12 @@ namespace _Project.Scripts.GameScene.Services.CreatureSlots
         {
             _slotRepository.Flush();
             return true;
+        }
+
+        public void AddCreatureSlots(IReadOnlyCollection<ICreatureSlotController> playerCreatureSlots, IReadOnlyCollection<ICreatureSlotController> enemyCreatureSlots)
+        {
+            _slotRepository.AddPlayerCreatureSlots(playerCreatureSlots);
+            _slotRepository.AddEnemyCreatureSlots(enemyCreatureSlots);
         }
 
         public bool TryGetFreePlayerCreatureSlot(out ICreatureSlotController slotController)
