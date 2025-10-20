@@ -1,13 +1,18 @@
+using _Project.Scripts.Application.Project.Services.Balance;
+using _Project.Scripts.Project.Configs;
 using _Project.Scripts.Project.Configs.Windows;
 using _Project.Scripts.Project.Handlers.SceneLoading;
 using _Project.Scripts.Project.Handlers.UI.Panels;
 using _Project.Scripts.Project.Handlers.UI.Popups;
 using _Project.Scripts.Project.Handlers.UI.Views;
+using _Project.Scripts.Project.Services.Balance;
 using _Project.Scripts.Project.Services.SceneLoading;
 using _Project.Scripts.Project.Services.ServiceInit;
 using _Project.Scripts.Project.Services.UI.Panels;
 using _Project.Scripts.Project.Services.UI.Popups;
 using _Project.Scripts.Project.Services.UI.Views;
+using Plugins.ZerglingUnityPlugins.Balance_Total_JSON.Scripts.Configs;
+using Plugins.ZerglingUnityPlugins.Balance_Total_JSON.Scripts.JSONParse;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +35,7 @@ namespace _Project.Scripts.Project.Zenject
     {
         [SerializeField] private MonoUpdater _monoUpdater;
         [SerializeField] private SceneLoadController _sceneLoadController;
+        [SerializeField] private ProjectBalanceConfig _projectBalanceConfig;
 
         [Header("VIEWS")]
         [SerializeField] private ViewConfig _viewConfig;
@@ -62,6 +68,8 @@ namespace _Project.Scripts.Project.Zenject
             BindPopupServices();
 
             BindPanelServices();
+
+            BindBalanceServices();
 
             BindProjectServiceIniter();
         }
@@ -106,6 +114,14 @@ namespace _Project.Scripts.Project.Zenject
             Container.Bind<IPanelSettingsRepository>().To<PanelSettingsRepository>().AsSingle();
             Container.Bind<IPanelHandler>().To<PanelHandler>().AsSingle();
             Container.Bind<IPanelController>().FromInstance(_panelController).AsSingle();
+        }
+
+        private void BindBalanceServices()
+        { 
+            Container.Bind<IBalanceConfig>().FromInstance(_projectBalanceConfig).AsSingle();
+            Container.Bind<IBalanceJSONParser>().To<BalanceJSONParser>().AsSingle();
+            Container.Bind<IJSONParseHelper>().To<JsonParseHelper>().AsSingle();
+            Container.Bind<IProjectBalanceService>().To<ProjectBalanceService>().AsSingle();
         }
 
         private void BindProjectServiceIniter()

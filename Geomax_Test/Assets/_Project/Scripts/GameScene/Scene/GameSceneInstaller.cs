@@ -5,9 +5,11 @@ using _Project.Scripts.GameScene.Creatures.Basis.Prefab;
 using _Project.Scripts.GameScene.Creatures.Player;
 using _Project.Scripts.GameScene.Creatures.Player.States;
 using _Project.Scripts.GameScene.GameLevel;
+using _Project.Scripts.GameScene.GameLoop;
 using _Project.Scripts.GameScene.ObjectPools;
 using _Project.Scripts.GameScene.Services.Abilities;
 using _Project.Scripts.GameScene.Services.Creatures;
+using _Project.Scripts.GameScene.Services.CreatureSlots;
 using _Project.Scripts.GameScene.Services.StateMachines;
 using _Project.Scripts.Project.Services.Balance.Models;
 using _Project.Scripts.Project.Services.StateMachines;
@@ -31,11 +33,17 @@ namespace _Project.Scripts.GameScene.Scene
 
             BindAbilityServices();
 
+            BindCreatureSlotServices();
+
             BindCreatureServices();
 
             BindObjectPools();
 
             BindStateMachineServices();
+
+            BindGameLevelController();
+
+            BindGameLoopController();
 
             BindSceneServiceIniter();
         }
@@ -56,15 +64,28 @@ namespace _Project.Scripts.GameScene.Scene
             Container.Bind<IGameLevelController>().FromInstance(_levelController).AsSingle();
         }
 
+        private void BindGameLoopController()
+        { 
+            Container.Bind<IGameLoopController>().To<GameLoopController>().AsSingle();
+        }
+
         private void BindAbilityServices()
         {
             BindAbilityFactories();
 
             Container.Bind<IAbilitiesProvider>().To<AbilitiesProvider>().AsSingle();
+            Container.Bind<IAbilitiesCreator>().To<AbilitiesCreator>().AsSingle();
+            Container.Bind<IAbilityService>().To<AbilityService>().AsSingle();
         }
 
         private void BindAbilityFactories()
         {
+        }
+
+        private void BindCreatureSlotServices()
+        { 
+            Container.Bind<ICreatureSlotRepository>().To<CreatureSlotRepository>().AsSingle();
+            Container.Bind<ICreatureSlotService>().To<CreatureSlotService>().AsSingle();
         }
 
         private void BindCreatureServices()

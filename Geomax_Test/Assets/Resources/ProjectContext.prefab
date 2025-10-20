@@ -155,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: _Project.Scripts.Project::_Project.Scripts.Project.Zenject.ProjectInstaller
   _monoUpdater: {fileID: 5776131573750864227}
   _sceneLoadController: {fileID: 2946718518647632041}
+  _projectBalanceConfig: {fileID: 11400000, guid: 0a14efaa5266ecd4894576ded2a57a8e, type: 2}
   _viewConfig: {fileID: 11400000, guid: e74dca131ce502742b521adbffeacb48, type: 2}
   _viewController: {fileID: 259882885201010983}
   _popupConfig: {fileID: 11400000, guid: de3614cee4832c2438f8061f931cdfd5, type: 2}
