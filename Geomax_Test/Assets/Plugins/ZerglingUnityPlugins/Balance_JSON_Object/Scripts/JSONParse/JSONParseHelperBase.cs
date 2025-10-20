@@ -145,6 +145,12 @@ namespace Plugins.ZerglingUnityPlugins.Balance_Total_JSON.Scripts.JSONParse
 
             var result = new List<T>();
 
+            if (array.list == null)
+                return result;
+
+            if (array.list.Count == 0)
+                return result;
+
             for (int i = 0; i < array.list.Count; i++)
             {
                 if (_defaultParseFunctions.TryGetValue(typeT, out var func))
