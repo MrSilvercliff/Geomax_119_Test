@@ -23,6 +23,7 @@ namespace _Project.Scripts.GameScene.Scene
 
         [Header("CONFIGS")]
         [SerializeField] private CreaturePrefabConfig _creaturePrefabConfig;
+        [SerializeField] private GameStartConfig _gameStartConfig;
 
         protected override void OnInstallBindings()
         {
@@ -47,6 +48,7 @@ namespace _Project.Scripts.GameScene.Scene
         private void BindConfigs()
         {
             Container.Bind<ICreaturePrefabConfig>().FromInstance(_creaturePrefabConfig).AsSingle();
+            Container.Bind<IGameStartConfig>().FromInstance(_gameStartConfig).AsSingle();
         }
 
         private void BindGameLevelController()
