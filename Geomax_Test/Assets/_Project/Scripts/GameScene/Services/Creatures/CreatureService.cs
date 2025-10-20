@@ -1,3 +1,4 @@
+using _Project.Scripts.GameScene.Configs;
 using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -13,6 +14,8 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
     public class CreatureService : ICreatureService
     {
+        [Inject] private ICreaturePrefabConfig _creaturePrefabConfig;
+
         [Inject] private ICreatureControllerRepository _creatureControllerRepository;
         [Inject] private ICreatureControllerUpdater _creatureControllerUpdater;
         [Inject] private ICreatureModelCreator _creatureModelCreator;
@@ -20,6 +23,8 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
         public async Task<bool> Init()
         {
+            _creaturePrefabConfig.Init();
+
             await _creatureControllerRepository.Init();
             await _creatureControllerUpdater.Init();
             await _creatureModelCreator.Init();
