@@ -55,7 +55,6 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
 
         protected override void OnAwake()
         {
-            _componentContainer = new CreatureComponentContainer();
         }
 
         public void InitComponents()
@@ -81,6 +80,7 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
             _creaturePrefab.Transform.SetParent(_prefabContainer);
             _creaturePrefab.Transform.ResetLocalPosition();
             _creaturePrefab.Transform.ResetLocalRotation();
+            _creaturePrefab.Transform.ResetLocalScale();
             _componentContainer.InitComponents(this, _creaturePrefab.Components);
         }
 
@@ -102,6 +102,8 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         public void OnCreated()
         {
             LogUtils.Info(gameObject.name, $"OnCreated");
+            
+            _componentContainer = new CreatureComponentContainer();
 
             OnCreateProcess();
         }
