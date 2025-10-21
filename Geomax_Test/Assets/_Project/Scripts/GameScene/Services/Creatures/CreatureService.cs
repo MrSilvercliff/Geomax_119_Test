@@ -1,4 +1,5 @@
 using _Project.Scripts.GameScene.Configs;
+using _Project.Scripts.GameScene.Creatures.Basis;
 using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -11,6 +12,9 @@ namespace _Project.Scripts.GameScene.Services.Creatures
     public interface ICreatureService : IProjectService, ILateStartable, IMonoFixedUpdatable, IMonoUpdatable, IMonoLateUpdatable
     {
         void SpawnCreature(string creatureId, bool enterOnSpawnState);
+
+        ICreatureController GetAttackTargetForPlayerCreature();
+        ICreatureController GetAttackTargetForEnemyCreature();
     }
 
     public class CreatureService : ICreatureService
@@ -21,6 +25,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
         [Inject] private ICreatureControllerUpdater _creatureControllerUpdater;
         [Inject] private ICreatureModelCreator _creatureModelCreator;
         [Inject] private ICreatureSpawnService _creatureSpawnController;
+        [Inject] private ICreatureAttackTargetProvider _creatureAttackTargetProvider;
 
         public async Task<bool> Init()
         {
@@ -30,6 +35,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             await _creatureControllerUpdater.Init();
             await _creatureModelCreator.Init();
             await _creatureSpawnController.Init();
+            await _creatureAttackTargetProvider.Init();
             return true;
         }
 
@@ -39,6 +45,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             _creatureControllerUpdater.Flush();
             _creatureModelCreator.Flush();
             _creatureSpawnController.Flush();
+            _creatureAttackTargetProvider.Flush();
             return true;
         }
 
@@ -68,6 +75,18 @@ namespace _Project.Scripts.GameScene.Services.Creatures
         public void SpawnCreature(string creatureId, bool enterOnSpawnState)
         {
             _creatureSpawnController.Spawn(creatureId, enterOnSpawnState);
+        }
+
+        public ICreatureController GetAttackTargetForPlayerCreature()
+        {
+            var result = _creatureAttackTargetProvider.GetAttackTargetForPlayerCreature();
+            return result;
+        }
+
+        public ICreatureController GetAttackTargetForEnemyCreature()
+        {
+            var result = _creatureAttackTargetProvider.GetAttackTargetForEnemyCreature();
+            return result;
         }
     }
 }
