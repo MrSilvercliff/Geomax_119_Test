@@ -1,3 +1,4 @@
+using _Project.Scripts.GameScene.Services.Creatures;
 using _Project.Scripts.Project.Enums;
 using _Project.Scripts.Project.Services.Timers;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
         public override StateMachineStateType StateType => StateMachineStateType.CreatureState_Start;
 
         [Inject] private ITimerService _timerService;
+        [Inject] private ICreatureService _creatureService;
 
         public PlayerStateStart(IPlayerController creatureController) : base(creatureController)
         {
@@ -56,6 +58,12 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
             var creatureControllerInstanceId = _creatureController.InstanceID;
             var timerId = _timerService.IdProvider.GetCreatureAbilityCooldownTimerId(creatureControllerInstanceId, abilityId);
             _timerService.StartTimer(timerId, basicAttackAbility.CooldownSeconds);
+        }
+
+        private void SetupAttackTarget()
+        { 
+            var attackTarget = _creatureService.GetAttackTargetForPlayerCreature();
+            _creatureController.SetAttackTarget(attackTarget);
         }
     }
 }
