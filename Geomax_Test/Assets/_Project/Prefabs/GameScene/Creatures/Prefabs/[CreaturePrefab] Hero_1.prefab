@@ -185,6 +185,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1626368152868681209}
     - target: {fileID: -7993538187677466165, guid: 554d1c0c4d5542f4989b7dadac3bd3a6, type: 3}
+      propertyPath: _animationEventHandler
+      value: 
+      objectReference: {fileID: 4435696329350906651}
+    - target: {fileID: -7993538187677466165, guid: 554d1c0c4d5542f4989b7dadac3bd3a6, type: 3}
       propertyPath: _animationFinishHandler
       value: 
       objectReference: {fileID: 4435696329350906651}
