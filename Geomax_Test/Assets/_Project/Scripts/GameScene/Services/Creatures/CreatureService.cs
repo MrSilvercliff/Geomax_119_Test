@@ -2,12 +2,13 @@ using _Project.Scripts.GameScene.Configs;
 using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
+using ZerglingUnityPlugins.Tools.Scripts.Interfaces.Async;
 using ZerglingUnityPlugins.Tools.Scripts.Interfaces.ProjectService.AsyncSync;
 using ZerglingUnityPlugins.Tools.Scripts.Mono;
 
 namespace _Project.Scripts.GameScene.Services.Creatures
 {
-    public interface ICreatureService : IProjectService, IMonoFixedUpdatable, IMonoUpdatable, IMonoLateUpdatable
+    public interface ICreatureService : IProjectService, ILateStartable, IMonoFixedUpdatable, IMonoUpdatable, IMonoLateUpdatable
     {
         void SpawnCreature(string creatureId, bool enterOnSpawnState);
     }
@@ -38,6 +39,12 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             _creatureControllerUpdater.Flush();
             _creatureModelCreator.Flush();
             _creatureSpawnController.Flush();
+            return true;
+        }
+
+        public async Task<bool> OnLateStart()
+        {
+            await _creatureControllerUpdater.OnLateStart();
             return true;
         }
 

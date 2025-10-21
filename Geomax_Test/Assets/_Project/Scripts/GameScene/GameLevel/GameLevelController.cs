@@ -38,17 +38,19 @@ namespace _Project.Scripts.GameScene.GameLevel
             return Task.FromResult(true);
         }
 
-        public Task<bool> OnStart()
+        public async Task<bool> OnStart()
         {
             _creatureSlotService.AddCreatureSlots(_playerCreatureSlots, _enemyCreatureSlots);
 
             OnStartSpawnCreatures();
 
+            await _creatureService.OnLateStart();
+
             _monoUpdater.Subscribe((IMonoFixedUpdatable)this);
             _monoUpdater.Subscribe((IMonoUpdatable)this);
             _monoUpdater.Subscribe((IMonoLateUpdatable)this);
             _updateEnabled = true;
-            return Task.FromResult(true);
+            return true;
         }
 
         public bool Flush()
@@ -88,12 +90,12 @@ namespace _Project.Scripts.GameScene.GameLevel
         private void OnStartSpawnCreatures()
         {
             var playerCreatureId = _gameStartConfig.PlayerCreatureId;
-            _creatureService.SpawnCreature(playerCreatureId, true);
+            _creatureService.SpawnCreature(playerCreatureId, false);
 
             var enemyCreatureIds = _gameStartConfig.EnemyCreatureIds;
 
             foreach (var creatureId in enemyCreatureIds)
-                _creatureService.SpawnCreature(creatureId, true);
+                _creatureService.SpawnCreature(creatureId, false);
         }
     }
 }
