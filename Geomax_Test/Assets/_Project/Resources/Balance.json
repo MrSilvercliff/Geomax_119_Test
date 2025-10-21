@@ -6,7 +6,10 @@
 			"prefab_id":"CREATURE_HERO_1_PLAYER",
 			"state_machine_type":"CREATURE_PLAYER",
 			"name":"PLAYER",
-			"resources":[],
+			"resources":[
+				"PLAYER_HP",
+				"PLAYER_MP"
+			],
 			"basic_attack_ability_id":"PLAYER_BASIC_ATTACK",
 			"abilities":[
 				"PLAYER_BASIC_ATTACK"
@@ -18,7 +21,9 @@
 			"prefab_id":"CREATURE_HERO_1_ENEMY",
 			"state_machine_type":"CREATURE_ENEMY",
 			"name":"ENEMY_1",
-			"resources":[],
+			"resources":[
+				"ENEMY_1_HP"
+			],
 			"basic_attack_ability_id":"ENEMY_1_BASIC_ATTACK",
 			"abilities":[
 				"ENEMY_1_BASIC_ATTACK"
@@ -53,7 +58,7 @@
 			"id":"PLAYER_BASIC_ATTACK",
 			"type":"BASIC_ATTACK",
 			"name":"PLAYER AUTO ATTACK",
-			"int_value_1":5,
+			"int_value_1":15,
 			"int_value_2":0,
 			"int_value_3":0,
 			"int_value_4":0,
@@ -73,7 +78,7 @@
 			"int_value_1":15,
 			"int_value_2":0,
 			"int_value_3":0,
-			"int_value_4":0,
+			"int_value_4":10,
 			"float_value_1":1.2999999523162842,
 			"float_value_2":0,
 			"float_value_3":0,
@@ -90,7 +95,7 @@
 			"int_value_1":0,
 			"int_value_2":0,
 			"int_value_3":0,
-			"int_value_4":0,
+			"int_value_4":20,
 			"float_value_1":10,
 			"float_value_2":2,
 			"float_value_3":1.3999999761581421,
