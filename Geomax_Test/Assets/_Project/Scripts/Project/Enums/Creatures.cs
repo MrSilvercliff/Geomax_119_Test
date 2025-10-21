@@ -31,5 +31,6 @@ namespace _Project.Scripts.Project.Enums
         NONE,
         Animation_Finished,
         Attack_Deal_Damage,
+        Death_Prefab_Set_Active_False,
     }
 }
