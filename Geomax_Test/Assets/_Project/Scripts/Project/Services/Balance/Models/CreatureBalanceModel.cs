@@ -14,6 +14,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
         string Name { get; }
         string PrefabId { get; }
         StateMachineType StateMachineType { get; }
+        IReadOnlyList<string> Resources { get; }
         string BasicAttackAbilityId { get; }
         IReadOnlyList<string> Abilities { get; }
     }
@@ -24,6 +25,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
         public string Name => _name;
         public string PrefabId => _prefabId;
         public StateMachineType StateMachineType => _stateMachineType;
+        public IReadOnlyList<string> Resources => _resources;
         public string BasicAttackAbilityId => _basicAttackAbilityId;
         public IReadOnlyList<string> Abilities => _abilities;
 
@@ -31,6 +33,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
         private string _name;
         private string _prefabId;
         private StateMachineType _stateMachineType;
+        private List<string> _resources;
         private string _basicAttackAbilityId;
         private List<string> _abilities;
         
@@ -41,6 +44,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
             _name = json["name"].stringValue;
             _prefabId = json["prefab_id"].stringValue;
             _stateMachineType = parseHelper.ParseEnum(json, "state_machine_type", StateMachineType.NONE);
+            _resources = parseHelper.ParseList<string>(json, "resources");
             _basicAttackAbilityId = json["basic_attack_ability_id"].stringValue;
             _abilities = parseHelper.ParseList<string>(json, "abilities");
         }
