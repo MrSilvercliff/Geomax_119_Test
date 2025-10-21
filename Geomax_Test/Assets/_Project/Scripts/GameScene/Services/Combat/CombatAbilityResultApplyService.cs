@@ -46,6 +46,10 @@ namespace _Project.Scripts.GameScene.Services.Combat
         private void ApplyDamage(IAbilityResultItemDamage damageItem)
         {
             var creature = damageItem.CreatureTarget;
+
+            if (!creature.IsAlive())
+                return;
+
             var creatureHitPoints = creature.CreatureModel.GetResourceValue(CreatureResourceType.HIT_POINTS);
             var newValue = creatureHitPoints.CurrentValue - damageItem.Damage;
             creatureHitPoints.SetCurrentValue(newValue);
