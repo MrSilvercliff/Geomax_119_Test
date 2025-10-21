@@ -21,12 +21,24 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         ICreatureStateMachine CreatureStateMachine { get; }
         ICreatureComponentContainer CreatureComponentContainer { get; }
 
+
+        #region BASIS
+
         void InitComponents();
         void SetupModel(ICreatureModel model);
         void SetupStateMachine(ICreatureStateMachine stateMachine);
         void SetupPrefab(ICreaturePrefab view);
 
         void OnAnimationEvent(CreatureAnimationEvent creatureAnimationEvent);
+
+        #endregion BASIS
+
+
+        #region GAMEPLAY
+
+        void SetAttackTarget(ICreatureController attackTargetCreatureController);
+
+        #endregion GAMEPLAY
     }
 
     public abstract class CreatureController : ProjectMonoBehaviour, ICreatureController
@@ -44,17 +56,18 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         [SerializeField] private StateMachineStateType _onSpawnState;
         [SerializeField] private CreatureComponentBase[] _componentsList;
 
-        [Inject] private ICreatureControllerRepository _creatureControllerRepository;
-
         protected ICreatureModel _creatureModel;
         protected ICreaturePrefab _creaturePrefab;
         protected ICreatureStateMachine _creatureStateMachine;
         protected ICreatureComponentContainer _componentContainer;
 
+        protected ICreatureController _attackTargetCreatureController;
+
         #region BASIS
 
         protected override void OnAwake()
         {
+            base.OnAwake();
         }
 
         public void InitComponents()
@@ -104,6 +117,7 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
             LogUtils.Info(gameObject.name, $"OnCreated");
             
             _componentContainer = new CreatureComponentContainer();
+            _attackTargetCreatureController = null;
 
             OnCreateProcess();
         }
@@ -115,7 +129,6 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
             LogUtils.Info(gameObject.name, $"OnSpawned");
 
             OnSpawnedProcess();
-            _creatureControllerRepository.Add(this);
         }
 
         protected abstract void OnSpawnedProcess();
@@ -126,7 +139,6 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
 
             _componentContainer.Flush();
             OnDespawnedProcess();
-            _creatureControllerRepository.Remove(this);
         }
 
         protected abstract void OnDespawnedProcess();
@@ -138,7 +150,14 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
 
         #endregion BASIS
 
+
         #region GAMEPLAY
+
+        public void SetAttackTarget(ICreatureController attackTargetCreatureController)
+        {
+            _attackTargetCreatureController = attackTargetCreatureController;
+        }
+
         #endregion GAMEPLAY
     }
 
