@@ -20,6 +20,7 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         ICreatureModel CreatureModel { get; }
         ICreatureStateMachine CreatureStateMachine { get; }
         ICreatureComponentContainer CreatureComponentContainer { get; }
+        ICreatureController AttackTargetCreatureController { get; }
 
 
         #region BASIS
@@ -36,6 +37,8 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
 
         #region GAMEPLAY
 
+        void PrefabSetActive(bool active);
+        bool IsAlive();
         void SetAttackTarget(ICreatureController attackTargetCreatureController);
 
         #endregion GAMEPLAY
@@ -50,6 +53,7 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         public ICreatureModel CreatureModel => _creatureModel;
         public ICreatureStateMachine CreatureStateMachine => _creatureStateMachine;
         public ICreatureComponentContainer CreatureComponentContainer => _componentContainer;
+        public ICreatureController AttackTargetCreatureController => _attackTargetCreatureController;
 
         [Header("CREATURE CONTROLLER")]
         [SerializeField] private Transform _prefabContainer;
@@ -95,6 +99,7 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
             _creaturePrefab.Transform.ResetLocalRotation();
             _creaturePrefab.Transform.ResetLocalScale();
             _componentContainer.InitComponents(this, _creaturePrefab.Components);
+            _creaturePrefab.SetActive(true);
         }
 
         public void OnFixedUpdate(float deltaTime)
@@ -152,6 +157,18 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
 
 
         #region GAMEPLAY
+
+        public void PrefabSetActive(bool active)
+        {
+            _creaturePrefab.SetActive(active);
+        }
+
+        public bool IsAlive()
+        {
+            var hitPoints = _creatureModel.GetResourceValue(CreatureResourceType.HIT_POINTS);
+            var result = hitPoints.CurrentValue > 0;
+            return result;
+        }
 
         public void SetAttackTarget(ICreatureController attackTargetCreatureController)
         {
