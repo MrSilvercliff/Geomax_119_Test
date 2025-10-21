@@ -24,6 +24,7 @@ namespace _Project.Scripts.Project.Services.Timers
             await _creator.Init();
             await _repository.Init();
             await _startService.Init();
+            await _updateService.Init();
             return true;
         }
 
@@ -33,6 +34,7 @@ namespace _Project.Scripts.Project.Services.Timers
             _creator.Flush();
             _repository.Flush();
             _startService.Flush();
+            _updateService.Flush();
             return true;
         }
 
