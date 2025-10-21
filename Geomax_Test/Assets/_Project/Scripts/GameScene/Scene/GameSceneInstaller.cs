@@ -10,11 +10,13 @@ using _Project.Scripts.GameScene.Creatures.Player.States;
 using _Project.Scripts.GameScene.GameLevel;
 using _Project.Scripts.GameScene.ObjectPools;
 using _Project.Scripts.GameScene.Services.Abilities;
+using _Project.Scripts.GameScene.Services.Combat;
 using _Project.Scripts.GameScene.Services.Creatures;
 using _Project.Scripts.GameScene.Services.CreatureSlots;
 using _Project.Scripts.GameScene.Services.StateMachines;
 using _Project.Scripts.Project.Services.Balance.Models;
 using _Project.Scripts.Project.Services.StateMachines;
+using System.Collections.Generic;
 using UnityEngine;
 using ZerglingUnityPlugins.ZenjectExtentions.SceneInstallers;
 
@@ -45,6 +47,8 @@ namespace _Project.Scripts.GameScene.Scene
 
             BindGameLevelController();
 
+            BindCombatServices();
+
             BindSceneServiceIniter();
         }
 
@@ -67,6 +71,7 @@ namespace _Project.Scripts.GameScene.Scene
         private void BindAbilityServices()
         {
             BindAbilityFactories();
+            BindAbilityResultFactories();
 
             Container.Bind<IAbilitiesProvider>().To<AbilitiesProvider>().AsSingle();
             Container.Bind<IAbilitiesCreator>().To<AbilitiesCreator>().AsSingle();
@@ -76,6 +81,13 @@ namespace _Project.Scripts.GameScene.Scene
         private void BindAbilityFactories()
         {
             Container.BindFactory<IAbilityBalanceModel, AbilityAttack, AbilityAttack.Factory>();
+        }
+
+        private void BindAbilityResultFactories()
+        { 
+            Container.BindFactory<ICreatureController, int, AbilityResultItemDamage, AbilityResultItemDamage.Factory>();
+
+            Container.BindFactory<ICreatureController, IReadOnlyList<IAbilityResultItem>, AbilityResult, AbilityResult.Factory>();
         }
 
         private void BindCreatureSlotServices()
@@ -185,6 +197,13 @@ namespace _Project.Scripts.GameScene.Scene
             Container.BindFactory<PlayerStateMachine, PlayerStateMachine.Factory>();
             Container.BindFactory<EnemyCreatureStateMachine, EnemyCreatureStateMachine.Factory>();
             Container.Bind<IStateMachineCreator>().To<GameSceneStateMachineCreator>().AsSingle();
+        }
+
+        private void BindCombatServices()
+        { 
+            Container.Bind<ICombatAbilityUseService>().To<CombatAbilityUseService>().AsSingle();
+            Container.Bind<ICombatAbilityResultApplyService>().To<CombatAbilityResultApplyService>().AsSingle();
+            Container.Bind<ICombatService>().To<CombatService>().AsSingle();
         }
     }
 }
