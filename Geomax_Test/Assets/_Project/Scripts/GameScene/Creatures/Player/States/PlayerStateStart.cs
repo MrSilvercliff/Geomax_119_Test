@@ -1,5 +1,7 @@
 using _Project.Scripts.Project.Enums;
+using _Project.Scripts.Project.Services.Timers;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.GameScene.Creatures.Player.States
 {
@@ -11,6 +13,8 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
     {
         public override StateMachineStateType StateType => StateMachineStateType.CreatureState_Start;
 
+        [Inject] private ITimerService _timerService;
+
         public PlayerStateStart(IPlayerController creatureController) : base(creatureController)
         {
         }
@@ -21,6 +25,7 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
 
         protected override void OnEnter()
         {
+            StartBasicAttackCooldownTimer();
             _creatureStateMachine.EnterState(StateMachineStateType.CreatureState_Idle);
         }
 
@@ -40,8 +45,17 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
         {
         }
 
-        public override void OnAnimationFinished(int finishedState)
+        public override void OnAnimationEvent(CreatureAnimationEvent creatureAnimationEvent)
         {
+        }
+
+        private void StartBasicAttackCooldownTimer()
+        {
+            var basicAttackAbility = _creatureModel.GetBasicAttackAbility();
+            var abilityId = basicAttackAbility.Id;
+            var creatureControllerInstanceId = _creatureController.InstanceID;
+            var timerId = _timerService.IdProvider.GetCreatureAbilityCooldownTimerId(creatureControllerInstanceId, abilityId);
+            _timerService.StartTimer(timerId, basicAttackAbility.CooldownSeconds);
         }
     }
 }

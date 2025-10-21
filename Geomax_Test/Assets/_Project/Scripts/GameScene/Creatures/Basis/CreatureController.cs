@@ -26,7 +26,7 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         void SetupStateMachine(ICreatureStateMachine stateMachine);
         void SetupPrefab(ICreaturePrefab view);
 
-        void OnAnimationFinished(int finishedState);
+        void OnAnimationEvent(CreatureAnimationEvent creatureAnimationEvent);
     }
 
     public abstract class CreatureController : ProjectMonoBehaviour, ICreatureController
@@ -131,9 +131,9 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
 
         protected abstract void OnDespawnedProcess();
 
-        public void OnAnimationFinished(int finishedState)
+        public void OnAnimationEvent(CreatureAnimationEvent creatureAnimationEvent)
         {
-            _creatureStateMachine.OnAnimationFinished(finishedState);
+            _creatureStateMachine.OnAnimationEvent(creatureAnimationEvent);
         }
 
         #endregion BASIS

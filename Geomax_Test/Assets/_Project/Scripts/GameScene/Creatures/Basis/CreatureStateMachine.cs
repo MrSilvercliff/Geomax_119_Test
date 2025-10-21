@@ -13,6 +13,6 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         List<StateMachineStateType> GetActiveStates();
         bool TryGetState(StateMachineStateType state, out ICreatureStateControllerBase stateController);
         bool TryGetActiveState(StateMachineStateType state, out ICreatureStateControllerBase stateController);
-        void OnAnimationFinished(int finishedState);
+        void OnAnimationEvent(CreatureAnimationEvent creatureAnimationEvent);
     }
 }

@@ -13,8 +13,10 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         StateMachineType StateMachineType { get; }
 
         void Setup(IReadOnlyList<IAbility> abilities);
+        
         IAbilityAttack GetBasicAttackAbility();
         T GetAbility<T>(string id) where T : IAbility;
+        IReadOnlyList<IAbility> GetAllAbilities();
     }
 
     public class CreatureModel : ICreatureModel
@@ -54,8 +56,16 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
                 }
             }
 
+            if (preResult == null)
+                return default;
+
             var result = (T)preResult;
             return result;
+        }
+
+        public IReadOnlyList<IAbility> GetAllAbilities()
+        {
+            return _abilities;
         }
 
         public class Factory : PlaceholderFactory<ICreatureBalanceModel, CreatureModel> { }

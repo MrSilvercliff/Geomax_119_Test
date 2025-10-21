@@ -1,7 +1,10 @@
 using _Project.Scripts.GameScene.Creatures.Basis.Components;
 using _Project.Scripts.Project.Animations;
 using _Project.Scripts.Project.Enums;
+using _Project.Scripts.Project.Services.Timers;
+using System;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.GameScene.Creatures.Player.States
 {
@@ -13,7 +16,10 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
     {
         public override StateMachineStateType StateType => StateMachineStateType.CreatureState_Idle;
 
+        [Inject] private ITimerService _timerService;
+
         private ICreatureComponentAnimator _componentAnimator;
+        private ITimer _basicAttackCooldownTimer;
 
         public PlayerStateIdle(IPlayerController creatureController) : base(creatureController)
         {
@@ -26,6 +32,7 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
 
         protected override void OnEnter()
         {
+            GetBasicAttackCooldownTimer();
             _componentAnimator.AnimatorController.Play(AnimatorStateHash.Idle);
         }
 
@@ -45,8 +52,29 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
         {
         }
 
-        public override void OnAnimationFinished(int finishedState)
+        public override void OnAnimationEvent(CreatureAnimationEvent creatureAnimationEvent)
         {
+        }
+
+        private void GetBasicAttackCooldownTimer()
+        {
+            var basicAttackAbility = _creatureModel.GetBasicAttackAbility();
+            var abilityId = basicAttackAbility.Id;
+            var creatureControllerInstanceId = _creatureController.InstanceID;
+            var timerId = _timerService.IdProvider.GetCreatureAbilityCooldownTimerId(creatureControllerInstanceId, abilityId);
+            var tryGet = _timerService.TryGetTimer(timerId, out var timer);
+
+            if (!tryGet)
+                return;
+
+            _basicAttackCooldownTimer = timer;
+            _basicAttackCooldownTimer.ExpiredEvent += OnBasicAttackCooldownExpired;
+        }
+
+        private void OnBasicAttackCooldownExpired(ITimer timer)
+        {
+            _basicAttackCooldownTimer.ExpiredEvent -= OnBasicAttackCooldownExpired;
+            _creatureStateMachine.EnterState(StateMachineStateType.CreatureState_Attack);
         }
     }
 }

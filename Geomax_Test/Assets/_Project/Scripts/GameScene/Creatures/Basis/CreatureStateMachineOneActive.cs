@@ -26,7 +26,7 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
             base.EnterState(state);
 
             _activeStates.Clear();
-            _activeStates.Add(state);
+            _activeStates.Add(_activeStateController.StateType);
         }
 
         public List<StateMachineStateType> GetActiveStates()
@@ -59,9 +59,9 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
             return true;
         }
 
-        public void OnAnimationFinished(int finishedState)
+        public void OnAnimationEvent(CreatureAnimationEvent creatureAnimationEvent)
         {
-            _activeStateController?.OnAnimationFinished(finishedState);
+            _activeStateController?.OnAnimationEvent(creatureAnimationEvent);
         }
     }
 }

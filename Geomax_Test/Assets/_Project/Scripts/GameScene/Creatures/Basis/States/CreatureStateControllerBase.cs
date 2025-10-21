@@ -10,7 +10,7 @@ namespace _Project.Scripts.GameScene.Creatures.Basis.States
 {
     public interface ICreatureStateControllerBase : IStateMachineStateController
     {
-        void OnAnimationFinished(int finishedState);
+        void OnAnimationEvent(CreatureAnimationEvent creatureAnimationEvent);
     }
 
     public abstract class CreatureStateControllerBase<TCreatureController> : StateMachineStateController, ICreatureStateControllerBase
@@ -50,6 +50,6 @@ namespace _Project.Scripts.GameScene.Creatures.Basis.States
 
         protected abstract void OnExit();
 
-        public abstract void OnAnimationFinished(int finishedState);
+        public abstract void OnAnimationEvent(CreatureAnimationEvent creatureAnimationEvent);
     }
 }

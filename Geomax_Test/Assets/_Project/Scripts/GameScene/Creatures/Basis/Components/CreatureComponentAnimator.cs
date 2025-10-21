@@ -16,11 +16,11 @@ namespace _Project.Scripts.GameScene.Creatures.Basis.Components
         public MonoBehaviourAnimatorController AnimatorController => _animatorController;
 
         [SerializeField] private MonoBehaviourAnimatorController _animatorController;
-        [SerializeField] private CreatureAnimationFinishHandler _animationFinishHandler;
+        [SerializeField] private CreatureAnimationEventHandler _animationEventHandler;
 
         public override void Init(ICreatureComponentContainer componentContainer, ICreatureController creatureController)
         {
-            _animationFinishHandler.Setup(creatureController);
+            _animationEventHandler.Setup(creatureController);
             _animatorController.Init();
         }
     }

@@ -41,7 +41,7 @@ namespace _Project.Scripts.GameScene.Creatures.Enemy.States
         {
         }
 
-        public override void OnAnimationFinished(int finishedState)
+        public override void OnAnimationEvent(CreatureAnimationEvent creatureAnimationEvent)
         {
         }
     }

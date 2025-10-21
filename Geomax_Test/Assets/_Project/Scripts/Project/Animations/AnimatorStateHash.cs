@@ -9,7 +9,7 @@ namespace _Project.Scripts.Project.Animations
         public static readonly int NONE = Animator.StringToHash("");
 
         public static readonly int Empty = Animator.StringToHash("Empty");
-
         public static readonly int Idle = Animator.StringToHash("Idle");
+        public static readonly int Attack = Animator.StringToHash("Attack");
     }
 }
