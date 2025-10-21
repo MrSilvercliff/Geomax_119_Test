@@ -88,6 +88,7 @@ namespace _Project.Scripts.GameScene.Scene
         {
             BindCreatureStateFactories();
 
+            Container.BindFactory<ICreatureResourceBalanceModel, CreatureResourceValue, CreatureResourceValue.Factory>();
             Container.BindFactory<ICreatureBalanceModel, CreatureModel, CreatureModel.Factory>();
 
             Container.Bind<ICreatureModelCreator>().To<CreatureModelCreator>().AsSingle();
