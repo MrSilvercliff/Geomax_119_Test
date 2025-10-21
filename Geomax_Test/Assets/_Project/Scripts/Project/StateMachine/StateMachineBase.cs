@@ -41,6 +41,9 @@ namespace _Project.Scripts.Project.StateMachine
 
         public bool Flush()
         {
+            foreach (var stateController in _allStates.Values)
+                stateController.Flush();
+
             OnFlush();
             return true;
         }

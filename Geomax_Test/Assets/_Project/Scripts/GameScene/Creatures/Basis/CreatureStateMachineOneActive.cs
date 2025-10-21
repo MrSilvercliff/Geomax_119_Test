@@ -16,6 +16,12 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         protected List<StateMachineStateType> _activeStates = new();
         protected TCreatureControllerType _creatureController;
 
+        protected override void OnFlush()
+        {
+            base.OnFlush();
+            _creatureController = default;
+        }
+
         public void Setup(ICreatureController creatureController)
         {
             _creatureController = (TCreatureControllerType)creatureController;

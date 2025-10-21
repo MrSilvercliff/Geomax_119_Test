@@ -35,6 +35,16 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
             _abilityAttack = _creatureModel.GetBasicAttackAbility();
         }
 
+        protected override void OnFlush()
+        {
+            
+            _componentAnimator = null;
+            _abilityAttack = null;
+
+            _abilityResult.Flush();
+            _abilityResult = null;
+        }
+
         protected override void OnEnter()
         {
             _componentAnimator.AnimatorController.Play(AnimatorStateHash.Attack);

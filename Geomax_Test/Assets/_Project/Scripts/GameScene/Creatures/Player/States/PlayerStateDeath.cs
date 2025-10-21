@@ -19,6 +19,10 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
         {
         }
 
+        protected override void OnFlush()
+        {
+        }
+
         protected override void OnEnter()
         {
         }

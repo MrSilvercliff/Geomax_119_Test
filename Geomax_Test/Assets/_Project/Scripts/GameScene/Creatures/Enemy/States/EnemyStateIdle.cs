@@ -25,6 +25,11 @@ namespace _Project.Scripts.GameScene.Creatures.Enemy.States
             _componentAnimator = _creatureComponentContainer.GetComponent<CreatureComponentAnimator>(CreatureComponentType.AnimatorController);
         }
 
+        protected override void OnFlush()
+        {
+            _componentAnimator = null;
+        }
+
         protected override void OnEnter()
         {
             _componentAnimator.AnimatorController.Play(AnimatorStateHash.Idle);

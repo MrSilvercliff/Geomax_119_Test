@@ -20,6 +20,10 @@ namespace _Project.Scripts.GameScene.Creatures.Enemy.States
         {
         }
 
+        protected override void OnFlush()
+        {
+        }
+
         protected override void OnEnter()
         {
             _creatureStateMachine.EnterState(StateMachineStateType.CreatureState_Idle);

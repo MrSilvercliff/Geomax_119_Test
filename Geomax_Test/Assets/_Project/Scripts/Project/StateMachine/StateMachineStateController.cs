@@ -10,6 +10,7 @@ namespace _Project.Scripts.Project.StateMachine
     {
         StateMachineStateType StateType { get; }
         void Init();
+        void Flush();
         void Enter();
         void Exit();
     }
@@ -19,6 +20,8 @@ namespace _Project.Scripts.Project.StateMachine
         public abstract StateMachineStateType StateType { get; }
 
         public abstract void Init();
+
+        public abstract void Flush();
 
         public abstract void Enter();
 

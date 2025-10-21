@@ -30,6 +30,17 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
             _componentAnimator = _creatureComponentContainer.GetComponent<CreatureComponentAnimator>(CreatureComponentType.AnimatorController);
         }
 
+        protected override void OnFlush()
+        {
+            _componentAnimator = null;
+
+            if (_basicAttackCooldownTimer != null)
+            {
+                _basicAttackCooldownTimer.ExpiredEvent -= OnBasicAttackCooldownExpired;
+                _basicAttackCooldownTimer = null;
+            }
+        }
+
         protected override void OnEnter()
         {
             GetBasicAttackCooldownTimer();

@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using ZerglingUnityPlugins.Tools.Scripts.Mono;
 
 namespace _Project.Scripts.GameScene.Creatures.Basis.States
 {
@@ -35,6 +34,16 @@ namespace _Project.Scripts.GameScene.Creatures.Basis.States
         }
 
         protected abstract void OnInit();
+
+        public override void Flush()
+        {
+            _creatureController = default;
+            _creatureModel = null;
+            _creatureStateMachine = null;
+            _creatureComponentContainer = null;
+        }
+
+        protected abstract void OnFlush();
 
         public override void Enter()
         {
