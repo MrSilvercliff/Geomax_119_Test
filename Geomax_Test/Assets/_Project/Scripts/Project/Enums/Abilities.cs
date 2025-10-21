@@ -11,4 +11,11 @@ namespace _Project.Scripts.Project.Enums
         SKILL_ATTACK = 2,
         SKILL_BUFF = 3,
     }
+
+    public enum AbilityResultItemType
+    { 
+        NONE = 0,
+        DamageDeal = 1,
+        ApplyEffect = 2,
+    }
 }
