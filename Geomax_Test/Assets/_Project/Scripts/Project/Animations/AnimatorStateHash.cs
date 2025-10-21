@@ -11,5 +11,7 @@ namespace _Project.Scripts.Project.Animations
         public static readonly int Empty = Animator.StringToHash("Empty");
         public static readonly int Idle = Animator.StringToHash("Idle");
         public static readonly int Attack = Animator.StringToHash("Attack");
+        public static readonly int Hit = Animator.StringToHash("Hit");
+        public static readonly int Death = Animator.StringToHash("Death");
     }
 }
