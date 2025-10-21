@@ -18,4 +18,11 @@ namespace _Project.Scripts.Project.Enums
         StateMachineDebug = 2,
         AnimatorController = 3,
     }
+
+    public enum CreatureAnimationEvent
+    { 
+        NONE,
+        Animation_Finished,
+        Attack_Deal_Damage,
+    }
 }
