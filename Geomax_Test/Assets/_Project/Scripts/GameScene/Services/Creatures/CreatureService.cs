@@ -44,6 +44,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
         public async Task<bool> OnLateStart()
         {
+            _creatureControllerRepository.OnLateUpdate(0);
             await _creatureControllerUpdater.OnLateStart();
             return true;
         }
