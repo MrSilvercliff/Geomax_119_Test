@@ -11,6 +11,13 @@ namespace _Project.Scripts.Project.Enums
         ENEMY = 2,
     }
 
+    public enum CreatureResourceType
+    { 
+        NONE = 0,
+        HIT_POINTS = 1,
+        MANA_POINTS = 2,
+    }
+
     public enum CreatureComponentType
     { 
         None = 0,

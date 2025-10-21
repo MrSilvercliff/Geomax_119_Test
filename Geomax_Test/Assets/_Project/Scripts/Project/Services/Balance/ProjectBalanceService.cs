@@ -10,17 +10,20 @@ namespace _Project.Scripts.Project.Services.Balance
     public interface IProjectBalanceService : IBalanceServiceAbstractAsync
     {
         ICreatureBalanceStorage Creatures { get; }
+        ICreatureResourceBalanceStorage CreatureResources { get; }
         IAbilityBalanceStorage Abilities { get; }
     }
 
     public class ProjectBalanceService : BalanceServiceAbstractAsync, IProjectBalanceService
     {
         public ICreatureBalanceStorage Creatures { get; private set; }
+        public ICreatureResourceBalanceStorage CreatureResources { get; private set; }
         public IAbilityBalanceStorage Abilities { get; private set; }
 
         public ProjectBalanceService() 
         {
             Creatures = new CreatureBalanceStorage();
+            CreatureResources = new CreatureResourceBalanceStorage();
             Abilities = new AbilityBalanceStorage();
         }
 
@@ -29,6 +32,7 @@ namespace _Project.Scripts.Project.Services.Balance
             var result = new HashSet<IProjectService>();
 
             result.Add(Creatures);
+            result.Add(CreatureResources);
             result.Add(Abilities);
 
             return result;
