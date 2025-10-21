@@ -1,3 +1,4 @@
+using _Project.Scripts.GameScene.Abilities;
 using _Project.Scripts.GameScene.Configs;
 using _Project.Scripts.GameScene.Creatures;
 using _Project.Scripts.GameScene.Creatures.Basis;
@@ -74,6 +75,7 @@ namespace _Project.Scripts.GameScene.Scene
 
         private void BindAbilityFactories()
         {
+            Container.BindFactory<IAbilityBalanceModel, AbilityAttack, AbilityAttack.Factory>();
         }
 
         private void BindCreatureSlotServices()
