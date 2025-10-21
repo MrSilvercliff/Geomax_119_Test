@@ -1,5 +1,6 @@
 using _Project.Scripts.GameScene.Abilities;
 using _Project.Scripts.GameScene.Creatures.Basis.Components;
+using _Project.Scripts.GameScene.Services.Combat;
 using _Project.Scripts.Project.Animations;
 using _Project.Scripts.Project.Enums;
 using _Project.Scripts.Project.Services.Timers;
@@ -18,9 +19,11 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
         public override StateMachineStateType StateType => StateMachineStateType.CreatureState_Attack;
 
         [Inject] private ITimerService _timerService;
+        [Inject] private ICombatService _combatService;
 
         private ICreatureComponentAnimator _componentAnimator;
         private IAbilityAttack _abilityAttack;
+        private IAbilityResult _abilityResult;
 
         public PlayerStateAttack(IPlayerController creatureController) : base(creatureController)
         {
@@ -36,6 +39,7 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
         {
             _componentAnimator.AnimatorController.Play(AnimatorStateHash.Attack);
             StartBasicAttackCooldownTimer();
+            _abilityResult = _combatService.UseAbility(_creatureController, _abilityAttack);
         }
 
         public override void OnFixedUpdate(float deltaTime)
@@ -52,6 +56,8 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
 
         protected override void OnExit()
         {
+            _abilityResult.Flush();
+            _abilityResult = null;
         }
 
         public override void OnAnimationEvent(CreatureAnimationEvent creatureAnimationEvent)
@@ -59,7 +65,7 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
             switch (creatureAnimationEvent) 
             {
                 case CreatureAnimationEvent.Attack_Deal_Damage:
-                    LogUtils.Error(this, $"Creature [{_creatureController.Transform.gameObject.name}] attack deal damage!");
+                    _combatService.ApplyAbilityResult(_abilityResult);
                     break;
 
                 case CreatureAnimationEvent.Animation_Finished:
