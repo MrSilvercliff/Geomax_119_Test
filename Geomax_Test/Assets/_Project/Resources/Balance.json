@@ -6,6 +6,7 @@
 			"prefab_id":"CREATURE_HERO_1_PLAYER",
 			"state_machine_type":"CREATURE_PLAYER",
 			"name":"PLAYER",
+			"basic_attack_ability_id":"PLAYER_BASIC_ATTACK",
 			"abilities":[]
 		},
 		"CREATURE_HERO_1":{
@@ -14,22 +15,40 @@
 			"prefab_id":"CREATURE_HERO_1_ENEMY",
 			"state_machine_type":"CREATURE_ENEMY",
 			"name":"ENEMY_1",
+			"basic_attack_ability_id":"ENEMY_1_BASIC_ATTACK",
 			"abilities":[]
 		}
 	},
 	"Abilities":{
-		"PLAYER_AUTO_ATTACK":{
-			"id":"PLAYER_AUTO_ATTACK",
+		"PLAYER_BASIC_ATTACK":{
+			"id":"PLAYER_BASIC_ATTACK",
 			"type":"BASIC_ATTACK",
 			"name":"PLAYER AUTO ATTACK",
+			"int_value_1":10,
+			"int_value_2":0,
+			"int_value_3":0,
+			"int_value_4":0,
+			"float_value_1":0,
+			"float_value_2":0,
+			"float_value_3":0,
+			"float_value_4":3,
+			"bool_value_1":false,
+			"bool_value_2":false,
+			"string_value_1":"null",
+			"string_value_2":"null"
+		},
+		"ENEMY_1_BASIC_ATTACK":{
+			"id":"ENEMY_1_BASIC_ATTACK",
+			"type":"BASIC_ATTACK",
+			"name":"ENEMY_1_BASIC_ATTACK",
 			"int_value_1":0,
 			"int_value_2":0,
 			"int_value_3":0,
 			"int_value_4":0,
-			"float_value_1":10,
+			"float_value_1":0,
 			"float_value_2":0,
 			"float_value_3":0,
-			"float_value_4":3,
+			"float_value_4":0,
 			"bool_value_1":false,
 			"bool_value_2":false,
 			"string_value_1":"null",
