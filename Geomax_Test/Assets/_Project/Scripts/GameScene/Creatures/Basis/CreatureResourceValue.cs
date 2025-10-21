@@ -34,6 +34,11 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         public void SetCurrentValue(int newValue)
         {
             _currentValue = newValue;
+
+            if (_currentValue < MinValue)
+                _currentValue = MinValue;
+            else if (_currentValue > MaxValue)
+                _currentValue = MaxValue;
         }
 
         public class Factory : PlaceholderFactory<ICreatureResourceBalanceModel, CreatureResourceValue> { }

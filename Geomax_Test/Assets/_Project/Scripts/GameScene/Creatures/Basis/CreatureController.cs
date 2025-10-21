@@ -40,6 +40,8 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         void PrefabSetActive(bool active);
         bool IsAlive();
         void SetAttackTarget(ICreatureController attackTargetCreatureController);
+        void OnHit();
+        void OnDeath();
 
         #endregion GAMEPLAY
     }
@@ -143,6 +145,7 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
             LogUtils.Info(gameObject.name, $"OnDespawned");
 
             _componentContainer.Flush();
+            _creatureStateMachine.Flush();
             OnDespawnedProcess();
         }
 
@@ -173,6 +176,16 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         public void SetAttackTarget(ICreatureController attackTargetCreatureController)
         {
             _attackTargetCreatureController = attackTargetCreatureController;
+        }
+
+        public void OnHit()
+        {
+            _creatureStateMachine.EnterState(StateMachineStateType.CreatureState_Hit);
+        }
+
+        public void OnDeath()
+        {
+            _creatureStateMachine.EnterState(StateMachineStateType.CreatureState_Death);
         }
 
         #endregion GAMEPLAY

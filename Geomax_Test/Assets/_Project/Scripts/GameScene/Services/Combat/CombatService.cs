@@ -40,6 +40,9 @@ namespace _Project.Scripts.GameScene.Services.Combat
 
         public void ApplyAbilityResult(IAbilityResult abilityResult)
         {
+            if (abilityResult == null)
+                return;
+
             _abilityResultApplyService.ApplyAbilityResult(abilityResult);
         }
     }
