@@ -18,6 +18,7 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         StateMachineStateType OnSpawnState { get; }
 
         ICreatureModel CreatureModel { get; }
+        ICreaturePrefab CreaturePrefab { get; }
         ICreatureStateMachine CreatureStateMachine { get; }
         ICreatureComponentContainer CreatureComponentContainer { get; }
         ICreatureController AttackTargetCreatureController { get; }
@@ -37,7 +38,6 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
 
         #region GAMEPLAY
 
-        void PrefabSetActive(bool active);
         bool IsAlive();
         void SetAttackTarget(ICreatureController attackTargetCreatureController);
         void OnHit();
@@ -53,6 +53,7 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         public StateMachineStateType OnSpawnState => _onSpawnState;
 
         public ICreatureModel CreatureModel => _creatureModel;
+        public ICreaturePrefab CreaturePrefab => _creaturePrefab;
         public ICreatureStateMachine CreatureStateMachine => _creatureStateMachine;
         public ICreatureComponentContainer CreatureComponentContainer => _componentContainer;
         public ICreatureController AttackTargetCreatureController => _attackTargetCreatureController;
@@ -160,11 +161,6 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
 
 
         #region GAMEPLAY
-
-        public void PrefabSetActive(bool active)
-        {
-            _creaturePrefab.SetActive(active);
-        }
 
         public bool IsAlive()
         {

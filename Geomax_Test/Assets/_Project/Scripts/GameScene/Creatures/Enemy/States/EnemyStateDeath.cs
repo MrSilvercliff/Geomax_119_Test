@@ -55,11 +55,8 @@ namespace _Project.Scripts.GameScene.Creatures.Enemy.States
         {
             switch (creatureAnimationEvent)
             {
-                case CreatureAnimationEvent.Death_Prefab_Set_Active_False:
-                    _creatureController.PrefabSetActive(false);
-                    break;
-
                 case CreatureAnimationEvent.Animation_Finished:
+                    _creatureController.CreaturePrefab.SetActive(false);
                     _creatureStateMachine.EnterState(StateMachineStateType.CreatureState_Despawn);
                     break;
             }

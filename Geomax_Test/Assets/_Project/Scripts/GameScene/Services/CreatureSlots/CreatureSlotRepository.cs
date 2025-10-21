@@ -1,3 +1,4 @@
+using _Project.Scripts.GameScene.Creatures.Basis;
 using _Project.Scripts.GameScene.CreatureSlot;
 using _Project.Scripts.GameScene.GameLevel;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace _Project.Scripts.GameScene.Services.CreatureSlots
         void AddEnemyCreatureSlots(IReadOnlyCollection<ICreatureSlotController> creatureSlots);
         bool TryGetFreePlayerCreatureSlot(out ICreatureSlotController slotController);
         bool TryGetFreeEnemyCreatureSlot(out ICreatureSlotController slotController);
+        bool TryGetSlotWithCreatureController(ICreatureController creatureController, out ICreatureSlotController slotController);
     }
 
     public class CreatureSlotRepository : ICreatureSlotRepository
@@ -79,6 +81,35 @@ namespace _Project.Scripts.GameScene.Services.CreatureSlots
 
             slotController = null;
             return false;
+        }
+
+        public bool TryGetSlotWithCreatureController(ICreatureController creatureController, out ICreatureSlotController slotController)
+        {
+            slotController = null;
+
+            foreach (var playerCreatureSlot in _playerCreatureSlots)
+            {
+                if (playerCreatureSlot.Contains(creatureController))
+                {
+                    slotController = playerCreatureSlot;
+                    break;
+                }
+            }
+
+            if (slotController != null)
+                return true;
+
+            foreach (var enemyCreatureSlot in _enemyCreatureSlots)
+            {
+                if (enemyCreatureSlot.Contains(creatureController))
+                {
+                    slotController = enemyCreatureSlot;
+                    break;
+                }
+            }
+
+            var result = slotController != null;
+            return result;
         }
     }
 

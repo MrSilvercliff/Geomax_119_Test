@@ -1,6 +1,8 @@
 using _Project.Scripts.GameScene.Creatures.Player;
+using _Project.Scripts.GameScene.Services.Creatures;
 using _Project.Scripts.Project.Enums;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.GameScene.Creatures.Enemy.States
 {
@@ -11,6 +13,8 @@ namespace _Project.Scripts.GameScene.Creatures.Enemy.States
     public class EnemyStateDespawn : EnemyStateControllerBase<EnemyStateDespawn>, IEnemyStateDespawn
     {
         public override StateMachineStateType StateType => StateMachineStateType.CreatureState_Despawn;
+
+        [Inject] private ICreatureService _creatureService;
 
         public EnemyStateDespawn(IEnemyCreatureController creatureController) : base(creatureController)
         {
@@ -26,6 +30,7 @@ namespace _Project.Scripts.GameScene.Creatures.Enemy.States
 
         protected override void OnEnter()
         {
+            _creatureService.DespawnCreature(_creatureController);
         }
 
         public override void OnFixedUpdate(float deltaTime)

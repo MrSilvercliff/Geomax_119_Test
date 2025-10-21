@@ -1,3 +1,4 @@
+using _Project.Scripts.GameScene.Creatures.Basis;
 using _Project.Scripts.GameScene.CreatureSlot;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace _Project.Scripts.GameScene.Services.CreatureSlots
         void AddCreatureSlots(IReadOnlyCollection<ICreatureSlotController> playerCreatureSlots, IReadOnlyCollection<ICreatureSlotController> enemyCreatureSlots);
         bool TryGetFreePlayerCreatureSlot(out ICreatureSlotController slotController);
         bool TryGetFreeEnemyCreatureSlot(out ICreatureSlotController slotController);
+        bool TryGetSlotWithCreatureController(ICreatureController creatureController, out ICreatureSlotController slotController);
     }
 
     public class CreatureSlotService : ICreatureSlotService
@@ -45,6 +47,12 @@ namespace _Project.Scripts.GameScene.Services.CreatureSlots
         public bool TryGetFreeEnemyCreatureSlot(out ICreatureSlotController slotController)
         {
             var result = _slotRepository.TryGetFreeEnemyCreatureSlot(out slotController);
+            return result;
+        }
+
+        public bool TryGetSlotWithCreatureController(ICreatureController creatureController, out ICreatureSlotController slotController)
+        {
+            var result = _slotRepository.TryGetSlotWithCreatureController(creatureController, out slotController);
             return result;
         }
     }

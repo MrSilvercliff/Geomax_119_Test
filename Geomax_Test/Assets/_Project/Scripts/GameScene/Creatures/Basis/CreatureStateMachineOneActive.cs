@@ -32,7 +32,9 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
             base.EnterState(state);
 
             _activeStates.Clear();
-            _activeStates.Add(_activeStateController.StateType);
+
+            if (_activeStateController != null)
+                _activeStates.Add(_activeStateController.StateType);
         }
 
         public List<StateMachineStateType> GetActiveStates()

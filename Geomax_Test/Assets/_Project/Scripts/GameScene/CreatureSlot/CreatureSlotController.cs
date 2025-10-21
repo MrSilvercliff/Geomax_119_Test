@@ -10,6 +10,7 @@ namespace _Project.Scripts.GameScene.CreatureSlot
         int SlotIndex { get; }
 
         bool IsEmpty();
+        bool Contains(ICreatureController creatureController);
         void SetCreatureController(ICreatureController creatureController);
     }
 
@@ -35,13 +36,22 @@ namespace _Project.Scripts.GameScene.CreatureSlot
             return result;
         }
 
+        public bool Contains(ICreatureController creatureController)
+        {
+            if (_creatureContainer == null)
+                return false;
+
+            var result = _creatureController.InstanceID == creatureController.InstanceID;
+            return result;
+        }
+
         public void SetCreatureController(ICreatureController creatureController)
         {
             _emptyState.SetActive(false);
 
             _creatureController = creatureController;
 
-            if (_creatureContainer == null)
+            if (_creatureController == null)
                 return;
 
             _creatureController.Transform.SetParent(_creatureContainer);

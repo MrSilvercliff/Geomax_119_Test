@@ -18,11 +18,12 @@ namespace _Project.Scripts.GameScene.Services.Creatures
     public interface ICreatureSpawnService : IProjectService
     {
         void Spawn(string creatureId, bool enterOnSpawnState);
+        void SpawnRandomEnemy();
     }
 
     public class CreatureSpawnService : ICreatureSpawnService
     {
-        [Inject] private IProjectBalanceService _balanceStorage;
+        [Inject] private IProjectBalanceService _balanceService;
         [Inject] private IGameSceneObjectPoolService _gameSceneObjectPoolService;
         [Inject] private IStateMachineCreator _stateMachineCreator;
         [Inject] private ICreatureModelCreator _modelCreator;
@@ -41,7 +42,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
         public void Spawn(string creatureId, bool enterOnSpawnState)
         {
-            var creaturesBalanceStorage = _balanceStorage.Creatures;
+            var creaturesBalanceStorage = _balanceService.Creatures;
             var tryGetResult = creaturesBalanceStorage.TryGetById(creatureId, out var creatureBalanceModel);
 
             if (!tryGetResult)
@@ -66,6 +67,14 @@ namespace _Project.Scripts.GameScene.Services.Creatures
                     LogUtils.Error(this, $"Spawn for creature type [{creatureType}] not implemented!");
                     break;
             }
+        }
+
+        public void SpawnRandomEnemy()
+        {
+            var enemyBalanceModels = _balanceService.Creatures.Enemies;
+            var index = Random.Range(0, enemyBalanceModels.Count);
+            var enemyBalanceModel = enemyBalanceModels[index];
+            SpawnEnemy(enemyBalanceModel, true);
         }
 
         private void SpawnPlayer(ICreatureBalanceModel balanceModel, bool enterOnSpawnState)
