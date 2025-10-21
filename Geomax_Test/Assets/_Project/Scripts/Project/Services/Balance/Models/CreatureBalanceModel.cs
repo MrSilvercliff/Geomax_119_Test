@@ -14,6 +14,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
         string Name { get; }
         string PrefabId { get; }
         StateMachineType StateMachineType { get; }
+        string BasicAttackAbilityId { get; }
         IReadOnlyList<string> Abilities { get; }
     }
 
@@ -23,12 +24,14 @@ namespace _Project.Scripts.Project.Services.Balance.Models
         public string Name => _name;
         public string PrefabId => _prefabId;
         public StateMachineType StateMachineType => _stateMachineType;
+        public string BasicAttackAbilityId => _basicAttackAbilityId;
         public IReadOnlyList<string> Abilities => _abilities;
 
         private CreatureType _creatureType;
         private string _name;
         private string _prefabId;
         private StateMachineType _stateMachineType;
+        private string _basicAttackAbilityId;
         private List<string> _abilities;
         
         protected override void OnTrySetup(JSONObject json, IJSONParseHelper parseHelper)
@@ -38,6 +41,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
             _name = json["name"].stringValue;
             _prefabId = json["prefab_id"].stringValue;
             _stateMachineType = parseHelper.ParseEnum(json, "state_machine_type", StateMachineType.NONE);
+            _basicAttackAbilityId = json["basic_attack_ability_id"].stringValue;
             _abilities = parseHelper.ParseList<string>(json, "abilities");
         }
 
@@ -50,6 +54,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
             builder.AppendLine($"_name = {_name}");
             builder.AppendLine($"_prefabId = {_prefabId}");
             builder.AppendLine($"_stateMachineType = {_stateMachineType}");
+            builder.AppendLine($"_basicAttackAbilityId = {_basicAttackAbilityId}");
 
             builder.AppendLine($"Abilities:");
             for (int i = 0; i < _abilities.Count; i++)

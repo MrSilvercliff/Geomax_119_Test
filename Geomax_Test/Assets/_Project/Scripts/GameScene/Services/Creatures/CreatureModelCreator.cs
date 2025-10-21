@@ -53,16 +53,16 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             return creatureModel;
         }
 
-        private IReadOnlyDictionary<AbilityType, IAbility> GetAbilities(ICreatureBalanceModel balanceModel)
+        private IReadOnlyList<IAbility> GetAbilities(ICreatureBalanceModel balanceModel)
         {
-            var result = new Dictionary<AbilityType, IAbility>();
+            var result = new List<IAbility>();
 
             var abilityIds = balanceModel.Abilities;
 
             foreach (var abilityId in abilityIds)
             {
                 var ability = _abilityService.GetAbility(abilityId);
-                result[ability.AbilityType] = ability;
+                result.Add(ability);
             }
 
             return result;

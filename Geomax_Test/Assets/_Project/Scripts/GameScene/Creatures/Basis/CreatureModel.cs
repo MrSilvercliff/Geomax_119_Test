@@ -12,8 +12,9 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
     {
         StateMachineType StateMachineType { get; }
 
-        void Setup(IReadOnlyDictionary<AbilityType, IAbility> abilities);
-        T GetAbility<T>(AbilityType abilityType) where T : IAbility;
+        void Setup(IReadOnlyList<IAbility> abilities);
+        IAbilityAttack GetBasicAttackAbility();
+        T GetAbility<T>(string id) where T : IAbility;
     }
 
     public class CreatureModel : ICreatureModel
@@ -21,22 +22,39 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         public StateMachineType StateMachineType => _balanceModel.StateMachineType;
 
         private ICreatureBalanceModel _balanceModel;
-        private IReadOnlyDictionary<AbilityType, IAbility> _abilities;
+        private IReadOnlyList<IAbility> _abilities;
 
         public CreatureModel(ICreatureBalanceModel balanceModel)
         {
             _balanceModel = balanceModel;
         }
 
-        public void Setup(IReadOnlyDictionary<AbilityType, IAbility> abilities)
+        public void Setup(IReadOnlyList<IAbility> abilities)
         {
             _abilities = abilities;
         }
 
-        public T GetAbility<T>(AbilityType abilityType) where T : IAbility
+        public IAbilityAttack GetBasicAttackAbility()
         {
-            var ability = _abilities[abilityType];
-            var result = (T)ability;
+            var abilityId = _balanceModel.BasicAttackAbilityId;
+            var result = GetAbility<IAbilityAttack>(abilityId);
+            return result;
+        }
+
+        public T GetAbility<T>(string id) where T : IAbility
+        {
+            IAbility preResult = null;
+
+            foreach (var ability in _abilities)
+            {
+                if (ability.Id == id)
+                { 
+                    preResult = ability;
+                    break;
+                }
+            }
+
+            var result = (T)preResult;
             return result;
         }
 
