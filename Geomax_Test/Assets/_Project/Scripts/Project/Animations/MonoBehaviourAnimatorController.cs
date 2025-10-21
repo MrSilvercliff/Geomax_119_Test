@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
 using ZerglingUnityPlugins.Tools.Scripts.Interfaces.Sync;
-using static Codice.CM.Common.CmCallContext;
 
 namespace _Project.Scripts.Project.Animations
 {
