@@ -6,6 +6,7 @@
 			"prefab_id":"CREATURE_HERO_1_PLAYER",
 			"state_machine_type":"CREATURE_PLAYER",
 			"name":"PLAYER",
+			"resources":[],
 			"basic_attack_ability_id":"PLAYER_BASIC_ATTACK",
 			"abilities":[
 				"PLAYER_BASIC_ATTACK"
@@ -17,10 +18,34 @@
 			"prefab_id":"CREATURE_HERO_1_ENEMY",
 			"state_machine_type":"CREATURE_ENEMY",
 			"name":"ENEMY_1",
+			"resources":[],
 			"basic_attack_ability_id":"ENEMY_1_BASIC_ATTACK",
 			"abilities":[
 				"ENEMY_1_BASIC_ATTACK"
 			]
+		}
+	},
+	"CreatureResources":{
+		"PLAYER_HP":{
+			"id":"PLAYER_HP",
+			"type":"HIT_POINTS",
+			"min_value":0,
+			"max_value":100,
+			"start_value":100
+		},
+		"PLAYER_MP":{
+			"id":"PLAYER_MP",
+			"type":"MANA_POINTS",
+			"min_value":0,
+			"max_value":100,
+			"start_value":50
+		},
+		"ENEMY_1_HP":{
+			"id":"ENEMY_1_HP",
+			"type":"HIT_POINTS",
+			"min_value":0,
+			"max_value":30,
+			"start_value":30
 		}
 	},
 	"Abilities":{
@@ -28,7 +53,7 @@
 			"id":"PLAYER_BASIC_ATTACK",
 			"type":"BASIC_ATTACK",
 			"name":"PLAYER AUTO ATTACK",
-			"int_value_1":10,
+			"int_value_1":5,
 			"int_value_2":0,
 			"int_value_3":0,
 			"int_value_4":0,
@@ -41,15 +66,49 @@
 			"string_value_1":"null",
 			"string_value_2":"null"
 		},
-		"ENEMY_1_BASIC_ATTACK":{
-			"id":"ENEMY_1_BASIC_ATTACK",
-			"type":"BASIC_ATTACK",
-			"name":"ENEMY_1_BASIC_ATTACK",
+		"PLAYER_STRONG_ATTACK":{
+			"id":"PLAYER_STRONG_ATTACK",
+			"type":"SKILL_ATTACK",
+			"name":"PLAYER STRONG ATTACK",
+			"int_value_1":15,
+			"int_value_2":0,
+			"int_value_3":0,
+			"int_value_4":0,
+			"float_value_1":1.2999999523162842,
+			"float_value_2":0,
+			"float_value_3":0,
+			"float_value_4":0,
+			"bool_value_1":false,
+			"bool_value_2":false,
+			"string_value_1":"null",
+			"string_value_2":"null"
+		},
+		"PLAYER_BUFF":{
+			"id":"PLAYER_BUFF",
+			"type":"SKILL_BUFF",
+			"name":"PLAYER BUFF",
 			"int_value_1":0,
 			"int_value_2":0,
 			"int_value_3":0,
 			"int_value_4":0,
-			"float_value_1":0,
+			"float_value_1":10,
+			"float_value_2":2,
+			"float_value_3":1.3999999761581421,
+			"float_value_4":0,
+			"bool_value_1":false,
+			"bool_value_2":false,
+			"string_value_1":"null",
+			"string_value_2":"null"
+		},
+		"ENEMY_1_BASIC_ATTACK":{
+			"id":"ENEMY_1_BASIC_ATTACK",
+			"type":"BASIC_ATTACK",
+			"name":"ENEMY 1 BASIC ATTACK",
+			"int_value_1":3,
+			"int_value_2":0,
+			"int_value_3":0,
+			"int_value_4":0,
+			"float_value_1":5,
 			"float_value_2":0,
 			"float_value_3":0,
 			"float_value_4":0,
