@@ -7,11 +7,16 @@ using ZerglingUnityPlugins.Tools.Scripts.Mono;
 namespace _Project.Scripts.Project.Services.Timers
 {
     public interface ITimerService : IProjectService, IMonoLateUpdatable
-    { 
+    {
+        ITimerIdProvider IdProvider { get; }
+        bool TryGetTimer(string id, out ITimer timer);
+        ITimer StartTimer(string id, float duration);
     }
 
     public class TimerService : ITimerService
     {
+        public ITimerIdProvider IdProvider => _idProvider;
+
         [Inject] private ITimerIdProvider _idProvider;
         [Inject] private ITimerCreator _creator;
         [Inject] private ITimerRepository _repository;
@@ -41,6 +46,18 @@ namespace _Project.Scripts.Project.Services.Timers
         public void OnLateUpdate(float deltaTime)
         {
             _updateService.OnLateUpdate(deltaTime);
+        }
+
+        public bool TryGetTimer(string id, out ITimer timer)
+        {
+            var result = _repository.TryGet(id, out timer);
+            return result;
+        }
+
+        public ITimer StartTimer(string id, float duration)
+        {
+            var result = _startService.StartTimer(id, duration);
+            return result;
         }
     }
 }
