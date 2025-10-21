@@ -1,4 +1,5 @@
 using _Project.Scripts.GameScene.Abilities;
+using _Project.Scripts.Project.Enums;
 using _Project.Scripts.Project.Services.Balance;
 using _Project.Scripts.Project.Services.Balance.Models;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ namespace _Project.Scripts.GameScene.Services.Abilities
     public class AbilitiesCreator : IAbilitiesCreator
     {
         [Inject] private IProjectBalanceService _projectBalanceStorage;
+
+        [Inject] private AbilityAttack.Factory _attackFactory;
 
         public Task<bool> Init()
         {
@@ -58,6 +61,10 @@ namespace _Project.Scripts.GameScene.Services.Abilities
 
             switch (abilityType)
             {
+                case AbilityType.BASIC_ATTACK:
+                    result = _attackFactory.Create(balanceModel);
+                    break;
+
                 default:
                     LogUtils.Error(this, $"Ability factory for ability type [{abilityType}] does not implemented!");
                     break;
