@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: GameStartConfig
   m_EditorClassIdentifier: _Project.Scripts.GameScene::_Project.Scripts.GameScene.Configs.GameStartConfig
   _playerCreatureId: CREATURE_PLAYER
-  _enemyCreatureIds: []
+  _enemyCreatureIds:
+  - CREATURE_HERO_1
+  - CREATURE_HERO_1
+  - CREATURE_HERO_1
