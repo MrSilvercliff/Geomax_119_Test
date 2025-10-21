@@ -24,6 +24,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
         [Inject] private IProjectBalanceService _projectBalanceStorage;
         [Inject] private CreatureModel.Factory _creatureModelFactory;
         [Inject] private IAbilityService _abilityService;
+        [Inject] private CreatureResourceValue.Factory _creatureResourceFactory;
 
         public Task<bool> Init()
         {
@@ -49,7 +50,8 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
             var creatureModel = _creatureModelFactory.Create(balanceModel);
             var abilities = GetAbilities(balanceModel);
-            creatureModel.Setup(abilities);
+            var resources = GetResources(balanceModel);
+            creatureModel.Setup(abilities, resources);
             return creatureModel;
         }
 
@@ -63,6 +65,26 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             {
                 var ability = _abilityService.GetAbility(abilityId);
                 result.Add(ability);
+            }
+
+            return result;
+        }
+
+        private IReadOnlyDictionary<CreatureResourceType, ICreatureResourceValue> GetResources(ICreatureBalanceModel balanceModel)
+        {
+            var result = new Dictionary<CreatureResourceType, ICreatureResourceValue>();
+            var creatureResourceBalanceStorage = _projectBalanceStorage.CreatureResources;
+            var resourceIds = balanceModel.Resources;
+
+            foreach (var resourceId in resourceIds) 
+            {
+                var tryResult = creatureResourceBalanceStorage.TryGetById(resourceId, out var resourceBalanceModel);
+
+                if (!tryResult)
+                    continue;
+
+                var creatureResourceValue = _creatureResourceFactory.Create(resourceBalanceModel);
+                result.TryAdd(creatureResourceValue.ResourceType, creatureResourceValue);
             }
 
             return result;

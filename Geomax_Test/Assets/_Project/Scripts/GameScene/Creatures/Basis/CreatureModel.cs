@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using ZerglingUnityPlugins.Tools.Scripts.Log;
 
 namespace _Project.Scripts.GameScene.Creatures.Basis
 {
@@ -12,11 +13,25 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
     {
         StateMachineType StateMachineType { get; }
 
-        void Setup(IReadOnlyList<IAbility> abilities);
-        
+        void Setup(IReadOnlyList<IAbility> abilities, IReadOnlyDictionary<CreatureResourceType, ICreatureResourceValue> resources);
+
+
+
+        #region RESOURCES
+
+        ICreatureResourceValue GetResourceValue(CreatureResourceType resourceType);
+
+        #endregion RESOURCES
+
+
+
+        #region ABILITIES
+
         IAbilityAttack GetBasicAttackAbility();
         T GetAbility<T>(string id) where T : IAbility;
         IReadOnlyList<IAbility> GetAllAbilities();
+
+        #endregion ABILITIES
     }
 
     public class CreatureModel : ICreatureModel
@@ -25,16 +40,36 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
 
         private ICreatureBalanceModel _balanceModel;
         private IReadOnlyList<IAbility> _abilities;
+        private IReadOnlyDictionary<CreatureResourceType, ICreatureResourceValue> _resources;
 
         public CreatureModel(ICreatureBalanceModel balanceModel)
         {
             _balanceModel = balanceModel;
         }
 
-        public void Setup(IReadOnlyList<IAbility> abilities)
+        public void Setup(IReadOnlyList<IAbility> abilities, IReadOnlyDictionary<CreatureResourceType, ICreatureResourceValue> resources)
         {
             _abilities = abilities;
+            _resources = resources;
         }
+
+        #region RESOURCES
+
+        public ICreatureResourceValue GetResourceValue(CreatureResourceType resourceType)
+        {
+            var tryResult = _resources.TryGetValue(resourceType, out var result);
+
+            if (!tryResult)
+                LogUtils.Error(this, $"RESOURCE WITH TYPE {resourceType} DOES NOT EXIST!");
+
+            return result;
+        }
+
+        #endregion RESOURCES
+
+
+
+        #region ABILITIES
 
         public IAbilityAttack GetBasicAttackAbility()
         {
@@ -67,6 +102,8 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         {
             return _abilities;
         }
+
+        #endregion ABILITIES
 
         public class Factory : PlaceholderFactory<ICreatureBalanceModel, CreatureModel> { }
     }
