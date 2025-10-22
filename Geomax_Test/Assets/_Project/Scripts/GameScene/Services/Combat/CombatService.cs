@@ -1,5 +1,6 @@
 using _Project.Scripts.GameScene.Abilities;
 using _Project.Scripts.GameScene.Creatures.Basis;
+using _Project.Scripts.GameScene.Services.Creatures;
 using _Project.Scripts.Project.Enums;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -15,6 +16,8 @@ namespace _Project.Scripts.GameScene.Services.Combat
 
         ICreatureController GetSelectedCreatureController(CreatureType creatureType);
         void SelectCreatureController(ICreatureController creatureController);
+
+        ICreatureController GetAttackTargetForCreature(CreatureType creatureType);
     }
 
     public class CombatService : ICombatService
@@ -22,12 +25,14 @@ namespace _Project.Scripts.GameScene.Services.Combat
         [Inject] private ICombatAbilityUseService _useAbilityService;
         [Inject] private ICombatAbilityResultApplyService _abilityResultApplyService;
         [Inject] private ICombatCreatureSelectService _creatureSelectService;
+        [Inject] private ICombatAttackTargetProvider _attackTargetProvider;
 
         public async Task<bool> Init()
         {
             await _useAbilityService.Init();
             await _abilityResultApplyService.Init();
             await _creatureSelectService.Init();
+            await _attackTargetProvider.Init();
             return true;
         }
 
@@ -36,6 +41,7 @@ namespace _Project.Scripts.GameScene.Services.Combat
             _useAbilityService.Flush();
             _abilityResultApplyService.Flush();
             _creatureSelectService.Flush();
+            _attackTargetProvider.Flush();
             return true;
         }
 
@@ -62,6 +68,13 @@ namespace _Project.Scripts.GameScene.Services.Combat
         public void SelectCreatureController(ICreatureController creatureController)
         {
             _creatureSelectService.SelectCreatureController(creatureController);
+        }
+
+        public ICreatureController GetAttackTargetForCreature(CreatureType creatureType)
+        {
+            var result = _attackTargetProvider.GetAttackTargetForCreature(creatureType);
+            _creatureSelectService.SelectCreatureController(result);
+            return result;
         }
     }
 }

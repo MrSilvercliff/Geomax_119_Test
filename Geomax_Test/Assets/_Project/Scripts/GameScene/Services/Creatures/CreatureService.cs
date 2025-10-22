@@ -1,5 +1,6 @@
 using _Project.Scripts.GameScene.Configs;
 using _Project.Scripts.GameScene.Creatures.Basis;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -12,12 +13,10 @@ namespace _Project.Scripts.GameScene.Services.Creatures
     public interface ICreatureService : IProjectService, ILateStartable, IMonoFixedUpdatable, IMonoUpdatable, IMonoLateUpdatable
     {
         ICreatureController PlayerController { get; }
+        IReadOnlyCollection<ICreatureController> GetAllCreatureControllers();
 
         void SpawnCreature(string creatureId, bool enterOnSpawnState);
         void DespawnCreature(ICreatureController creatureController);
-
-        ICreatureController GetAttackTargetForPlayerCreature();
-        ICreatureController GetAttackTargetForEnemyCreature();
     }
 
     public class CreatureService : ICreatureService
@@ -31,7 +30,6 @@ namespace _Project.Scripts.GameScene.Services.Creatures
         [Inject] private ICreatureModelCreator _creatureModelCreator;
         [Inject] private ICreatureSpawnService _creatureSpawnService;
         [Inject] private ICreatureDespawnService _creatureDespawnService;
-        [Inject] private ICreatureAttackTargetProvider _creatureAttackTargetProvider;
 
         public async Task<bool> Init()
         {
@@ -42,7 +40,6 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             await _creatureModelCreator.Init();
             await _creatureSpawnService.Init();
             await _creatureDespawnService.Init();
-            await _creatureAttackTargetProvider.Init();
             return true;
         }
 
@@ -53,7 +50,6 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             _creatureModelCreator.Flush();
             _creatureSpawnService.Flush();
             _creatureDespawnService.Flush();
-            _creatureAttackTargetProvider.Flush();
             return true;
         }
 
@@ -80,6 +76,12 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             _creatureControllerRepository.OnLateUpdate(deltaTime);
         }
 
+        public IReadOnlyCollection<ICreatureController> GetAllCreatureControllers()
+        {
+            var result = _creatureControllerRepository.GetAll();
+            return result;
+        }
+
         public void SpawnCreature(string creatureId, bool enterOnSpawnState)
         {
             _creatureSpawnService.Spawn(creatureId, enterOnSpawnState);
@@ -88,18 +90,6 @@ namespace _Project.Scripts.GameScene.Services.Creatures
         public void DespawnCreature(ICreatureController creatureController)
         {
             _creatureDespawnService.Despawn(creatureController);
-        }
-
-        public ICreatureController GetAttackTargetForPlayerCreature()
-        {
-            var result = _creatureAttackTargetProvider.GetAttackTargetForPlayerCreature();
-            return result;
-        }
-
-        public ICreatureController GetAttackTargetForEnemyCreature()
-        {
-            var result = _creatureAttackTargetProvider.GetAttackTargetForEnemyCreature();
-            return result;
         }
     }
 }
