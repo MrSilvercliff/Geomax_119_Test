@@ -110,7 +110,6 @@ namespace _Project.Scripts.GameScene.Scene
 
             Container.Bind<ICreatureControllerRepository>().To<CreatureControllerRepository>().AsSingle();
             Container.Bind<ICreatureControllerUpdater>().To<CreatureControllerUpdater>().AsSingle();
-            Container.Bind<ICreatureAttackTargetProvider>().To<CreatureAttackTargetProvider>().AsSingle();
             Container.Bind<ICreatureService>().To<CreatureService>().AsSingle();
         }
 
@@ -205,6 +204,7 @@ namespace _Project.Scripts.GameScene.Scene
             Container.Bind<ICombatAbilityUseService>().To<CombatAbilityUseService>().AsSingle();
             Container.Bind<ICombatAbilityResultApplyService>().To<CombatAbilityResultApplyService>().AsSingle();
             Container.Bind<ICombatCreatureSelectService>().To<CombatCreatureSelectService>().AsSingle();
+            Container.Bind<ICombatAttackTargetProvider>().To<CombatAttackTargetProvider>().AsSingle();
             Container.Bind<ICombatService>().To<CombatService>().AsSingle();
         }
     }
