@@ -14,6 +14,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
     {
         ICreatureController PlayerController { get; }
         IReadOnlyCollection<ICreatureController> GetAllCreatureControllers();
+        bool TryGetCreatureControllerByInstanceId(int instanceId, out ICreatureController creatureController);
 
         void SpawnCreature(string creatureId, bool enterOnSpawnState);
         void DespawnCreature(ICreatureController creatureController);
@@ -79,6 +80,12 @@ namespace _Project.Scripts.GameScene.Services.Creatures
         public IReadOnlyCollection<ICreatureController> GetAllCreatureControllers()
         {
             var result = _creatureControllerRepository.GetAll();
+            return result;
+        }
+
+        public bool TryGetCreatureControllerByInstanceId(int instanceId, out ICreatureController creatureController)
+        {
+            var result = _creatureControllerRepository.TryGetByInstanceId(instanceId, out creatureController);
             return result;
         }
 

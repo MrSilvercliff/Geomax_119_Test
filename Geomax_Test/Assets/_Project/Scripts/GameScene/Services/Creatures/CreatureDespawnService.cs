@@ -21,6 +21,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
     {
         [Inject] private IGameSceneObjectPoolService _gameSceneObjectPoolService;
         [Inject] private ICreatureSlotService _creatureSlotService;
+        [Inject] private ICreatureControllerRepository _creatureControllerRepository;
         [Inject] private ICreatureSpawnService _creatureSpawnService;
 
         public Task<bool> Init()
@@ -36,6 +37,8 @@ namespace _Project.Scripts.GameScene.Services.Creatures
         public void Despawn(ICreatureController controller)
         {
             Debug.LogError($"Despawn creature {controller.InstanceID}");
+
+            _creatureControllerRepository.Remove(controller);
 
             var creatureType = controller.CreatureType;
 

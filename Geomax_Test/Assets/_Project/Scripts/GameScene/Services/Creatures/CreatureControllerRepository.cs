@@ -13,8 +13,6 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 {
     public interface ICreatureControllerRepository : IRepositoryBase<ICreatureController>, IProjectService, IMonoLateUpdatable
     {
-        IReadOnlyDictionary<int, ICreatureController> CreatureControllerDictionary { get; }
-        
         ICreatureController PlayerController { get; }
 
         bool TryGetByInstanceId(int instanceId, out ICreatureController creatureController);
@@ -25,7 +23,6 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
     public class CreatureControllerRepository : ICreatureControllerRepository
     {
-        public IReadOnlyDictionary<int, ICreatureController> CreatureControllerDictionary => _activeCreatureControllersDict;
         public int Count => _activeCreatureControllersHashSet.Count;
 
         public ICreatureController PlayerController => _playerController;
@@ -38,13 +35,17 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
         private ICreatureController _playerController;
 
-        public Task<bool> Init()
+        public CreatureControllerRepository()
         {
             _activeCreatureControllersDict = new Dictionary<int, ICreatureController>();
             _activeCreatureControllersHashSet = new HashSet<ICreatureController>();
 
             _toAddCreatureControllers = new HashSet<ICreatureController>();
             _toRemoveCreatureControllers = new HashSet<ICreatureController>();
+        }
+
+        public Task<bool> Init()
+        {
             return Task.FromResult(true);
         }
 
@@ -67,14 +68,12 @@ namespace _Project.Scripts.GameScene.Services.Creatures
                 return false;
 
             _toRemoveCreatureControllers.Add(controller);
-
             return true;
         }
 
         public bool Remove(ICreatureController creatureController)
         {
             _toRemoveCreatureControllers.Add(creatureController);
-
             return true;
         }
 
