@@ -20,6 +20,7 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
 
         private ICreatureComponentAnimator _componentAnimator;
         private ITimer _basicAttackCooldownTimer;
+        private bool _canAttack;
 
         public PlayerStateIdle(IPlayerController creatureController) : base(creatureController)
         {
@@ -43,6 +44,7 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
 
         protected override void OnEnter()
         {
+            _canAttack = false;
             GetBasicAttackCooldownTimer();
             _componentAnimator.AnimatorController.Play(AnimatorStateHash.Idle);
         }
@@ -53,6 +55,16 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
 
         public override void OnUpdate(float deltaTime)
         {
+            if (!_canAttack)
+                return;
+
+            _creatureController.CheckAttackTarget();
+
+            if (_creatureController.AttackTargetCreatureController == null)
+                return;
+
+            _canAttack = false;
+            _creatureStateMachine.EnterState(StateMachineStateType.CreatureState_Attack);
         }
 
         public override void OnLateUpdate(float deltaTime)
@@ -78,6 +90,12 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
             if (!tryGet)
                 return;
 
+            if (timer.Expired)
+            {
+                _canAttack = true;
+                return;
+            }
+
             _basicAttackCooldownTimer = timer;
             _basicAttackCooldownTimer.ExpiredEvent += OnBasicAttackCooldownExpired;
         }
@@ -85,7 +103,7 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
         private void OnBasicAttackCooldownExpired(ITimer timer)
         {
             _basicAttackCooldownTimer.ExpiredEvent -= OnBasicAttackCooldownExpired;
-            _creatureStateMachine.EnterState(StateMachineStateType.CreatureState_Attack);
+            _canAttack = true;
         }
     }
 }

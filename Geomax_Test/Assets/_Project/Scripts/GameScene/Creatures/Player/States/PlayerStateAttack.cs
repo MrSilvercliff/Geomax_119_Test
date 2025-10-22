@@ -1,6 +1,7 @@
 using _Project.Scripts.GameScene.Abilities;
 using _Project.Scripts.GameScene.Creatures.Basis.Components;
 using _Project.Scripts.GameScene.Services.Combat;
+using _Project.Scripts.GameScene.Services.Creatures;
 using _Project.Scripts.Project.Animations;
 using _Project.Scripts.Project.Enums;
 using _Project.Scripts.Project.Services.Timers;
@@ -19,6 +20,7 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
         public override StateMachineStateType StateType => StateMachineStateType.CreatureState_Attack;
 
         [Inject] private ITimerService _timerService;
+        [Inject] private ICreatureService _creatureService;
         [Inject] private ICombatService _combatService;
 
         private ICreatureComponentAnimator _componentAnimator;
@@ -37,7 +39,6 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
 
         protected override void OnFlush()
         {
-            
             _componentAnimator = null;
             _abilityAttack = null;
 
@@ -47,6 +48,14 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
 
         protected override void OnEnter()
         {
+            _creatureController.CheckAttackTarget();
+
+            if (_creatureController.AttackTargetCreatureController == null)
+            {
+                _creatureStateMachine.EnterState(StateMachineStateType.CreatureState_Idle);
+                return;
+            }
+
             _componentAnimator.AnimatorController.Play(AnimatorStateHash.Attack);
             StartBasicAttackCooldownTimer();
             _abilityResult = _combatService.UseAbility(_creatureController, _abilityAttack);
@@ -76,6 +85,7 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
             {
                 case CreatureAnimationEvent.Attack_Deal_Damage:
                     _combatService.ApplyAbilityResult(_abilityResult);
+                    _creatureController.CheckAttackTarget();
                     break;
 
                 case CreatureAnimationEvent.Animation_Finished:

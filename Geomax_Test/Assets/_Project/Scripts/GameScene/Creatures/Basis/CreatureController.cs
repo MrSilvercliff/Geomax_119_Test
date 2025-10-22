@@ -1,4 +1,5 @@
 using _Project.Scripts.GameScene.Creatures.Basis.Components;
+using _Project.Scripts.GameScene.Services.Combat;
 using _Project.Scripts.GameScene.Services.Creatures;
 using _Project.Scripts.Project.Enums;
 using _Project.Scripts.Project.Extensions;
@@ -39,6 +40,7 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         #region GAMEPLAY
 
         bool IsAlive();
+        void CheckAttackTarget();
         void SetAttackTarget(ICreatureController attackTargetCreatureController);
         void OnHit();
         void OnDeath();
@@ -62,6 +64,8 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         [SerializeField] private Transform _prefabContainer;
         [SerializeField] private StateMachineStateType _onSpawnState;
         [SerializeField] private CreatureComponentBase[] _componentsList;
+
+        [Inject] private ICombatService _combatService;
 
         protected ICreatureModel _creatureModel;
         protected ICreaturePrefab _creaturePrefab;
@@ -165,8 +169,24 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         public bool IsAlive()
         {
             var hitPoints = _creatureModel.GetResourceValue(CreatureResourceType.HIT_POINTS);
-            var result = hitPoints.CurrentValue > 0;
+            var result = hitPoints.CurrentValue > hitPoints.MinValue;
             return result;
+        }
+
+        public void CheckAttackTarget()
+        {
+            if (_attackTargetCreatureController == null)
+            {
+                _attackTargetCreatureController = _combatService.GetAttackTargetForCreature(CreatureType);
+                return;
+            }
+            
+            var isAlive = _attackTargetCreatureController.IsAlive();
+
+            if (isAlive)
+                return;
+
+            _attackTargetCreatureController = _combatService.GetAttackTargetForCreature(CreatureType);
         }
 
         public void SetAttackTarget(ICreatureController attackTargetCreatureController)
@@ -190,6 +210,13 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
     public abstract class CreatureController<TObjectPoolType> : CreatureController
         where TObjectPoolType : CreatureController
     { 
-        public class Pool : ProjectMonoMemoryPool<TObjectPoolType> { }
+        public class Pool : ProjectMonoMemoryPool<TObjectPoolType> 
+        {
+            protected override void OnCreated(TObjectPoolType item)
+            {
+                base.OnCreated(item);
+                item.gameObject.name = $"{item.gameObject.name}_{item.InstanceID}";
+            }
+        }
     }
 }

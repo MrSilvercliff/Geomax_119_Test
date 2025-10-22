@@ -33,7 +33,7 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
         protected override void OnEnter()
         {
             StartBasicAttackCooldownTimer();
-            SetupAttackTarget();
+            _creatureController.CheckAttackTarget();
             _creatureStateMachine.EnterState(StateMachineStateType.CreatureState_Idle);
         }
 
@@ -64,12 +64,6 @@ namespace _Project.Scripts.GameScene.Creatures.Player.States
             var creatureControllerInstanceId = _creatureController.InstanceID;
             var timerId = _timerService.IdProvider.GetCreatureAbilityCooldownTimerId(creatureControllerInstanceId, abilityId);
             _timerService.StartTimer(timerId, basicAttackAbility.CooldownSeconds);
-        }
-
-        private void SetupAttackTarget()
-        { 
-            var attackTarget = _creatureService.GetAttackTargetForPlayerCreature();
-            _creatureController.SetAttackTarget(attackTarget);
         }
     }
 }
