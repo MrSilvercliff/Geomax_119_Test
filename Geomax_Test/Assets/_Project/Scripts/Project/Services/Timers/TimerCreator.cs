@@ -8,13 +8,13 @@ namespace _Project.Scripts.Project.Services.Timers
     public interface ITimerCreator : IProjectService
     {
         ITimer Create(string id);
-        ITimerSecondTick CreateSecondTick(string id);
+        ITimerOneSecondTick CreateSecondTick(string id);
     }
 
     public class TimerCreator : ITimerCreator
     {
         [Inject] private Timer.Factory _timerFactory;
-        [Inject] private TimerSecondTick.Factory _timerSecondTickFactory;
+        [Inject] private TimerOneSecondTick.Factory _timerSecondTickFactory;
 
         public Task<bool> Init()
         {
@@ -32,7 +32,7 @@ namespace _Project.Scripts.Project.Services.Timers
             return result;
         }
 
-        public ITimerSecondTick CreateSecondTick(string id)
+        public ITimerOneSecondTick CreateSecondTick(string id)
         {
             var result = _timerSecondTickFactory.Create(id);
             return result;

@@ -8,7 +8,7 @@ namespace _Project.Scripts.Project.Services.Timers
     public interface ITimerStartService : IProjectService
     {
         ITimer StartTimer(string id, float duration);
-        ITimerSecondTick StartTimerSecondTick(string id, float duration);
+        ITimerOneSecondTick StartTimerSecondTick(string id, float duration);
         void PauseTimer(string timerId, bool paused);
         void StopTimer(string timerId, bool reset);
     }
@@ -44,14 +44,14 @@ namespace _Project.Scripts.Project.Services.Timers
             return timer;
         }
 
-        public ITimerSecondTick StartTimerSecondTick(string id, float duration)
+        public ITimerOneSecondTick StartTimerSecondTick(string id, float duration)
         {
-            ITimerSecondTick timer = null;
+            ITimerOneSecondTick timer = null;
 
             var tryResult = _repository.TryGet(id, out var repositoryTimer);
 
             if (tryResult)
-                timer = (ITimerSecondTick)repositoryTimer;
+                timer = (ITimerOneSecondTick)repositoryTimer;
             else
             {
                 timer = _creator.CreateSecondTick(id);

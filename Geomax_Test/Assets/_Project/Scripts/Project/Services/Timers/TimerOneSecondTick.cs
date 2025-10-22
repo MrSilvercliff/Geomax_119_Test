@@ -3,18 +3,18 @@ using UnityEngine;
 
 namespace _Project.Scripts.Project.Services.Timers
 {
-    public interface ITimerSecondTick : ITimer
+    public interface ITimerOneSecondTick : ITimer
     {
-        event Action<ITimerSecondTick> TickEvent;
+        event Action<ITimerOneSecondTick> TickEvent;
     }
 
-    public class TimerSecondTick : Timer<TimerSecondTick>, ITimerSecondTick
+    public class TimerOneSecondTick : Timer<TimerOneSecondTick>, ITimerOneSecondTick
     {
-        public event Action<ITimerSecondTick> TickEvent;
+        public event Action<ITimerOneSecondTick> TickEvent;
 
         protected float _secondProgress;
 
-        public TimerSecondTick(string id) : base(id)
+        public TimerOneSecondTick(string id) : base(id)
         {
         }
 
