@@ -16,6 +16,9 @@ namespace _Project.Scripts.Project.Services.Balance.Models
         AbilityTargetType TargetType { get; }
         IReadOnlyList<string> ApplyEffects { get; }
 
+        CreatureResourceType ResourceCostType { get; }
+        int ResourceCostValue { get; }
+
         int IntValue1 { get; }
         int IntValue2 { get; }
         int IntValue3 { get; }
@@ -41,6 +44,9 @@ namespace _Project.Scripts.Project.Services.Balance.Models
         public AbilityTargetType TargetType => _targetType;
         public IReadOnlyList<string> ApplyEffects => _applyEffects;
 
+        public CreatureResourceType ResourceCostType => _resourceCostType;
+        public int ResourceCostValue => _resourceCostValue;
+
         public int IntValue1 => _intValue1;
         public int IntValue2 => _intValue2;
         public int IntValue3 => _intValue3;
@@ -57,11 +63,15 @@ namespace _Project.Scripts.Project.Services.Balance.Models
         public string StringValue1 => _stringValue1;
         public string StringValue2 => _stringValue2;
 
+
         private AbilityType _abilityType;
         private string _name;
 
         private AbilityTargetType _targetType;
         private List<string> _applyEffects;
+
+        private CreatureResourceType _resourceCostType;
+        private int _resourceCostValue;
 
         private int _intValue1;
         private int _intValue2;
@@ -87,6 +97,9 @@ namespace _Project.Scripts.Project.Services.Balance.Models
 
             _targetType = parseHelper.ParseEnum(json, "target_type", AbilityTargetType.NONE);
             _applyEffects = parseHelper.ParseList<string>(json, $"apply_effects");
+
+            _resourceCostType = parseHelper.ParseEnum(json, "resource_cost_type", CreatureResourceType.NONE);
+            _resourceCostValue = json["resource_cost_value"].intValue;
             
             _intValue1 = json["int_value_1"].intValue;
             _intValue2 = json["int_value_2"].intValue;
