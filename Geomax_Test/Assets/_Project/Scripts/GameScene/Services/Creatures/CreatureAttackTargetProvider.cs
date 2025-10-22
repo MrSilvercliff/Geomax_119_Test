@@ -34,11 +34,15 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
             foreach (var creatureController in allCreatureControllers)
             {
-                if (creatureController.CreatureType == CreatureType.ENEMY)
-                {
-                    result = creatureController;
-                    break;
-                }
+                if (creatureController.CreatureType != CreatureType.ENEMY)
+                    continue;
+
+                var isAlive = creatureController.IsAlive();
+
+                if (!isAlive) 
+                    continue;
+
+                result = creatureController;
             }
 
             return result;
