@@ -24,6 +24,7 @@ namespace _Project.Scripts.Project.Enums
         Move = 1,
         StateMachineDebug = 2,
         AnimatorController = 3,
+        RaycastHandler = 4,
     }
 
     public enum CreatureAnimationEvent
