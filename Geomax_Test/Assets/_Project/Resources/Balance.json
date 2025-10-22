@@ -12,7 +12,13 @@
 			],
 			"basic_attack_ability_id":"PLAYER_BASIC_ATTACK",
 			"abilities":[
-				"PLAYER_BASIC_ATTACK"
+				"PLAYER_BASIC_ATTACK",
+				"PLAYER_STRONG_ATTACK",
+				"PLAYER_BUFF"
+			],
+			"effects":[
+				"PLAYER_MP_REGEN",
+				"PLAYER_ATTACK_STUN_TRIGGER"
 			]
 		},
 		"CREATURE_HERO_1":{
@@ -27,6 +33,9 @@
 			"basic_attack_ability_id":"ENEMY_1_BASIC_ATTACK",
 			"abilities":[
 				"ENEMY_1_BASIC_ATTACK"
+			],
+			"effects":[
+				"ENEMY_ATTACK_HP_REGEN_TRIGGER"
 			]
 		}
 	},
@@ -59,6 +68,8 @@
 			"type":"BASIC_ATTACK",
 			"name":"PLAYER AUTO ATTACK",
 			"target_type":"CREATURE",
+			"resource_cost_type":"MANA_POINTS",
+			"resource_cost_value":0,
 			"apply_effects":[],
 			"int_value_1":15,
 			"int_value_2":0,
@@ -78,11 +89,13 @@
 			"type":"SKILL_ATTACK",
 			"name":"PLAYER STRONG ATTACK",
 			"target_type":"CREATURE",
+			"resource_cost_type":"MANA_POINTS",
+			"resource_cost_value":10,
 			"apply_effects":[],
 			"int_value_1":15,
 			"int_value_2":0,
 			"int_value_3":0,
-			"int_value_4":10,
+			"int_value_4":0,
 			"float_value_1":1.2999999523162842,
 			"float_value_2":0,
 			"float_value_3":0,
@@ -97,11 +110,17 @@
 			"type":"SKILL_BUFF",
 			"name":"PLAYER BUFF",
 			"target_type":"SELF",
-			"apply_effects":[],
+			"resource_cost_type":"MANA_POINTS",
+			"resource_cost_value":20,
+			"apply_effects":[
+				"PLAYER_BUFF_VISUAL",
+				"PLAYER_BUFF_DAMAGE_MULT",
+				"PLAYER_BUFF_BASIC_ATTACK_COOLDOWN_MULT"
+			],
 			"int_value_1":0,
 			"int_value_2":0,
 			"int_value_3":0,
-			"int_value_4":20,
+			"int_value_4":0,
 			"float_value_1":10,
 			"float_value_2":2,
 			"float_value_3":1.3999999761581421,
@@ -116,6 +135,8 @@
 			"type":"BASIC_ATTACK",
 			"name":"ENEMY 1 BASIC ATTACK",
 			"target_type":"CREATURE",
+			"resource_cost_type":"MANA_POINTS",
+			"resource_cost_value":0,
 			"apply_effects":[],
 			"int_value_1":3,
 			"int_value_2":0,
@@ -129,6 +150,106 @@
 			"bool_value_2":false,
 			"string_value_1":"null",
 			"string_value_2":"null"
+		}
+	},
+	"Effects":{
+		"PLAYER_MP_REGEN":{
+			"id":"PLAYER_MP_REGEN",
+			"target_type":"SELF",
+			"trigger_type":"TIME_TICK",
+			"duration_type":"PERMANENT",
+			"effect_type":"MANA_POINTS_REGEN",
+			"value_type":"SOLID",
+			"parameter":1,
+			"duration_seconds":0,
+			"tick_time":1,
+			"probability":1,
+			"trigger_effect_id":"null",
+			"visible":false
+		},
+		"PLAYER_ATTACK_STUN_TRIGGER":{
+			"id":"PLAYER_ATTACK_STUN_TRIGGER",
+			"target_type":"ATTACK_TARGET",
+			"trigger_type":"DAMAGE_DEAL",
+			"duration_type":"PERMANENT",
+			"effect_type":"EFFECT_TRIGGER",
+			"value_type":"SOLID",
+			"parameter":0,
+			"duration_seconds":0,
+			"tick_time":0,
+			"probability":0.30000001192092896,
+			"trigger_effect_id":"PLAYER_ATTACK_STUN",
+			"visible":false
+		},
+		"PLAYER_ATTACK_STUN":{
+			"id":"PLAYER_ATTACK_STUN",
+			"target_type":"ATTACK_TARGET",
+			"trigger_type":"NONE",
+			"duration_type":"TEMPORARY",
+			"effect_type":"STUN",
+			"value_type":"SOLID",
+			"parameter":0,
+			"duration_seconds":2,
+			"tick_time":0,
+			"probability":1,
+			"trigger_effect_id":"null",
+			"visible":true
+		},
+		"PLAYER_BUFF_VISUAL":{
+			"id":"PLAYER_BUFF_VISUAL",
+			"target_type":"SELF",
+			"trigger_type":"NONE",
+			"duration_type":"TEMPORARY",
+			"effect_type":"NONE",
+			"value_type":"SOLID",
+			"parameter":0,
+			"duration_seconds":10,
+			"tick_time":0,
+			"probability":1,
+			"trigger_effect_id":"null",
+			"visible":true
+		},
+		"PLAYER_BUFF_DAMAGE_MULT":{
+			"id":"PLAYER_BUFF_DAMAGE_MULT",
+			"target_type":"SELF",
+			"trigger_type":"NONE",
+			"duration_type":"TEMPORARY",
+			"effect_type":"DAMAGE_MULTIPLY",
+			"value_type":"PERCENTAGE",
+			"parameter":2,
+			"duration_seconds":10,
+			"tick_time":0,
+			"probability":1,
+			"trigger_effect_id":"null",
+			"visible":false
+		},
+		"PLAYER_BUFF_BASIC_ATTACK_COOLDOWN_MULT":{
+			"id":"PLAYER_BUFF_BASIC_ATTACK_COOLDOWN_MULT",
+			"target_type":"SELF",
+			"trigger_type":"NONE",
+			"duration_type":"TEMPORARY",
+			"effect_type":"BASIC_ATTACK_COOLDOWN_MULTIPLY",
+			"value_type":"PERCENTAGE",
+			"parameter":1.3999999761581421,
+			"duration_seconds":10,
+			"tick_time":0,
+			"probability":1,
+			"trigger_effect_id":"null",
+			"visible":false
+		},
+		"ENEMY_ATTACK_HP_REGEN_TRIGGER":{
+			"id":"ENEMY_ATTACK_HP_REGEN_TRIGGER",
+			"target_type":"SELF",
+			"trigger_type":"DAMAGE_DEAL",
+			"duration_type":"PERMANENT",
+			"effect_type":"HEAL_BY_MAX_HIT_POINTS",
+			"value_type":"PERCENTAGE",
+			"parameter":0.25,
+			"duration_seconds":0,
+			"tick_time":0,
+			"probability":0.25,
+			"trigger_effect_id":"null",
+			"visible":false
 		}
 	}
 }
