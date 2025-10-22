@@ -3,38 +3,20 @@ using UnityEngine;
 
 namespace _Project.Scripts.Project.Services.Timers
 {
-    public interface ITimerOneSecondTick : ITimer
+    public interface ITimerOneSecondTick : ITimerTick
     {
-        event Action<ITimerOneSecondTick> TickEvent;
     }
 
-    public class TimerOneSecondTick : Timer<TimerOneSecondTick>, ITimerOneSecondTick
+    public class TimerOneSecondTick : TimerTick<TimerOneSecondTick>, ITimerOneSecondTick
     {
-        public event Action<ITimerOneSecondTick> TickEvent;
-
-        protected float _secondProgress;
-
         public TimerOneSecondTick(string id) : base(id)
         {
+            _tickTime = 1f;
         }
 
-        public override void OnProcess(float deltaTime)
+        public override void SetTickTime(float time)
         {
-            base.OnProcess(deltaTime);
-
-            if (Paused)
-                return;
-
-            if (Expired)
-                return;
-
-            _secondProgress += deltaTime;
-
-            if (_secondProgress < 1)
-                return;
-
-            TickEvent?.Invoke(this);
-            _secondProgress = 0f;
+            Debug.LogError($"DONT USE SET TICK TIME! USE TIMER TICK CLASS INSTED!");
         }
     }
 }
