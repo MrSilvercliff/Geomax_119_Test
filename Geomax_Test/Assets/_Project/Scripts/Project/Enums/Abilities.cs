@@ -12,6 +12,13 @@ namespace _Project.Scripts.Project.Enums
         SKILL_BUFF = 3,
     }
 
+    public enum AbilityTargetType
+    { 
+        NONE = 0,
+        CREATURE = 1,
+        SELF = 2,
+    }
+
     public enum AbilityResultItemType
     { 
         NONE = 0,

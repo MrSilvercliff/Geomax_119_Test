@@ -4,6 +4,7 @@ using Defective.JSON;
 using Plugins.ZerglingUnityPlugins.Balance_Total_JSON.Scripts.BalanceStorage;
 using Plugins.ZerglingUnityPlugins.Balance_Total_JSON.Scripts.JSONParse;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace _Project.Scripts.Project.Services.Balance.Models
 {
@@ -11,6 +12,9 @@ namespace _Project.Scripts.Project.Services.Balance.Models
     {
         AbilityType AbilityType { get; }
         string Name { get; }
+
+        AbilityTargetType TargetType { get; }
+        IReadOnlyList<string> ApplyEffects { get; }
 
         int IntValue1 { get; }
         int IntValue2 { get; }
@@ -34,6 +38,9 @@ namespace _Project.Scripts.Project.Services.Balance.Models
         public AbilityType AbilityType => _abilityType;
         public string Name => _name;
 
+        public AbilityTargetType TargetType => _targetType;
+        public IReadOnlyList<string> ApplyEffects => _applyEffects;
+
         public int IntValue1 => _intValue1;
         public int IntValue2 => _intValue2;
         public int IntValue3 => _intValue3;
@@ -52,6 +59,9 @@ namespace _Project.Scripts.Project.Services.Balance.Models
 
         private AbilityType _abilityType;
         private string _name;
+
+        private AbilityTargetType _targetType;
+        private List<string> _applyEffects;
 
         private int _intValue1;
         private int _intValue2;
@@ -74,6 +84,9 @@ namespace _Project.Scripts.Project.Services.Balance.Models
             _id = json["id"].stringValue;
             _abilityType = parseHelper.ParseEnum(json, "type", AbilityType.NONE);
             _name = json["name"].stringValue;
+
+            _targetType = parseHelper.ParseEnum(json, "target_type", AbilityTargetType.NONE);
+            _applyEffects = parseHelper.ParseList<string>(json, $"apply_effects");
             
             _intValue1 = json["int_value_1"].intValue;
             _intValue2 = json["int_value_2"].intValue;
