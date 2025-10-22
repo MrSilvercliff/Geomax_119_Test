@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Zenject;
 using _Project.Scripts.GameScene.Services.CreatureSlots;
 using _Project.Scripts.Project.Services.Timers;
+using _Project.Scripts.GameScene.Services.Combat;
 
 namespace _Project.Scripts.GameScene.GameLevel
 {
@@ -22,6 +23,7 @@ namespace _Project.Scripts.GameScene.GameLevel
     {
         [SerializeField] private CreatureSlotController[] _playerCreatureSlots;
         [SerializeField] private CreatureSlotController[] _enemyCreatureSlots;
+        [SerializeField] private CreatureSelectHighlightController[] _creatureHighlightControllers;
 
         [Inject] private IMonoUpdater _monoUpdater;
         [Inject] private ITimerService _timerService;
@@ -29,6 +31,7 @@ namespace _Project.Scripts.GameScene.GameLevel
         [Inject] private IGameStartConfig _gameStartConfig;
         [Inject] private ICreatureSlotService _creatureSlotService;
         [Inject] private ICreatureService _creatureService;
+        [Inject] private ICombatService _combatService;
 
         private bool _updateEnabled;
 
@@ -42,9 +45,12 @@ namespace _Project.Scripts.GameScene.GameLevel
         {
             _creatureSlotService.AddCreatureSlots(_playerCreatureSlots, _enemyCreatureSlots);
 
+            InitCreatureHighlights();
             OnStartSpawnCreatures();
 
             await _creatureService.OnLateStart();
+
+            SelectCreatureControllers();
 
             _monoUpdater.Subscribe((IMonoFixedUpdatable)this);
             _monoUpdater.Subscribe((IMonoUpdatable)this);
@@ -76,6 +82,9 @@ namespace _Project.Scripts.GameScene.GameLevel
                 return;
 
             _creatureService.OnUpdate(deltaTime);
+
+            foreach (var creatureHighlightController in _creatureHighlightControllers)
+                creatureHighlightController.OnUpdate(deltaTime);
         }
 
         public void OnLateUpdate(float deltaTime)
@@ -87,6 +96,12 @@ namespace _Project.Scripts.GameScene.GameLevel
             _timerService.OnLateUpdate(deltaTime);
         }
 
+        private void InitCreatureHighlights()
+        {
+            foreach (var creatureHighlightController in _creatureHighlightControllers)
+                creatureHighlightController.Init();
+        }
+
         private void OnStartSpawnCreatures()
         {
             var playerCreatureId = _gameStartConfig.PlayerCreatureId;
@@ -96,6 +111,12 @@ namespace _Project.Scripts.GameScene.GameLevel
 
             foreach (var creatureId in enemyCreatureIds)
                 _creatureService.SpawnCreature(creatureId, false);
+        }
+
+        private void SelectCreatureControllers()
+        {
+            var playerCreatureController = _creatureService.PlayerController;
+            _combatService.SelectCreatureController(playerCreatureController);
         }
     }
 }

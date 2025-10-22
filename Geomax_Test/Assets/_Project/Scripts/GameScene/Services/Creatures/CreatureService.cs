@@ -11,6 +11,8 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 {
     public interface ICreatureService : IProjectService, ILateStartable, IMonoFixedUpdatable, IMonoUpdatable, IMonoLateUpdatable
     {
+        ICreatureController PlayerController { get; }
+
         void SpawnCreature(string creatureId, bool enterOnSpawnState);
         void DespawnCreature(ICreatureController creatureController);
 
@@ -20,6 +22,8 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
     public class CreatureService : ICreatureService
     {
+        public ICreatureController PlayerController => _creatureControllerRepository.PlayerController;
+
         [Inject] private ICreaturePrefabConfig _creaturePrefabConfig;
 
         [Inject] private ICreatureControllerRepository _creatureControllerRepository;

@@ -1,5 +1,6 @@
 using _Project.Scripts.GameScene.Abilities;
 using _Project.Scripts.GameScene.Creatures.Basis;
+using _Project.Scripts.Project.Enums;
 using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -11,17 +12,22 @@ namespace _Project.Scripts.GameScene.Services.Combat
     {
         IAbilityResult UseAbility(ICreatureController creatureFrom, IAbility ability);
         void ApplyAbilityResult(IAbilityResult abilityResult);
+
+        ICreatureController GetSelectedCreatureController(CreatureType creatureType);
+        void SelectCreatureController(ICreatureController creatureController);
     }
 
     public class CombatService : ICombatService
     {
         [Inject] private ICombatAbilityUseService _useAbilityService;
         [Inject] private ICombatAbilityResultApplyService _abilityResultApplyService;
+        [Inject] private ICombatCreatureSelectService _creatureSelectService;
 
         public async Task<bool> Init()
         {
             await _useAbilityService.Init();
             await _abilityResultApplyService.Init();
+            await _creatureSelectService.Init();
             return true;
         }
 
@@ -29,6 +35,7 @@ namespace _Project.Scripts.GameScene.Services.Combat
         {
             _useAbilityService.Flush();
             _abilityResultApplyService.Flush();
+            _creatureSelectService.Flush();
             return true;
         }
 
@@ -44,6 +51,17 @@ namespace _Project.Scripts.GameScene.Services.Combat
                 return;
 
             _abilityResultApplyService.ApplyAbilityResult(abilityResult);
+        }
+
+        public ICreatureController GetSelectedCreatureController(CreatureType creatureType)
+        {
+            var result = _creatureSelectService.GetSelectedCreatureController(creatureType);
+            return result;
+        }
+
+        public void SelectCreatureController(ICreatureController creatureController)
+        {
+            _creatureSelectService.SelectCreatureController(creatureController);
         }
     }
 }

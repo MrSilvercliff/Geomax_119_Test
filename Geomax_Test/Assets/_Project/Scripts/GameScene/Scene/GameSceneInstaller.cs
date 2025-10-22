@@ -204,6 +204,7 @@ namespace _Project.Scripts.GameScene.Scene
         { 
             Container.Bind<ICombatAbilityUseService>().To<CombatAbilityUseService>().AsSingle();
             Container.Bind<ICombatAbilityResultApplyService>().To<CombatAbilityResultApplyService>().AsSingle();
+            Container.Bind<ICombatCreatureSelectService>().To<CombatCreatureSelectService>().AsSingle();
             Container.Bind<ICombatService>().To<CombatService>().AsSingle();
         }
     }

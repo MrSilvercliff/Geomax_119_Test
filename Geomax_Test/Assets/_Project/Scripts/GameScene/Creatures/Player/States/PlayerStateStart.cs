@@ -1,3 +1,4 @@
+using _Project.Scripts.GameScene.Services.Combat;
 using _Project.Scripts.GameScene.Services.Creatures;
 using _Project.Scripts.Project.Enums;
 using _Project.Scripts.Project.Services.Timers;
