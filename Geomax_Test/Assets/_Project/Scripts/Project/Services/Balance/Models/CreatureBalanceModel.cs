@@ -17,6 +17,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
         IReadOnlyList<string> Resources { get; }
         string BasicAttackAbilityId { get; }
         IReadOnlyList<string> Abilities { get; }
+        IReadOnlyList<string> Effects { get; }
     }
 
     public class CreatureBalanceModel : BalanceModelWithIdBase, ICreatureBalanceModel
@@ -28,6 +29,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
         public IReadOnlyList<string> Resources => _resources;
         public string BasicAttackAbilityId => _basicAttackAbilityId;
         public IReadOnlyList<string> Abilities => _abilities;
+        public IReadOnlyList<string> Effects => _effects;
 
         private CreatureType _creatureType;
         private string _name;
@@ -36,6 +38,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
         private List<string> _resources;
         private string _basicAttackAbilityId;
         private List<string> _abilities;
+        private List<string> _effects;
         
         protected override void OnTrySetup(JSONObject json, IJSONParseHelper parseHelper)
         {
@@ -47,6 +50,7 @@ namespace _Project.Scripts.Project.Services.Balance.Models
             _resources = parseHelper.ParseList<string>(json, "resources");
             _basicAttackAbilityId = json["basic_attack_ability_id"].stringValue;
             _abilities = parseHelper.ParseList<string>(json, "abilities");
+            _effects = parseHelper.ParseList<string>(json, "effects");
         }
 
         public override void DebugPrint()
@@ -60,10 +64,24 @@ namespace _Project.Scripts.Project.Services.Balance.Models
             builder.AppendLine($"_stateMachineType = {_stateMachineType}");
             builder.AppendLine($"_basicAttackAbilityId = {_basicAttackAbilityId}");
 
+            builder.AppendLine($"");
+
+            builder.AppendLine($"Resources:");
+            for (int i = 0; i < _resources.Count; i++)
+                builder.AppendLine($"_resources[{i}] = {_resources[i]}");
+
+            builder.AppendLine($"");
+
             builder.AppendLine($"Abilities:");
             for (int i = 0; i < _abilities.Count; i++)
                 builder.AppendLine($"_abilities[{i}] = {_abilities[i]}");
-            
+
+            builder.AppendLine($"");
+
+            builder.AppendLine($"Effects:");
+            for (int i = 0; i < _effects.Count; i++)
+                builder.AppendLine($"_effects[{i}] = {_effects[i]}");
+
             Debug.LogError(builder.ToString());
         }
     }
