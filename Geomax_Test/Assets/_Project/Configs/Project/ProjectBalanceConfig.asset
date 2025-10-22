@@ -27,3 +27,7 @@ MonoBehaviour:
     _targetBalanceStorage: {fileID: 11500000, guid: 563e92b8c713b9446af0141e2b5e4347, type: 3}
     _debugPrintOnInit: 1
     _parseFuncType: 2
+  - _pageName: Effects
+    _targetBalanceStorage: {fileID: 11500000, guid: eaeccee1660acf646929f45e4ac6e0c2, type: 3}
+    _debugPrintOnInit: 1
+    _parseFuncType: 2

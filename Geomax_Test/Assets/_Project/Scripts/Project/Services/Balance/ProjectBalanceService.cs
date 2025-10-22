@@ -12,6 +12,7 @@ namespace _Project.Scripts.Project.Services.Balance
         ICreatureBalanceStorage Creatures { get; }
         ICreatureResourceBalanceStorage CreatureResources { get; }
         IAbilityBalanceStorage Abilities { get; }
+        IEffectBalanceStorage Effects { get; }
     }
 
     public class ProjectBalanceService : BalanceServiceAbstractAsync, IProjectBalanceService
@@ -19,12 +20,14 @@ namespace _Project.Scripts.Project.Services.Balance
         public ICreatureBalanceStorage Creatures { get; private set; }
         public ICreatureResourceBalanceStorage CreatureResources { get; private set; }
         public IAbilityBalanceStorage Abilities { get; private set; }
+        public IEffectBalanceStorage Effects { get; private set; }
 
         public ProjectBalanceService() 
         {
             Creatures = new CreatureBalanceStorage();
             CreatureResources = new CreatureResourceBalanceStorage();
             Abilities = new AbilityBalanceStorage();
+            Effects = new EffectBalanceStorage();
         }
 
         protected override HashSet<IProjectService> GetStoragesToInit()
@@ -34,6 +37,7 @@ namespace _Project.Scripts.Project.Services.Balance
             result.Add(Creatures);
             result.Add(CreatureResources);
             result.Add(Abilities);
+            result.Add(Effects);
 
             return result;
         }
