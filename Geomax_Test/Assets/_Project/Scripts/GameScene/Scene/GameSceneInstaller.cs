@@ -7,10 +7,12 @@ using _Project.Scripts.GameScene.Creatures.Enemy;
 using _Project.Scripts.GameScene.Creatures.Enemy.States;
 using _Project.Scripts.GameScene.Creatures.Player;
 using _Project.Scripts.GameScene.Creatures.Player.States;
+using _Project.Scripts.GameScene.Effects.CreatureEffects;
 using _Project.Scripts.GameScene.GameLevel;
 using _Project.Scripts.GameScene.ObjectPools;
 using _Project.Scripts.GameScene.Services.Abilities;
 using _Project.Scripts.GameScene.Services.Combat;
+using _Project.Scripts.GameScene.Services.CreatureEffects;
 using _Project.Scripts.GameScene.Services.Creatures;
 using _Project.Scripts.GameScene.Services.CreatureSlots;
 using _Project.Scripts.GameScene.Services.StateMachines;
@@ -48,6 +50,8 @@ namespace _Project.Scripts.GameScene.Scene
             BindGameLevelController();
 
             BindCombatServices();
+
+            BindCreatureEffectServices();
 
             BindSceneServiceIniter();
         }
@@ -206,6 +210,16 @@ namespace _Project.Scripts.GameScene.Scene
             Container.Bind<ICombatCreatureSelectService>().To<CombatCreatureSelectService>().AsSingle();
             Container.Bind<ICombatAttackTargetProvider>().To<CombatAttackTargetProvider>().AsSingle();
             Container.Bind<ICombatService>().To<CombatService>().AsSingle();
+        }
+
+        private void BindCreatureEffectServices()
+        {
+            Container.BindMemoryPool<CreatureEffectController, CreatureEffectController.Pool>();
+
+            Container.Bind<ICreatureEffectRepository>().To<CreatureEffectRepository>().AsSingle();
+            Container.Bind<ICreatureEffectApplyService>().To<CreatureEffectApplyService>().AsSingle();
+            Container.Bind<ICreatureEffectInvokeService>().To<CreatureEffectInvokeService>().AsSingle();
+            Container.Bind<ICreatureEffectService>().To<CreatureEffectService>().AsSingle();
         }
     }
 }
