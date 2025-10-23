@@ -318,6 +318,7 @@ GameObject:
   - component: {fileID: 1419002378}
   - component: {fileID: 1419002380}
   - component: {fileID: 1419002377}
+  - component: {fileID: 1419002381}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -415,6 +416,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!114 &1419002381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419002376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19311056bcce4744a3048fda8fbc1aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: _Project.Scripts.GameScene::_Project.Scripts.GameScene.CameraController
+  _camera: {fileID: 1419002378}
 --- !u!1001 &1558335426674089736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -431,6 +445,10 @@ PrefabInstance:
       propertyPath: _levelController
       value: 
       objectReference: {fileID: 559193755}
+    - target: {fileID: 5741724315133006914, guid: 90c1c7ce290a93345b1325e193d48457, type: 3}
+      propertyPath: _cameraController
+      value: 
+      objectReference: {fileID: 1419002381}
     - target: {fileID: 7418651574109598468, guid: 90c1c7ce290a93345b1325e193d48457, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -488,10 +506,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Canvas] Scene'
       objectReference: {fileID: 0}
-    - target: {fileID: 2842372875409782822, guid: 8c432e9736278b94da0dd51f1a33566d, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: ff4263a8caa30cd4a87c07b36393e380, type: 3}
     - target: {fileID: 2907810587096157487, guid: 8c432e9736278b94da0dd51f1a33566d, type: 3}
       propertyPath: m_Camera
       value: 
