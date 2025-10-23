@@ -6,7 +6,7 @@ namespace _Project.Scripts.Project.Services.Timers
     { 
     }
 
-    public class TimerCustomSecondTick : TimerTick<TimerCustomSecondTick>
+    public class TimerCustomSecondTick : TimerTick<TimerCustomSecondTick>, ITimerCustomSecondTick
     {
         public TimerCustomSecondTick(string id) : base(id)
         {
