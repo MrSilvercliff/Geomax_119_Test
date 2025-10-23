@@ -139,6 +139,7 @@ namespace _Project.Scripts.Project.Zenject
         {
             Container.BindFactory<string, Timer, Timer.Factory>();
             Container.BindFactory<string, TimerOneSecondTick, TimerOneSecondTick.Factory>();
+            Container.BindFactory<string, TimerCustomSecondTick, TimerCustomSecondTick.Factory>();
 
             Container.Bind<ITimerIdProvider>().To<TimerIdProvider>().AsSingle();
             Container.Bind<ITimerCreator>().To<TimerCreator>().AsSingle();
