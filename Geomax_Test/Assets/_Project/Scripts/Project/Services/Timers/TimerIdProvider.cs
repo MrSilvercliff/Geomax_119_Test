@@ -7,6 +7,7 @@ namespace _Project.Scripts.Project.Services.Timers
     public interface ITimerIdProvider : IProjectService
     {
         string GetCreatureAbilityCooldownTimerId(int creatureControllerInstanceId, string abilityId);
+        string GetCreatureEffectTimerId(int creatureControllerInstanceId, string effectId);
     }
 
     public class TimerIdProvider : ITimerIdProvider
@@ -24,6 +25,12 @@ namespace _Project.Scripts.Project.Services.Timers
         public string GetCreatureAbilityCooldownTimerId(int creatureControllerInstanceId, string abilityId)
         {
             var result = $"{creatureControllerInstanceId}_{abilityId}";
+            return result;
+        }
+
+        public string GetCreatureEffectTimerId(int creatureControllerInstanceId, string effectId)
+        {
+            var result = $"{creatureControllerInstanceId}_{effectId}";
             return result;
         }
     }
