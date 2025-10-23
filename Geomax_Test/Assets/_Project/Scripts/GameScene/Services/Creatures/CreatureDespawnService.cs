@@ -36,8 +36,6 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
         public void Despawn(ICreatureController controller)
         {
-            Debug.LogError($"Despawn creature {controller.InstanceID}");
-
             _creatureControllerRepository.Remove(controller);
 
             var creatureType = controller.CreatureType;
@@ -61,8 +59,6 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
         private void DespawnPlayerCreature(ICreatureController controller)
         {
-            Debug.LogError($"Despawn player");
-
             SetCreatureSlotControllerFree(controller);
             DespawnPrefab((CreaturePrefab)controller.CreaturePrefab);
             var playerControllerPool = _gameSceneObjectPoolService.PlayerControllerPool;
@@ -71,8 +67,6 @@ namespace _Project.Scripts.GameScene.Services.Creatures
 
         private void DespawnEnemyCreature(ICreatureController controller)
         {
-            Debug.LogError($"Despawn enemy");
-
             SetCreatureSlotControllerFree(controller);
             DespawnPrefab((CreaturePrefab)controller.CreaturePrefab);
             var enemyControllerPool = _gameSceneObjectPoolService.EnemyControllerPool;
