@@ -8,7 +8,8 @@ namespace _Project.Scripts.Project.Services.Timers
     public interface ITimerStartService : IProjectService
     {
         ITimer StartTimer(string id, float duration);
-        ITimerOneSecondTick StartTimerSecondTick(string id, float duration);
+        ITimerOneSecondTick StartTimerOneSecondTick(string id, float duration);
+        ITimerCustomSecondTick StartTimerCustomSecondTick(string id, float duration, float tickTime);
         void PauseTimer(string timerId, bool paused);
         void StopTimer(string timerId, bool reset);
     }
@@ -40,11 +41,12 @@ namespace _Project.Scripts.Project.Services.Timers
                 _repository.Add(id, timer);
             }
 
+            timer.Reset();
             timer.Start(duration);
             return timer;
         }
 
-        public ITimerOneSecondTick StartTimerSecondTick(string id, float duration)
+        public ITimerOneSecondTick StartTimerOneSecondTick(string id, float duration)
         {
             ITimerOneSecondTick timer = null;
 
@@ -58,6 +60,27 @@ namespace _Project.Scripts.Project.Services.Timers
                 _repository.Add(id, timer);
             }
 
+            timer.Reset();
+            timer.Start(duration);
+            return timer;
+        }
+
+        public ITimerCustomSecondTick StartTimerCustomSecondTick(string id, float duration, float tickTime)
+        {
+            ITimerCustomSecondTick timer = null;
+
+            var tryResult = _repository.TryGet(id, out var repositoryTimer);
+
+            if (tryResult)
+                timer = (ITimerCustomSecondTick)repositoryTimer;
+            else
+            {
+                timer = _creator.CreateCustomSecondTick(id);
+                _repository.Add(id, timer);
+            }
+
+            timer.Reset();
+            timer.SetTickTime(tickTime);
             timer.Start(duration);
             return timer;
         }

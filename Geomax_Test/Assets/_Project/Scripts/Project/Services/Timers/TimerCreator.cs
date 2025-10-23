@@ -9,12 +9,14 @@ namespace _Project.Scripts.Project.Services.Timers
     {
         ITimer Create(string id);
         ITimerOneSecondTick CreateSecondTick(string id);
+        ITimerCustomSecondTick CreateCustomSecondTick(string id);
     }
 
     public class TimerCreator : ITimerCreator
     {
         [Inject] private Timer.Factory _timerFactory;
         [Inject] private TimerOneSecondTick.Factory _timerSecondTickFactory;
+        [Inject] private TimerCustomSecondTick.Factory _timerCustomSecondTickFactory;
 
         public Task<bool> Init()
         {
@@ -35,6 +37,12 @@ namespace _Project.Scripts.Project.Services.Timers
         public ITimerOneSecondTick CreateSecondTick(string id)
         {
             var result = _timerSecondTickFactory.Create(id);
+            return result;
+        }
+
+        public ITimerCustomSecondTick CreateCustomSecondTick(string id)
+        {
+            var result = _timerCustomSecondTickFactory.Create(id);
             return result;
         }
     }
