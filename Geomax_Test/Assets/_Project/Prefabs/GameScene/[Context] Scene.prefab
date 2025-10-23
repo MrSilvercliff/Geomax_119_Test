@@ -32,7 +32,9 @@ Transform:
   m_Children:
   - {fileID: 2372675575683626046}
   - {fileID: 7065657272230876101}
-  - {fileID: 8106346449887235507}
+  - {fileID: 6339034946398412347}
+  - {fileID: 1483306876470131601}
+  - {fileID: 3679418419206498189}
   m_Father: {fileID: 7418651574109598468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2178705512804592916
@@ -57,8 +59,16 @@ MonoBehaviour:
     _poolInitialSize: 0
   _enemyCreatureController:
     _prefab: {fileID: 6680956481714031841, guid: 6bee854fc50cddd43b1e0010b28ca09b, type: 3}
-    _container: {fileID: 8106346449887235507}
+    _container: {fileID: 6339034946398412347}
     _poolInitialSize: 3
+  _creatureResourceContainer:
+    _prefab: {fileID: 8967191364826055084, guid: a77f7b201fc9c4941a90ef535d63a76d, type: 3}
+    _container: {fileID: 1483306876470131601}
+    _poolInitialSize: 0
+  _creatureResourceWidget:
+    _prefab: {fileID: 1060966002168252071, guid: 9af152e947a87ea46ab6e108db6073f1, type: 3}
+    _container: {fileID: 3679418419206498189}
+    _poolInitialSize: 0
 --- !u!1 &3467116909617342617
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +100,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5421163441703813516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4167588550732924946
+--- !u!1 &4055168375629371619
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,21 +108,52 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8106346449887235507}
+  - component: {fileID: 1483306876470131601}
   m_Layer: 0
-  m_Name: '[Container] EnemyCreatureController'
+  m_Name: '[Container] UI_CreatureResourceContainer'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &8106346449887235507
+--- !u!4 &1483306876470131601
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4167588550732924946}
+  m_GameObject: {fileID: 4055168375629371619}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5421163441703813516}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5114988874954527028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3679418419206498189}
+  m_Layer: 0
+  m_Name: '[Container] UI_CreatureResourceWidget'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3679418419206498189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5114988874954527028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -200,10 +241,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: _Project.Scripts.GameScene::_Project.Scripts.GameScene.Scene.GameSceneInstaller
   _sceneContext: {fileID: 3795792049919745459}
+  _cameraController: {fileID: 0}
   _objectPoolContainers: {fileID: 2178705512804592916}
   _levelController: {fileID: 0}
   _creaturePrefabConfig: {fileID: 11400000, guid: 7a0aff8d9a357fc438415a86e871672d, type: 2}
   _gameStartConfig: {fileID: 11400000, guid: b5604ba15420cab4eb059814d0a8e143, type: 2}
+--- !u!1 &6245093833567764331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6339034946398412347}
+  m_Layer: 0
+  m_Name: '[Container] EnemyController'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6339034946398412347
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6245093833567764331}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5421163441703813516}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6678134216732101197
 GameObject:
   m_ObjectHideFlags: 0

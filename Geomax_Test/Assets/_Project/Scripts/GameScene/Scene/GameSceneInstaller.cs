@@ -16,6 +16,7 @@ using _Project.Scripts.GameScene.Services.CreatureEffects;
 using _Project.Scripts.GameScene.Services.Creatures;
 using _Project.Scripts.GameScene.Services.CreatureSlots;
 using _Project.Scripts.GameScene.Services.StateMachines;
+using _Project.Scripts.GameScene.UI.Views.Main;
 using _Project.Scripts.Project.Services.Balance.Models;
 using _Project.Scripts.Project.Services.StateMachines;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace _Project.Scripts.GameScene.Scene
 {
     public class GameSceneInstaller : SceneInstaller
     {
+        [SerializeField] private CameraController _cameraController;
         [SerializeField] private GameSceneObjectPoolContainers _objectPoolContainers;
         [SerializeField] private GameLevelController _levelController;
 
@@ -36,6 +38,8 @@ namespace _Project.Scripts.GameScene.Scene
         protected override void OnInstallBindings()
         {
             BindConfigs();
+
+            BindCamera();
 
             BindAbilityServices();
 
@@ -59,6 +63,11 @@ namespace _Project.Scripts.GameScene.Scene
         private void BindSceneServiceIniter()
         {
             Container.Bind<IGameSceneServiceIniter>().To<GameSceneServiceIniter>().AsSingle();
+        }
+
+        private void BindCamera()
+        {
+            Container.Bind<ICameraController>().FromInstance(_cameraController).AsSingle();
         }
 
         private void BindConfigs()
@@ -150,6 +159,7 @@ namespace _Project.Scripts.GameScene.Scene
             Container.Bind<IGameSceneObjectPoolContainers>().FromInstance(_objectPoolContainers).AsSingle();
             
             BindCreatureObjectPools();
+            BindUIObjectPools();
 
             Container.Bind<IGameSceneObjectPoolService>().To<GameSceneObjectPoolService>().AsSingle();
         }
@@ -191,6 +201,40 @@ namespace _Project.Scripts.GameScene.Scene
             var poolInitSize = poolItem.PoolInitialSize;
 
             Container.BindMemoryPool<EnemyCreatureController, EnemyCreatureController.Pool>()
+                .WithInitialSize(poolInitSize)
+                .FromComponentInNewPrefab(prefab)
+                .UnderTransform(container);
+        }
+
+        private void BindUIObjectPools()
+        {
+            BindCreatureResourceContainerPool();
+            BindCreatureResourceWidgetPool();
+        }
+
+        private void BindCreatureResourceContainerPool()
+        { 
+            var poolItem = _objectPoolContainers.CreatureResourceContainer;
+
+            var prefab = poolItem.Prefab;
+            var container = poolItem.Container;
+            var poolInitSize = poolItem.PoolInitialSize;
+
+            Container.BindMemoryPool<CreatureResourceContainerWidget, CreatureResourceContainerWidget.Pool>()
+                .WithInitialSize(poolInitSize)
+                .FromComponentInNewPrefab(prefab)
+                .UnderTransform(container);
+        }
+
+        private void BindCreatureResourceWidgetPool()
+        {
+            var poolItem = _objectPoolContainers.CreatureResourceWidget;
+
+            var prefab = poolItem.Prefab;
+            var container = poolItem.Container;
+            var poolInitSize = poolItem.PoolInitialSize;
+
+            Container.BindMemoryPool<CreatureResourceWidget, CreatureResourceWidget.Pool>()
                 .WithInitialSize(poolInitSize)
                 .FromComponentInNewPrefab(prefab)
                 .UnderTransform(container);
