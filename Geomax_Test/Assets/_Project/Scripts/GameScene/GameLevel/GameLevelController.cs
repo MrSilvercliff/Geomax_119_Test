@@ -12,6 +12,7 @@ using Zenject;
 using _Project.Scripts.GameScene.Services.CreatureSlots;
 using _Project.Scripts.Project.Services.Timers;
 using _Project.Scripts.GameScene.Services.Combat;
+using _Project.Scripts.GameScene.Services.CreatureEffects;
 
 namespace _Project.Scripts.GameScene.GameLevel
 {
@@ -32,6 +33,7 @@ namespace _Project.Scripts.GameScene.GameLevel
         [Inject] private ICreatureSlotService _creatureSlotService;
         [Inject] private ICreatureService _creatureService;
         [Inject] private ICombatService _combatService;
+        [Inject] private ICreatureEffectService _creatureEffectService;
 
         private bool _updateEnabled;
 
@@ -49,6 +51,7 @@ namespace _Project.Scripts.GameScene.GameLevel
             OnStartSpawnCreatures();
 
             await _creatureService.OnLateStart();
+            await _creatureEffectService.OnLateStart();
 
             SelectCreatureControllers();
 
@@ -94,6 +97,7 @@ namespace _Project.Scripts.GameScene.GameLevel
 
             _creatureService.OnLateUpdate(deltaTime);
             _timerService.OnLateUpdate(deltaTime);
+            _creatureEffectService.OnLateUpdate(deltaTime);
         }
 
         private void InitCreatureHighlights()
