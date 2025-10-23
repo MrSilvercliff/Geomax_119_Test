@@ -1,6 +1,7 @@
 using _Project.Scripts.GameScene.Creatures.Basis;
 using _Project.Scripts.GameScene.Effects.CreatureEffects;
 using _Project.Scripts.GameScene.Services.Creatures;
+using _Project.Scripts.Project.Enums;
 using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -46,11 +47,39 @@ namespace _Project.Scripts.GameScene.Services.CreatureEffects
                 LogUtils.Error(this, $"CREATURE CONTROLLER WITH INSTANCE ID [{creatureControllerInstanceId}] DOES NOT EXIST!");
                 return;
             }
+
+            InvokeCreatureEffectProcess(creatureEffectController, creatureController);
         }
 
         private void InvokeCreatureEffectProcess(ICreatureEffectController creatureEffectController, ICreatureController creatureController)
         { 
+            var effectType = creatureEffectController.EffectType;
 
+            switch (effectType)
+            {
+                case EffectType.MANA_POINTS_REGEN:
+                    InvokeManaPointsRegen(creatureEffectController, creatureController);
+                    break;
+
+                default:
+                    LogUtils.Error(this, $"INVOKE EFFECT FOR EFFECT TYPE {effectType} DOES NOT IMPLEMENTED!");
+                    break;
+            }
+        }
+
+        private void InvokeManaPointsRegen(ICreatureEffectController creatureEffectController, ICreatureController creatureController)
+        {
+            var mp = creatureEffectController.Parameter;
+            var mpResourceValue = creatureController.CreatureModel.GetResourceValue(CreatureResourceType.MANA_POINTS);
+
+            if (mpResourceValue == null)
+                return;
+
+            if (mpResourceValue.CurrentValue >= mpResourceValue.MaxValue)
+                return;
+
+            var newValue = mpResourceValue.CurrentValue + Mathf.FloorToInt(mp);
+            mpResourceValue.SetCurrentValue(newValue);
         }
     }
 }
