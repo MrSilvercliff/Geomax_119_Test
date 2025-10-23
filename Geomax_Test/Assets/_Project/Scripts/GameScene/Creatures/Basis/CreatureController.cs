@@ -216,9 +216,10 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
     { 
         public class Pool : ProjectMonoMemoryPool<TObjectPoolType> 
         {
-            protected override void OnSpawned(TObjectPoolType item)
+            protected override void OnCreated(TObjectPoolType item)
             {
-                base.OnSpawned(item);
+                base.OnCreated(item);
+                item.RefreshInstanceId();
                 item.gameObject.name = $"[CreatureController]_{item.CreatureType}_[{item.InstanceID}]";
             }
         }

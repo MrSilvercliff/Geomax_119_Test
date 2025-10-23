@@ -11,6 +11,7 @@ namespace _Project.Scripts.Project.Monobeh
         int InstanceID { get; }
 
         void SetActive(bool active);
+        void RefreshInstanceId();
     }
 
     public class ProjectMonoBehaviour : MonoBehaviour, IProjectMonoBehaviour
@@ -26,7 +27,6 @@ namespace _Project.Scripts.Project.Monobeh
 
         private void Awake()
         {
-            _instanceId = gameObject.GetInstanceID();
             OnAwake();
         }
 
@@ -37,6 +37,11 @@ namespace _Project.Scripts.Project.Monobeh
         public void SetActive(bool active)
         {
             gameObject.SetActive(active);
+        }
+
+        public void RefreshInstanceId()
+        {
+            _instanceId = gameObject.GetInstanceID();
         }
     }
 }
