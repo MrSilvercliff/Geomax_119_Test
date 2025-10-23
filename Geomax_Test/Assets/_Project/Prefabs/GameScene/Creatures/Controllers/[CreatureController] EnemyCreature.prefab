@@ -81,6 +81,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8661382031122432466, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
   m_PrefabInstance: {fileID: 7658992948697708236}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &6673367262324756124 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3951527876835129424, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+  m_PrefabInstance: {fileID: 7658992948697708236}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6680956481714031841 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3962520077457275437, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
@@ -100,6 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: _Project.Scripts.GameScene::_Project.Scripts.GameScene.Creatures.Enemy.EnemyCreatureController
   _transform: {fileID: 579458485713902831}
   _prefabContainer: {fileID: 1331196941653522206}
+  _resourceContainerAnchor: {fileID: 6673367262324756124}
   _onSpawnState: 1
   _componentsList:
   - {fileID: 47167677579211713}
