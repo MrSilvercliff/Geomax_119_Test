@@ -44,5 +44,12 @@ namespace _Project.Scripts.Project.Services.Timers
             TickEvent?.Invoke(this);
             _tickProgress = 0f;
         }
+
+        public override void Reset()
+        {
+            base.Reset();
+            _tickTime = 0f;
+            _tickProgress = 0f;
+        }
     }
 }

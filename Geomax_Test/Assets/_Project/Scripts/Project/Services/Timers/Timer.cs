@@ -93,7 +93,7 @@ namespace _Project.Scripts.Project.Services.Timers
                 Reset();
         }
 
-        public void Reset()
+        public virtual void Reset()
         {
             Expired = true;
             Duration = 0f;
