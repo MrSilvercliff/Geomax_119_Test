@@ -1,3 +1,4 @@
+using _Project.Scripts.GameScene.Services.CreatureEffects;
 using _Project.Scripts.Project.Enums;
 using _Project.Scripts.Project.Services.Balance.Models;
 using _Project.Scripts.Project.Services.Timers;
@@ -23,7 +24,8 @@ namespace _Project.Scripts.GameScene.Effects.CreatureEffects
 
         bool Visible { get; }
 
-        void Setup(ITimerCustomSecondTick timer);
+        void Setup(IEffectBalanceModel effectBalanceModel);
+        void Setup(ITimerTick timer);
     }
 
     public class CreatureEffectController : ICreatureEffectController
@@ -50,16 +52,22 @@ namespace _Project.Scripts.GameScene.Effects.CreatureEffects
 
         public bool Visible => _balanceModel.Visible;
 
+        [Inject] private ICreatureEffectApplyService _effectApplyService;
+        [Inject] private ICreatureEffectInvokeService _effectInvokeService;
 
         private IEffectBalanceModel _balanceModel;
-        private ITimerCustomSecondTick _timer;
+        private ITimerTick _timer;
 
-        public CreatureEffectController(IEffectBalanceModel balanceModel) 
+        public CreatureEffectController() 
         {
-            _balanceModel = balanceModel;
         }
 
-        public void Setup(ITimerCustomSecondTick timer)
+        public void Setup(IEffectBalanceModel effectBalanceModel)
+        {
+            _balanceModel = effectBalanceModel;
+        }
+
+        public void Setup(ITimerTick timer)
         {
             _timer = timer;
             _timer.TickEvent += OnTimerTick;
@@ -80,13 +88,15 @@ namespace _Project.Scripts.GameScene.Effects.CreatureEffects
 
         private void OnTimerTick(ITimerTick tick)
         {
+            _effectInvokeService.InvokeCreatureEffect(this);
         }
 
         private void OnTimerExpired(ITimer timer)
         {
+            _effectApplyService.RemoveEffect(this);
         }
 
-        public class Pool : MemoryPool<IEffectBalanceModel, CreatureEffectController> 
+        public class Pool : MemoryPool<CreatureEffectController> 
         {
             protected override void OnDespawned(CreatureEffectController item)
             {
