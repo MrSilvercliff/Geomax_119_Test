@@ -17,17 +17,17 @@ MonoBehaviour:
   _googleSheetPages:
   - _pageName: Creatures
     _targetBalanceStorage: {fileID: 11500000, guid: 4151827a8ea12004d97b1f94a693256d, type: 3}
-    _debugPrintOnInit: 1
+    _debugPrintOnInit: 0
     _parseFuncType: 2
   - _pageName: CreatureResources
     _targetBalanceStorage: {fileID: 11500000, guid: 35fe9ba57ddac6a49a5c43fbc494a92c, type: 3}
-    _debugPrintOnInit: 1
+    _debugPrintOnInit: 0
     _parseFuncType: 2
   - _pageName: Abilities
     _targetBalanceStorage: {fileID: 11500000, guid: 563e92b8c713b9446af0141e2b5e4347, type: 3}
-    _debugPrintOnInit: 1
+    _debugPrintOnInit: 0
     _parseFuncType: 2
   - _pageName: Effects
     _targetBalanceStorage: {fileID: 11500000, guid: eaeccee1660acf646929f45e4ac6e0c2, type: 3}
-    _debugPrintOnInit: 1
+    _debugPrintOnInit: 0
     _parseFuncType: 2
