@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7081147084755400805, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+      propertyPath: m_Name
+      value: '[Transform] ResourceContainerAnchor'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -81,6 +85,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7079821263820630563, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
   m_PrefabInstance: {fileID: 8817920346823767616}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &5514990332842937872 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3951527876835129424, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
+  m_PrefabInstance: {fileID: 8817920346823767616}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5522038568411663469 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3962520077457275437, guid: cf878b133500bd847a5b8c554c4514f5, type: 3}
@@ -100,6 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: _Project.Scripts.GameScene::_Project.Scripts.GameScene.Creatures.Player.PlayerController
   _transform: {fileID: 1738134626181291107}
   _prefabContainer: {fileID: 174763830811801490}
+  _resourceContainerAnchor: {fileID: 5514990332842937872}
   _onSpawnState: 1
   _componentsList:
   - {fileID: 1203073078800331597}

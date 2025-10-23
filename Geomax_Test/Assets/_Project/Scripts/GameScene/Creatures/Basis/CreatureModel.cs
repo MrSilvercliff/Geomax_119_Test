@@ -3,6 +3,7 @@ using _Project.Scripts.Project.Enums;
 using _Project.Scripts.Project.Services.Balance.Models;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 using ZerglingUnityPlugins.Tools.Scripts.Log;
@@ -20,6 +21,7 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         #region RESOURCES
 
         ICreatureResourceValue GetResourceValue(CreatureResourceType resourceType);
+        IReadOnlyCollection<ICreatureResourceValue> GetAllResources();
 
         #endregion RESOURCES
 
@@ -62,6 +64,12 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
             if (!tryResult)
                 LogUtils.Error(this, $"RESOURCE WITH TYPE {resourceType} DOES NOT EXIST!");
 
+            return result;
+        }
+
+        public IReadOnlyCollection<ICreatureResourceValue> GetAllResources()
+        {
+            var result = _resources.Values.ToArray();
             return result;
         }
 

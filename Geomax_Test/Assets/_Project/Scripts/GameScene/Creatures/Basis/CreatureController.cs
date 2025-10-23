@@ -24,6 +24,7 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         ICreatureComponentContainer CreatureComponentContainer { get; }
         ICreatureController AttackTargetCreatureController { get; }
 
+        Transform ResourceContainerAnchor { get; }
 
         #region BASIS
 
@@ -60,8 +61,11 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
         public ICreatureComponentContainer CreatureComponentContainer => _componentContainer;
         public ICreatureController AttackTargetCreatureController => _attackTargetCreatureController;
 
+        public Transform ResourceContainerAnchor => _resourceContainerAnchor;
+
         [Header("CREATURE CONTROLLER")]
         [SerializeField] private Transform _prefabContainer;
+        [SerializeField] private Transform _resourceContainerAnchor;
         [SerializeField] private StateMachineStateType _onSpawnState;
         [SerializeField] private CreatureComponentBase[] _componentsList;
 
@@ -215,7 +219,7 @@ namespace _Project.Scripts.GameScene.Creatures.Basis
             protected override void OnSpawned(TObjectPoolType item)
             {
                 base.OnSpawned(item);
-                item.gameObject.name = $"{item.gameObject.name}_{item.InstanceID}";
+                item.gameObject.name = $"[CreatureController]_{item.CreatureType}_[{item.InstanceID}]";
             }
         }
     }
