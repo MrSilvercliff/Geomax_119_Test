@@ -2,6 +2,7 @@ using _Project.Scripts.GameScene.Creatures.Basis;
 using _Project.Scripts.GameScene.Creatures.Player;
 using _Project.Scripts.GameScene.CreatureSlot;
 using _Project.Scripts.GameScene.ObjectPools;
+using _Project.Scripts.GameScene.Services.CreatureEffects;
 using _Project.Scripts.GameScene.Services.CreatureSlots;
 using _Project.Scripts.Project.Enums;
 using _Project.Scripts.Project.Services.Balance;
@@ -25,10 +26,13 @@ namespace _Project.Scripts.GameScene.Services.Creatures
     {
         [Inject] private IProjectBalanceService _balanceService;
         [Inject] private IGameSceneObjectPoolService _gameSceneObjectPoolService;
+        
         [Inject] private IStateMachineCreator _stateMachineCreator;
         [Inject] private ICreatureModelCreator _modelCreator;
         [Inject] private ICreatureControllerRepository _controllerRepository;
+        
         [Inject] private ICreatureSlotService _creatureSlotService;
+        [Inject] private ICreatureEffectService _creatureEffectService;
 
         public Task<bool> Init()
         {
@@ -99,6 +103,7 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             InitComponents(playerController);
             SetupCreaturePrefab(prefabId, playerController);
             InitStateMachineStateControllers(playerController);
+            ApplyEffects(playerController, balanceModel);
             TryEnterOnSpawnState(enterOnSpawnState, playerController);
 
             creatureSlotController.SetCreatureController(playerController);
@@ -127,13 +132,14 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             InitComponents(enemyCreatureController);
             SetupCreaturePrefab(prefabId, enemyCreatureController);
             InitStateMachineStateControllers(enemyCreatureController);
+            ApplyEffects(enemyCreatureController, balanceModel);
             TryEnterOnSpawnState(enterOnSpawnState, enemyCreatureController);
 
             creatureSlotController.SetCreatureController(enemyCreatureController);
             _controllerRepository.Add(enemyCreatureController);
         }
 
-        bool TryGetFreeCreatureSlotController(bool playerSlot, out ICreatureSlotController creatureSlotController)
+        private bool TryGetFreeCreatureSlotController(bool playerSlot, out ICreatureSlotController creatureSlotController)
         {
             var result = false;
             creatureSlotController = null;
@@ -146,37 +152,45 @@ namespace _Project.Scripts.GameScene.Services.Creatures
             return result;
         }
 
-        void SetupCreatureModel(string creatureId, ICreatureController creatureController)
+        private void SetupCreatureModel(string creatureId, ICreatureController creatureController)
         {
             var creatureModel = _modelCreator.GetCreatureModel(creatureId);
             creatureController.SetupModel(creatureModel);
         }
 
-        void SetupStateMachine(ICreatureController creatureController)
+        private void SetupStateMachine(ICreatureController creatureController)
         {
             var stateMachineType = creatureController.CreatureModel.StateMachineType;
             var stateMachine = (ICreatureStateMachine)_stateMachineCreator.CreateStateMachine(stateMachineType);
             creatureController.SetupStateMachine(stateMachine);
         }
 
-        void SetupCreaturePrefab(string prefabId, ICreatureController creatureController)
+        private void SetupCreaturePrefab(string prefabId, ICreatureController creatureController)
         {
             var prefabPool = _gameSceneObjectPoolService.CreaturePrefabPool;
             var creaturePrefab = prefabPool.Spawn(prefabId);
             creatureController.SetupPrefab(creaturePrefab);
         }
 
-        void InitComponents(ICreatureController creatureController)
+        private void InitComponents(ICreatureController creatureController)
         {
             creatureController.InitComponents();
         }
 
-        void InitStateMachineStateControllers(ICreatureController creatureController)
+        private void InitStateMachineStateControllers(ICreatureController creatureController)
         {
             creatureController.CreatureStateMachine.InitStates();
         }
 
-        void TryEnterOnSpawnState(bool enterOnSpawnState, ICreatureController creatureController)
+        private void ApplyEffects(ICreatureController creatureController, ICreatureBalanceModel balanceModel)
+        {
+            var effects = balanceModel.Effects;
+
+            foreach (var effectId in effects)
+                _creatureEffectService.ApplyEffect(effectId, creatureController);
+        }
+
+        private void TryEnterOnSpawnState(bool enterOnSpawnState, ICreatureController creatureController)
         {
             if (!enterOnSpawnState)
                 return;
