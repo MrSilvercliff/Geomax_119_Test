@@ -10,6 +10,8 @@ namespace _Project.Scripts.Project.Services.Timers
         ITimer StartTimer(string id, float duration);
         ITimerOneSecondTick StartTimerOneSecondTick(string id, float duration);
         ITimerCustomSecondTick StartTimerCustomSecondTick(string id, float duration, float tickTime);
+        ITimerCustomSecondTickInfinite StartTimerCustomSecondTickInfinite(string id, float tickTime);
+
         void PauseTimer(string timerId, bool paused);
         void StopTimer(string timerId, bool reset);
     }
@@ -82,6 +84,26 @@ namespace _Project.Scripts.Project.Services.Timers
             timer.Reset();
             timer.SetTickTime(tickTime);
             timer.Start(duration);
+            return timer;
+        }
+
+        public ITimerCustomSecondTickInfinite StartTimerCustomSecondTickInfinite(string id, float tickTime)
+        {
+            ITimerCustomSecondTickInfinite timer = null;
+
+            var tryResult = _repository.TryGet(id, out var repositoryTimer);
+
+            if (tryResult)
+                timer = (ITimerCustomSecondTickInfinite)repositoryTimer;
+            else
+            {
+                timer = _creator.CreateTimerCustomSecondTickInfinite(id);
+                _repository.Add(id, timer);
+            }
+
+            timer.Reset();
+            timer.SetTickTime(tickTime);
+            timer.Start(int.MaxValue);
             return timer;
         }
 

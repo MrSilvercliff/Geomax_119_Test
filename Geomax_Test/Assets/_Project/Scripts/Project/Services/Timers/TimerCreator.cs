@@ -10,6 +10,7 @@ namespace _Project.Scripts.Project.Services.Timers
         ITimer Create(string id);
         ITimerOneSecondTick CreateSecondTick(string id);
         ITimerCustomSecondTick CreateCustomSecondTick(string id);
+        ITimerCustomSecondTickInfinite CreateTimerCustomSecondTickInfinite(string id);
     }
 
     public class TimerCreator : ITimerCreator
@@ -17,6 +18,7 @@ namespace _Project.Scripts.Project.Services.Timers
         [Inject] private Timer.Factory _timerFactory;
         [Inject] private TimerOneSecondTick.Factory _timerSecondTickFactory;
         [Inject] private TimerCustomSecondTick.Factory _timerCustomSecondTickFactory;
+        [Inject] private TimerCustomSecondTickInfinite.Factory _timerCustomSecondTickInfiniteFactory;
 
         public Task<bool> Init()
         {
@@ -43,6 +45,12 @@ namespace _Project.Scripts.Project.Services.Timers
         public ITimerCustomSecondTick CreateCustomSecondTick(string id)
         {
             var result = _timerCustomSecondTickFactory.Create(id);
+            return result;
+        }
+
+        public ITimerCustomSecondTickInfinite CreateTimerCustomSecondTickInfinite(string id)
+        {
+            var result = _timerCustomSecondTickInfiniteFactory.Create(id);
             return result;
         }
     }

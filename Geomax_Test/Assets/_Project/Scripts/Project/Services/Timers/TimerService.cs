@@ -10,8 +10,10 @@ namespace _Project.Scripts.Project.Services.Timers
     {
         ITimerIdProvider IdProvider { get; }
         bool TryGetTimer(string id, out ITimer timer);
+
         ITimer StartTimer(string id, float duration);
         ITimerCustomSecondTick StartTimerCustomSecondTick(string id, float duration, float tickTime);
+        ITimerCustomSecondTickInfinite StartTimerCustomSecondTickInfinite(string id, float tickTime);
     }
 
     public class TimerService : ITimerService
@@ -64,6 +66,12 @@ namespace _Project.Scripts.Project.Services.Timers
         public ITimerCustomSecondTick StartTimerCustomSecondTick(string id, float duration, float tickTime)
         {
             var result = _startService.StartTimerCustomSecondTick(id, duration, tickTime);
+            return result;
+        }
+
+        public ITimerCustomSecondTickInfinite StartTimerCustomSecondTickInfinite(string id, float tickTime)
+        {
+            var result = _startService.StartTimerCustomSecondTickInfinite(id, tickTime);
             return result;
         }
     }
